@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+{% if cfg.google_site_verification %}<meta name="google-site-verification" content="{{ cfg.google_site_verification }}">{% endif %}
 <title>{{ page.title }}</title>
 <meta name="description" content="{{ page.desc }}">
 <link rel="canonical" href="{{ page.url }}">

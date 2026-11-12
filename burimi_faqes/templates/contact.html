@@ -7,7 +7,7 @@
       <h1>{{ t.contact_title }}</h1>
       <p class="lead">{{ t.contact_lead }}</p>
 
-      <form class="form" id="contact-form" action="{{ root }}api/contact.php" method="post" novalidate
+      <form class="form" id="contact-form" action="{{ cfg.form_endpoint or (root ~ 'api/contact.php') }}" method="post" novalidate data-ext="{{ 1 if cfg.form_endpoint else 0 }}" data-subject="Go Tirana: contact form"
             data-msg='{{ form_msgs | safe }}'>
         <input type="hidden" name="lang" value="{{ lang }}">
         <input type="hidden" name="token" value="">

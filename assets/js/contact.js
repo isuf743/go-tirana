@@ -10,8 +10,21 @@
   const btn = form.querySelector('button[type="submit"]');
   const api = form.getAttribute("action");
 
+  // Formspree (ose shërbim tjetër i jashtëm) kur faqja është në GitHub Pages, ku nuk ka PHP
+  const ext = form.dataset.ext === "1";
+  function dergo() {
+    const fd = new FormData(form);
+    if (!ext) return fetch(api, { method: "POST", body: fd, credentials: "same-origin" });
+    fd.delete("token");
+    fd.set("_gotcha", fd.get("website") || ""); fd.delete("website");   // fusha kurth kundër spam-it
+    fd.set("_subject", form.dataset.subject || "Go Tirana");
+    fd.set("page", location.href);
+    return fetch(api, { method: "POST", body: fd, headers: { Accept: "application/json" } });
+  }
+  const uKry = async r => ext ? r.ok : (r.ok && (await r.json().catch(() => ({}))).ok);
+
   // Token-i nga serveri: provon që formulari u hap të paktën disa sekonda para dërgimit
-  fetch(api + "?token=1", { credentials: "same-origin" })
+  if (!ext) fetch(api + "?token=1", { credentials: "same-origin" })
     .then(r => r.ok ? r.json() : null)
     .then(j => { if (j && j.token) form.token.value = j.token; })
     .catch(() => {});
@@ -47,9 +60,8 @@
     }
     btn.disabled = true; const label = btn.textContent; btn.textContent = msg.sending;
     try {
-      const r = await fetch(api, { method: "POST", body: new FormData(form), credentials: "same-origin" });
-      const j = await r.json().catch(() => ({}));
-      if (r.ok && j.ok) { form.reset(); show(msg.ok, true); }
+      const r = await dergo();
+      if (await uKry(r)) { form.reset(); show(msg.ok, true); }
       else show(r.status === 429 ? msg.rate : msg.server, false);
     } catch (e) {
       show(msg.server, false);

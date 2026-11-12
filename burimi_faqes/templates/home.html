@@ -234,7 +234,7 @@
         <h2 id="nl-title">{{ t.nl_title }}</h2>
         <p>{{ t.nl_text }}</p>
       </div>
-      <form class="nl-form" id="nl-form" action="{{ root }}api/subscribe.php" method="post" novalidate data-msg='{{ nl_msgs | safe }}'>
+      <form class="nl-form" id="nl-form" action="{{ cfg.form_endpoint or (root ~ 'api/subscribe.php') }}" method="post" novalidate data-ext="{{ 1 if cfg.form_endpoint else 0 }}" data-subject="Go Tirana: newsletter signup" data-msg='{{ nl_msgs | safe }}'>
         <input type="hidden" name="lang" value="{{ lang }}">
         <input type="hidden" name="token" value="">
         <div class="hp" aria-hidden="true"><label for="nl-website">{{ t.f_hp }}</label><input id="nl-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>

@@ -10,10 +10,23 @@
   const status = document.getElementById("nl-status");
   const btn = form.querySelector('button[type="submit"]');
   const api = form.getAttribute("action");
+
+  // Formspree (ose shërbim tjetër i jashtëm) kur faqja është në GitHub Pages, ku nuk ka PHP
+  const ext = form.dataset.ext === "1";
+  function dergo() {
+    const fd = new FormData(form);
+    if (!ext) return fetch(api, { method: "POST", body: fd, credentials: "same-origin" });
+    fd.delete("token");
+    fd.set("_gotcha", fd.get("website") || ""); fd.delete("website");   // fusha kurth kundër spam-it
+    fd.set("_subject", form.dataset.subject || "Go Tirana");
+    fd.set("page", location.href);
+    return fetch(api, { method: "POST", body: fd, headers: { Accept: "application/json" } });
+  }
+  const uKry = async r => ext ? r.ok : (r.ok && (await r.json().catch(() => ({}))).ok);
   let tokenLoaded = false;
 
   function loadToken() {
-    if (tokenLoaded) return; tokenLoaded = true;
+    if (tokenLoaded || ext) return; tokenLoaded = true;
     fetch(api + "?token=1", { credentials: "same-origin" })
       .then(r => r.ok ? r.json() : null).then(j => { if (j && j.token) form.elements.token.value = j.token; })
       .catch(() => { tokenLoaded = false; });
@@ -36,9 +49,9 @@
     if (!consent.checked) { show(M.nl_err_consent, false); consent.focus(); return; }
     btn.disabled = true; const label = btn.textContent; btn.textContent = M.nl_sending;
     try {
-      const r = await fetch(api, { method: "POST", body: new FormData(form), credentials: "same-origin" });
-      const j = await r.json().catch(() => ({}));
-      if (r.ok && j.ok) { form.reset(); show(M.nl_ok, true); }
+      const r = await dergo();
+      const j = ext ? {} : await r.clone().json().catch(() => ({}));
+      if (await uKry(r)) { form.reset(); show(M.nl_ok, true); }
       else if (r.status === 429) show(M.nl_err_rate, false);
       else if (j.error === "validation" && (j.fields || []).includes("email")) show(M.nl_err_email, false);
       else show(M.nl_err_server, false);
