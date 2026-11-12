@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bus planner | Go Tirana</title>
+<meta name="description" content="Plan a trip on Tirana's city buses: click a start and a destination and see the fastest lines, walks and waits.">
+<meta name="theme-color" content="#1e242b">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+
+<!--
+  Faqja ka dy skeda:
+    UDHËTIM: klikon nisjen dhe destinacionin në hartë, dhe js/dijkstra.js gjen rrugën më të shpejtë
+             duke përdorur data/grafi.json (nga hapi 3a).
+    LINJAT:  lista e linjave dhe stacioneve (hapi 2), me gjurmët nga data/linjat.json.
+
+  Faqja duhet hapur përmes http://localhost/tirana-transit/ (XAMPP), jo me dopio-klik,
+  sepse shfletuesi nuk lejon leximin e skedarëve JSON nga file://.
+
+  HARTA: MapLibre GL JS + stili "Liberty" nga OpenFreeMap (falas, pa API key).
+  MapLibre e vizaton hartën me kartën grafike (WebGL), prandaj mund ta anojë, ta rrotullojë
+  dhe të tregojë relievin (malet) në 3D.
+-->
+
+<link rel="stylesheet" href="../assets/vendor/maplibre-gl.css">
+<script src="../assets/vendor/maplibre-gl.js"></script>
+<script src="../js/dijkstra.js?v=8"></script>
+<script src="../js/ecja.js?v=2"></script>
+<link rel="preload" href="../assets/fonts/manrope-var.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+  @font-face { font-family: "Manrope"; font-weight: 200 800; font-display: swap; src: url(../assets/fonts/manrope-var.woff2) format("woff2"); }
+  h1[data-tr="title"] { font-size: 24px; font-family: "Manrope", system-ui, sans-serif; font-weight: 700; letter-spacing: -.02em; }
+  a.brand-mark { background: none; padding: 0; text-decoration: none; }
+  a.brand-mark svg { display: block; }
+  a.brand-mark:focus-visible { outline: 3px solid #11707c; outline-offset: 2px; border-radius: 8px; }
+  .back-link { font-size: 12.5px; font-weight: 700; color: #11707c; text-decoration: none; }
+  .back-link:hover { text-decoration: underline; }
+  /*
+    DIZAJNI
+    Shkronjat: Overpass, e bazuar te "Highway Gothic" (shkronjat e tabelave rrugore).
+    Ngjyrat: gri të ftohta, që ngjyrat zyrtare të linjave të jenë ato që bien në sy.
+    Paraqitja: harta zë gjithë ekranin, paneli noton sipër (në telefon: fletë nga poshtë).
+  */
+  :root {
+    --ink: #1e242b;        /* teksti kryesor (asfalt) */
+    --muted: #66707a;      /* teksti dytësor */
+    --rule: #e3e6e8;       /* vijat ndarëse */
+    --surface: #f3f5f6;    /* sfondet e fushave */
+    --panel: #ffffff;
+    --accent: #d31332;     /* destinacioni dhe veprimet kryesore */
+    --start: #13865a;      /* nisja */
+    --walk: #8a929a;       /* ecja */
+    --radius-lg: 18px; --radius: 10px; --radius-sm: 6px;
+    --shadow: 0 1px 2px rgba(30,36,43,.08), 0 12px 32px rgba(30,36,43,.16);
+    font-family: "Manrope", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; color: var(--ink); background: #dfe3e6; }
+  body { font-size: 15px; line-height: 1.4; -webkit-font-smoothing: antialiased; }
+  button, input { font: inherit; color: inherit; }
+  :focus-visible { outline: 2.5px solid var(--accent); outline-offset: 2px; }
+
+  .app { position: relative; height: 100%; overflow: hidden; }
+  #map { position: absolute; inset: 0; }
+
+  /* ---------- Paneli ---------- */
+  .panel {
+    position: absolute; z-index: 2; top: 16px; left: 16px; bottom: 16px; width: 384px;
+    background: var(--panel); border-radius: var(--radius-lg); box-shadow: var(--shadow);
+    display: flex; flex-direction: column; overflow: hidden;
+  }
+  .grip { display: none; }
+  .header { padding: 18px 20px 0; }
+  .brand { display: flex; align-items: center; gap: 10px; }
+  .brand-mark { width: 30px; height: 30px; border-radius: 8px; background: var(--ink); color: #fff;
+    display: grid; place-items: center; font-weight: 800; font-size: 15px; letter-spacing: -.02em; }
+  .header h1 { font-size: 19px; font-weight: 800; letter-spacing: -.015em; margin: 0; line-height: 1.1; }
+  .stats { font-size: 12.5px; color: var(--muted); margin-top: 2px; }
+
+  .tabs { display: flex; gap: 2px; margin: 16px 0 0; padding: 3px; background: var(--surface); border-radius: var(--radius); }
+  .tab { flex: 1; border: 0; background: none; padding: 7px 6px 5px; font-size: 13.5px; font-weight: 600;
+    cursor: pointer; color: var(--muted); border-radius: 8px; }
+  .tab:hover { color: var(--ink); }
+  .tab.active { background: #fff; color: var(--ink); box-shadow: 0 1px 3px rgba(30,36,43,.14); }
+  .view { display: none; flex: 1; flex-direction: column; min-height: 0; }
+  .view.active { display: flex; }
+
+  /* ---------- Udhëtim: fushat e nisjes dhe destinacionit ---------- */
+  .plan { padding: 16px 20px 14px; border-bottom: 1px solid var(--rule); }
+  .route-inputs { position: relative; display: grid; grid-template-columns: 1fr auto; gap: 6px 8px; align-items: center; }
+  .route-inputs::before { /* vija që lidh dy pikat */
+    content: ""; position: absolute; left: 17px; top: 27px; bottom: 27px; border-left: 2px dotted #b7bec4; }
+  .point { display: flex; align-items: center; gap: 12px; padding: 9px 12px; background: var(--surface);
+    border: 1.5px solid transparent; border-radius: var(--radius); min-height: 48px; }
+  .point.waiting { border-color: var(--ink); background: #fff; }
+  .point .lbl-small { display: block; font-size: 11.5px; color: var(--muted); line-height: 1.2; }
+  .point .txt { display: block; font-weight: 600; font-size: 14.5px; line-height: 1.25; color: var(--muted); }
+  .point .txt.set { color: var(--ink); }
+  .dot { width: 12px; height: 12px; border-radius: 50%; flex: none; position: relative; z-index: 1; }
+  .dot.a { background: #fff; border: 3px solid var(--start); }
+  .dot.b { background: var(--accent); border-radius: 3px; }
+  .swap { grid-row: 1 / span 2; grid-column: 2; width: 38px; height: 38px; border-radius: 50%;
+    border: 1.5px solid var(--rule); background: #fff; cursor: pointer; font-size: 17px; line-height: 1; }
+  .swap:hover { border-color: var(--ink); }
+  .plan-foot { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; gap: 10px; }
+  .hint { font-size: 13px; color: var(--muted); }
+  .hint b { color: var(--ink); }
+  .link-btn { border: 0; background: none; padding: 4px 0; font-size: 13px; font-weight: 600; color: var(--muted); cursor: pointer; white-space: nowrap; }
+  .link-btn:hover { color: var(--accent); }
+
+  .result { overflow-y: auto; flex: 1; padding: 16px 20px 24px; }
+  .empty { color: var(--muted); font-size: 14px; padding: 8px 0; }
+  .empty strong { display: block; color: var(--ink); font-size: 16px; margin-bottom: 4px; }
+
+  /* ---------- Opsionet: shiriti proporcional i kohës ---------- */
+  .options { display: flex; flex-direction: column; gap: 8px; margin-bottom: 22px; }
+  .opt { border: 1.5px solid var(--rule); border-radius: var(--radius); padding: 12px 14px 12px; cursor: pointer; background: #fff; text-align: left; width: 100%; }
+  .opt:hover { border-color: #c4cacf; }
+  .opt.active { border-color: var(--ink); }
+  .opt .top { display: flex; align-items: baseline; gap: 10px; }
+  .opt .min { font-size: 24px; font-weight: 800; letter-spacing: -.02em; line-height: 1; }
+  .opt .min small { font-size: 14px; font-weight: 600; margin-left: 2px; }
+  .opt .arr { font-size: 13px; color: var(--muted); }
+  .opt .lbl { margin-left: auto; font-size: 12px; font-weight: 600; color: var(--muted); }
+  .opt.fastest .lbl { color: var(--start); }
+  .bar { display: flex; gap: 2px; height: 8px; margin: 10px 0 9px; border-radius: 4px; overflow: hidden; }
+  .seg { min-width: 4px; }
+  .seg.ecje { background: repeating-linear-gradient(90deg, var(--walk) 0 4px, transparent 4px 7px); background-color: transparent; }
+  .seg.pritje { background: repeating-linear-gradient(135deg, #d5dade 0 3px, #eef0f2 3px 6px); }
+  .chips { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; font-size: 13px; color: var(--muted); }
+  .chips .walk { display: inline-flex; align-items: center; gap: 2px; }
+  .chips .sep { color: #b7bec4; }
+
+  .badge { display: inline-block; min-width: 40px; text-align: center; padding: 3px 7px 2px; border-radius: var(--radius-sm);
+    font-weight: 800; font-size: 12.5px; letter-spacing: .01em; line-height: 1.3; }
+
+  /* ---------- Hapat: harta e linjës me orë ---------- */
+  .steps-head { display: flex; justify-content: space-between; align-items: baseline; margin: 0 0 12px; }
+  .steps-head h2 { font-size: 15px; font-weight: 800; margin: 0; }
+  .steps-head span { font-size: 13px; color: var(--muted); }
+  .steps { list-style: none; margin: 0; padding: 0; }
+  .step { position: relative; display: grid; grid-template-columns: 44px 20px 1fr; column-gap: 8px; padding-bottom: 18px; font-size: 14px; }
+  .step time { font-size: 13px; font-weight: 600; color: var(--muted); padding-top: 1px; font-variant-numeric: tabular-nums; }
+  .step .rail { position: relative; }
+  .step .rail::after { content: ""; position: absolute; left: 8px; top: 20px; bottom: -18px; border-left: 3px dotted var(--walk); }
+  .step.bus .rail::after { border-left: 5px solid var(--c); left: 7px; }
+  .step:last-child .rail::after { display: none; }
+  .step .ic { position: absolute; left: 1px; top: 2px; width: 17px; height: 17px; border-radius: 50%; background: #fff; border: 3px solid var(--walk); z-index: 1; }
+  .step.bus .ic { border-color: var(--c); }
+  .step.end .ic { border-color: var(--accent); background: var(--accent); border-radius: 4px; }
+  .step .t { font-weight: 600; line-height: 1.35; }
+  .step .s { color: var(--muted); font-size: 13px; margin-top: 2px; }
+  .step .s span + span::before { content: ", "; }
+  .step details { margin-top: 6px; font-size: 13px; color: var(--muted); }
+  .step details summary { cursor: pointer; }
+  .step details ol { margin: 6px 0 0; padding-left: 18px; }
+  .alt { margin-top: 8px; font-size: 13px; background: var(--surface); border-radius: var(--radius-sm); padding: 8px 10px; }
+  .alt .badge { min-width: 34px; font-size: 11.5px; padding: 2px 5px 1px; margin: 2px 1px; }
+  .alt .muted { color: var(--muted); }
+  .note { font-size: 12px; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 12px; margin-top: 4px; line-height: 1.5; }
+
+  /* ---------- Krahasimi me Google (kalibrimi) ---------- */
+  .cmp { margin-top: 16px; background: var(--surface); border-radius: var(--radius); padding: 14px; font-size: 13px; }
+  .cmp h3 { font-size: 14px; margin: 0 0 4px; }
+  .cmp .row { display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap; }
+  .cmp input { padding: 8px 10px; border: 1.5px solid var(--rule); border-radius: 8px; font-size: 13px; width: 84px; background: #fff; }
+  .cmp input.wide { flex: 1; min-width: 120px; }
+  .btn { border: 1.5px solid var(--rule); background: #fff; border-radius: 8px; padding: 7px 12px 5px; font-size: 13px; font-weight: 600; cursor: pointer; }
+  .btn:hover { border-color: var(--ink); }
+  .btn.primary { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .btn.primary:hover { background: #000; }
+  .btn:disabled { opacity: .45; cursor: default; }
+  a.btn { text-decoration: none; color: inherit; display: inline-block; }
+  .actions { display: flex; gap: 8px; }
+
+  .kal { overflow-y: auto; flex: 1; padding: 16px 20px 24px; font-size: 13.5px; }
+  .kal p { margin: 0 0 12px; line-height: 1.5; color: var(--muted); }
+  .kal table { width: 100%; border-collapse: collapse; margin: 8px 0 14px; font-size: 13px; }
+  .kal th, .kal td { text-align: left; padding: 7px 4px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  .kal th { font-size: 12px; color: var(--muted); font-weight: 600; }
+  .kal td.num, .kal th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .kal .del { border: 0; background: none; color: var(--muted); cursor: pointer; font-size: 16px; }
+  .stat { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 12px 0; }
+  .stat div { background: var(--surface); border-radius: var(--radius-sm); padding: 9px 10px 8px; }
+  .stat b { display: block; font-size: 19px; font-weight: 800; }
+  .stat span { font-size: 11.5px; color: var(--muted); }
+  .best { background: #e8f4ee; border-radius: var(--radius); padding: 12px 14px; margin: 12px 0; line-height: 1.55; }
+  .pos { color: #a14d00; } .neg { color: #1a5fb4; }
+
+  /* ---------- Linjat ---------- */
+  .search { margin: 16px 20px 8px; width: calc(100% - 40px); padding: 10px 12px 8px; border: 1.5px solid transparent;
+    border-radius: var(--radius); font-size: 14px; background: var(--surface); }
+  .search:focus { border-color: var(--ink); background: #fff; outline: none; }
+  .list { overflow-y: auto; flex: 1; padding-bottom: 8px; }
+  .item { display: flex; align-items: center; gap: 12px; padding: 9px 20px; cursor: pointer; }
+  .item:hover { background: var(--surface); }
+  .item.active { background: var(--surface); box-shadow: inset 3px 0 0 var(--ink); }
+  .item .name { font-size: 14px; font-weight: 600; line-height: 1.3; }
+  .item .meta { font-size: 12.5px; color: var(--muted); }
+  .item .warn { color: #a14d00; }
+  .details { border-top: 1px solid var(--rule); max-height: 45%; overflow-y: auto; padding: 14px 20px; display: none; }
+  .details.show { display: block; }
+  .details h2 { font-size: 15px; font-weight: 800; margin: 0 0 10px; display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+  .stops { list-style: none; margin: 0; padding: 0; }
+  .stops li { position: relative; padding: 5px 0 5px 22px; font-size: 13.5px; cursor: pointer; }
+  .stops li::before { content: ""; position: absolute; left: 3px; top: 10px; width: 9px; height: 9px; border-radius: 50%; background: #fff; border: 2.5px solid var(--c); z-index: 1; }
+  .stops li:not(:last-child)::after { content: ""; position: absolute; left: 8px; top: 16px; height: 100%; border-left: 3px solid var(--c); }
+  .stops li:hover { color: var(--accent); }
+
+  /* ---------- Kontrollet e hartës ---------- */
+  .btn-3d { font-weight: 800; font-size: 13px; font-family: inherit; }
+  .maplibregl-ctrl-group { border-radius: var(--radius) !important; box-shadow: var(--shadow) !important; }
+  .maplibregl-ctrl-group.pamjet button { width: auto; padding: 0 12px; font-size: 12.5px; font-weight: 600; text-align: left; }
+  .maplibregl-ctrl-group button.aktiv { background: var(--ink); color: #fff; }
+  .maplibregl-popup-content { padding: 8px 11px 6px; font-family: "Manrope", system-ui, sans-serif; font-size: 13px; border-radius: 8px; box-shadow: var(--shadow); }
+
+  /* ---------- Telefon: paneli si fletë nga poshtë ---------- */
+  @media (max-width: 760px) {
+    .panel { top: auto; left: 0; right: 0; bottom: 0; width: 100%; height: 56%; border-radius: var(--radius-lg) var(--radius-lg) 0 0; }
+    .grip { display: block; width: 40px; height: 4px; border-radius: 2px; background: #c9ced2; margin: 8px auto 0; }
+    .header { padding-top: 8px; }
+    .brand-mark { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+.suburban { padding: 14px 12px 18px; border-top: 1px solid #e3e6ea; margin-top: 6px; }
+.suburban h3 { margin: 0 0 4px; font-size: 14px; }
+.suburban p { margin: 0 0 10px; font-size: 12.5px; color: #5f6670; line-height: 1.45; }
+.suburban ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 7px; font-size: 13px; }
+.suburban li span { color: #5f6670; }
+.suburban .op { display: block; font-size: 12px; }
+.details .official { margin: 0 0 10px; font-size: 12.5px; color: #5f6670; line-height: 1.5; }
+</style>
+</head>
+<body>
+<div class="app">
+  <div id="map"></div>
+  <aside class="panel" aria-label="Planifikuesi i udhëtimit">
+    <div class="grip" aria-hidden="true"></div>
+    <div class="header">
+      <div class="brand">
+        <a class="brand-mark kthehu" href="../en/" data-tr-aria="back"><svg width="32" height="32" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="40" height="40" rx="11" fill="#d31332"/><path d="M8.5 32.5h23" stroke="#fff" stroke-opacity=".45" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="0.1 5.4"/><circle cx="8.6" cy="32.5" r="2.4" fill="#fff"/><circle cx="31.4" cy="32.5" r="2.4" fill="#fff"/><path d="M20 6.5c-5.3 0-9.3 4-9.3 9.1 0 6.3 9.3 14.4 9.3 14.4s9.3-8.1 9.3-14.4c0-5.1-4-9.1-9.3-9.1z" fill="#fff"/><circle cx="20" cy="15.6" r="3.7" fill="#d31332"/></svg></a>
+        <div>
+          <a class="back-link kthehu" href="../en/">← Go Tirana</a>
+          <h1 data-tr="title">Autobusët e Tiranës</h1>
+          <div class="stats" id="stats" data-tr="loading">Po ngarkohen linjat...</div>
+        </div>
+      </div>
+      <div class="tabs" role="tablist">
+        <button class="tab active" data-view="udhetim" role="tab" data-tr="tab_trip">Udhëtim</button>
+        <button class="tab" data-view="linjat" role="tab" data-tr="tab_lines">Linjat</button>
+        <button class="tab" data-view="kalibrim" role="tab" data-tr="tab_cal" id="tabKal">Kalibrimi</button>
+      </div>
+    </div>
+
+    <!-- SKEDA: UDHËTIM -->
+    <section class="view active" id="udhetim">
+      <div class="plan">
+        <div class="route-inputs">
+          <div class="point waiting" id="ptA"><span class="dot a"></span>
+            <span><span class="lbl-small" data-tr="from">Nga</span><span class="txt" id="txtA" data-tr="click_map">Kliko në hartë</span></span></div>
+          <button class="swap" id="nderro" data-tr-title="swap" data-tr-aria="swap" title="Ndërro nisjen me destinacionin" aria-label="Ndërro nisjen me destinacionin">⇅</button>
+          <div class="point" id="ptB"><span class="dot b"></span>
+            <span><span class="lbl-small" data-tr="to">Për</span><span class="txt" id="txtB" data-tr="then_dest">Pastaj kliko destinacionin</span></span></div>
+        </div>
+        <div class="plan-foot">
+          <div class="hint" id="hint" aria-live="polite" data-tr="hint_start">Kliko në hartë ku nis udhëtimi.</div>
+          <button class="link-btn" id="pastro" data-tr="reset">Fillo nga e para</button>
+        </div>
+      </div>
+      <div class="result" id="result"></div>
+    </section>
+
+    <!-- SKEDA: KALIBRIMI -->
+    <section class="view" id="kalibrim">
+      <div class="kal" id="kal"></div>
+    </section>
+
+    <!-- SKEDA: LINJAT -->
+    <section class="view" id="linjat">
+      <input class="search" id="search" type="search" data-tr-ph="search_ph" placeholder="Kërko linjë ose zonë, p.sh. L3 ose Kombinat">
+      <div class="list" id="list"></div>
+      <div class="details" id="details"></div>
+    </section>
+  </aside>
+</div>
+
+<script>
+// ===========================================================================
+// GJUHA (en / it / sq): nga ?lang=, ose nga zgjedhja e ruajtur në Go Tirana
+// ===========================================================================
+const PARAM = new URLSearchParams(location.search);
+const GJ = (() => {
+  let g = PARAM.get("lang");
+  try { if (!["en", "it", "sq"].includes(g)) g = localStorage.getItem("gt-lang"); } catch (e) {}
+  return ["en", "it", "sq"].includes(g) ? g : "en";
+})();
+const LOC = { en: "en-GB", it: "it-IT", sq: "sq-AL" }[GJ];
+const TX = {"en": {"title": "Bus planner", "desc": "Plan a trip on Tirana's city buses: click a start and a destination and see the fastest lines, walks and waits.", "back": "Back to Go Tirana", "loading": "Loading bus lines…", "stats": "{l} lines and {s} stops", "error": "Error", "tab_trip": "Trip", "tab_lines": "Lines", "tab_cal": "Calibration", "from": "From", "to": "To", "click_map": "Click on the map", "then_dest": "Then click your destination", "swap": "Swap start and destination", "hint_start": "Click on the map where your trip starts.", "hint_dest": "Now click where you want to go.", "hint_new": "Click on the map for a new trip.", "hint_fixed": "Click on the map where you are now, or tap the location button.", "hint_fixed_new": "Click elsewhere on the map to start from another point.", "reset": "Start over", "geo_rough": "Your browser's location is approximate (up to {d} off). Click on the map where you are.", "geo_ok": "Found your location (±{d}).", "start_here": "Start here", "geo_denied": "The browser blocked location access. Allow it from the lock icon next to the address, or click on the map.", "geo_fail": "Location not found. Click on the map where you are.", "near": "Near {n}", "none_t": "No route found", "none_s": "These points are too far from any bus line. Try a point within 800 m of a stop.", "walk_t": "Walk {n} min", "wait_t": "Wait ~{n} min", "walking": "walking", "fastest": "Fastest", "on_foot": "On foot", "arrive_at": "arrive {t}", "to_dest": "to your destination", "to_stop": "to the {n} stop", "estimate": " (estimate)", "alt": "Or take whichever comes first:", "alt_wait": "With {k} lines together, the wait drops to about {n} min.", "board": "Take {b} at {s}", "every": "every {n} min", "stops_sum": "{k} stops, get off at {s} at {t}", "arrive": "Arrive", "steps": "Steps", "leave_now": "leaving now, {t}", "note": "Times are estimates: the bus averages about {v} km/h, the wait is half of the line's interval and walking is 4.8 km/h.", "search_ph": "Search a line or area, e.g. L3 or Kombinat", "line_meta": "{n} stops, {km} km", "line_manual": "{n} stops, added by hand", "line_bad": "Not used for planning: the OpenStreetMap data is inaccurate", "stops_h": "Stops", "show_all": "Show all", "map": "Map", "light": "Light", "light_t": "Light map (lines stand out)", "sat": "Satellite", "t3d": "3D view with terrain", "dest": "Destination", "geo_auto": "Finding where you are…", "geo_far": "You seem to be outside Tirana. Click on the map where your trip starts.", "start_anyway": "Start from there anyway", "my_loc": "Your location", "op": "Operator: {o}", "official": "Official name: {e}", "not_listed": "Not on the Municipality's 2025 list, so not used for planning", "kamez": "Intercity line to Kamëz, not on Tirana's city list", "sub_h": "Suburban lines", "sub_note": "From the Municipality's 2025 list. Their stops are not mapped yet, so the planner cannot use them."}, "it": {"title": "Autobus di Tirana", "desc": "Pianifica un viaggio con gli autobus di Tirana: scegli partenza e destinazione e vedi linee, tratti a piedi e attese.", "back": "Torna a Go Tirana", "loading": "Caricamento delle linee…", "stats": "{l} linee e {s} fermate", "error": "Errore", "tab_trip": "Viaggio", "tab_lines": "Linee", "tab_cal": "Calibrazione", "from": "Da", "to": "A", "click_map": "Clicca sulla mappa", "then_dest": "Poi clicca la destinazione", "swap": "Inverti partenza e destinazione", "hint_start": "Clicca sulla mappa il punto di partenza.", "hint_dest": "Ora clicca dove vuoi andare.", "hint_new": "Clicca sulla mappa per un nuovo viaggio.", "hint_fixed": "Clicca sulla mappa dove ti trovi, o usa il pulsante della posizione.", "hint_fixed_new": "Clicca altrove sulla mappa per partire da un altro punto.", "reset": "Ricomincia", "geo_rough": "La posizione del browser è approssimativa (fino a {d} di scarto). Clicca sulla mappa dove ti trovi.", "geo_ok": "Posizione trovata (±{d}).", "start_here": "Parti da qui", "geo_denied": "Il browser ha bloccato la posizione. Consentila dall'icona del lucchetto accanto all'indirizzo, o clicca sulla mappa.", "geo_fail": "Posizione non trovata. Clicca sulla mappa dove ti trovi.", "near": "Vicino a {n}", "none_t": "Nessun percorso trovato", "none_s": "I punti sono troppo lontani dalle linee. Prova un punto entro 800 m da una fermata.", "walk_t": "A piedi {n} min", "wait_t": "Attesa ~{n} min", "walking": "a piedi", "fastest": "Più veloce", "on_foot": "A piedi", "arrive_at": "arrivo {t}", "to_dest": "fino alla destinazione", "to_stop": "fino alla fermata {n}", "estimate": " (stima)", "alt": "Oppure prendi la prima che arriva:", "alt_wait": "Con {k} linee insieme, l'attesa scende a circa {n} min.", "board": "Prendi il {b} a {s}", "every": "ogni {n} min", "stops_sum": "{k} fermate, scendi a {s} alle {t}", "arrive": "Arrivo", "steps": "Tappe", "leave_now": "partenza ora, {t}", "note": "Gli orari sono stime: l'autobus va a circa {v} km/h, l'attesa è metà dell'intervallo della linea e a piedi 4,8 km/h.", "search_ph": "Cerca una linea o zona, es. L3 o Kombinat", "line_meta": "{n} fermate, {km} km", "line_manual": "{n} fermate, aggiunta a mano", "line_bad": "Non usata: i dati di OpenStreetMap non sono accurati", "stops_h": "Fermate", "show_all": "Mostra tutte", "map": "Mappa", "light": "Chiara", "light_t": "Mappa chiara (le linee risaltano)", "sat": "Satellite", "t3d": "Vista 3D con rilievo", "dest": "Destinazione", "geo_auto": "Sto cercando dove ti trovi…", "geo_far": "Sembri fuori da Tirana. Clicca sulla mappa il punto di partenza.", "start_anyway": "Parti comunque da lì", "my_loc": "La tua posizione", "op": "Operatore: {o}", "official": "Nome ufficiale: {e}", "not_listed": "Non è nell'elenco 2025 del Comune, quindi non viene usata", "kamez": "Linea interurbana per Kamëz, non nell'elenco urbano di Tirana", "sub_h": "Linee suburbane", "sub_note": "Dall'elenco 2025 del Comune. Le fermate non sono ancora mappate, quindi il pianificatore non può usarle."}, "sq": {"title": "Autobusët e Tiranës", "desc": "Planifiko një udhëtim me autobusët e Tiranës: zgjidh nisjen dhe destinacionin dhe shiko linjat më të shpejta.", "back": "Kthehu te Go Tirana", "loading": "Po ngarkohen linjat…", "stats": "{l} linja dhe {s} stacione", "error": "Gabim", "tab_trip": "Udhëtim", "tab_lines": "Linjat", "tab_cal": "Kalibrimi", "from": "Nga", "to": "Për", "click_map": "Kliko në hartë", "then_dest": "Pastaj kliko destinacionin", "swap": "Ndërro nisjen me destinacionin", "hint_start": "Kliko në hartë ku nis udhëtimi.", "hint_dest": "Tani kliko ku do të shkosh.", "hint_new": "Kliko në hartë për një udhëtim të ri.", "hint_fixed": "Kliko në hartë ku je tani, ose përdor butonin e vendndodhjes.", "hint_fixed_new": "Kliko diku tjetër në hartë për të nisur nga një pikë tjetër.", "reset": "Fillo nga e para", "geo_rough": "Vendndodhja nga shfletuesi është e përafërt (deri në {d} larg). Kliko në hartë vendin ku je.", "geo_ok": "U gjet vendndodhja jote (±{d}).", "start_here": "Nis nga këtu", "geo_denied": "Shfletuesi nuk e lejoi vendndodhjen. Lejoje te ikona e drynit pranë adresës, ose kliko në hartë.", "geo_fail": "Vendndodhja nuk u gjet. Kliko në hartë vendin ku je.", "near": "Pranë {n}", "none_t": "Nuk u gjet asnjë rrugë", "none_s": "Pikat janë shumë larg çdo linje autobusi. Provo një pikë brenda 800 m nga një stacion.", "walk_t": "Ec {n} min", "wait_t": "Pritje ~{n} min", "walking": "ecje", "fastest": "Më e shpejta", "on_foot": "Në këmbë", "arrive_at": "mbërrin {t}", "to_dest": "deri te destinacioni", "to_stop": "deri te stacioni {n}", "estimate": " (vlerësim)", "alt": "Ose merr cilëndo që vjen e para:", "alt_wait": "Me {k} linja bashkë, pritja bie në rreth {n} min.", "board": "Hip në {b} te {s}", "every": "vjen çdo {n} min", "stops_sum": "{k} ndalesa, zbrit te {s} në {t}", "arrive": "Mbërrin", "steps": "Hapat", "leave_now": "nisja tani, {t}", "note": "Kohët janë vlerësime: autobusi rreth {v} km/h, pritja sa gjysma e intervalit të linjës, ecja 4.8 km/h. Dijkstra përpunoi {p} gjendje në {ms} ms.", "search_ph": "Kërko linjë ose zonë, p.sh. L3 ose Kombinat", "line_meta": "{n} stacione, {km} km", "line_manual": "{n} stacione, e shtuar me dorë", "line_bad": "Nuk përdoret për planifikim: të dhënat në OSM janë të pasakta", "stops_h": "Stacionet", "show_all": "Shfaq të gjitha", "map": "Harta", "light": "E çelët", "light_t": "Harta e çelët (linjat dallohen më shumë)", "sat": "Satelit", "t3d": "Pamja 3D me reliev", "dest": "Destinacioni", "geo_auto": "Po gjejmë ku ndodhesh…", "geo_far": "Duket se je jashtë Tiranës. Kliko në hartë ku nis udhëtimi.", "start_anyway": "Nis prapë nga aty", "my_loc": "Vendndodhja jote", "op": "Operatori: {o}", "official": "Emri zyrtar: {e}", "not_listed": "Nuk është në listën e Bashkisë 2025, ndaj nuk përdoret për planifikim", "kamez": "Linjë ndërqytetëse për Kamzën, jo në listën e linjave të Tiranës", "sub_h": "Linjat rrethqytetëse", "sub_note": "Nga lista e Bashkisë 2025. Stacionet e tyre nuk janë ende në hartë, ndaj planifikuesi nuk i përdor dot."}};
+const tr = (k, o = {}) => (TX[GJ][k] ?? TX.sq[k] ?? k).replace(/\{(\w+)\}/g, (_, n) => o[n] ?? "");
+const esc = v => String(v).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+document.documentElement.lang = GJ;
+document.title = `${tr("title")} | Go Tirana`;
+document.querySelector('meta[name="description"]').content = tr("desc");
+document.querySelectorAll("[data-tr]").forEach(e => e.textContent = tr(e.dataset.tr));
+document.querySelectorAll("[data-tr-ph]").forEach(e => e.placeholder = tr(e.dataset.trPh));
+document.querySelectorAll("[data-tr-title]").forEach(e => e.title = tr(e.dataset.trTitle));
+document.querySelectorAll("[data-tr-aria]").forEach(e => e.setAttribute("aria-label", tr(e.dataset.trAria)));
+document.querySelectorAll(".kthehu").forEach(a => a.href = `../${GJ}/`);
+// Kalibrimi me Google është mjet zhvilluesi: shfaqet vetëm në shqip ose me ?dev=1
+const ZHVILLUES = GJ === "sq" || PARAM.has("dev");
+if (!ZHVILLUES) document.getElementById("tabKal").hidden = true;
+
+// Destinacioni i paracaktuar nga faqja e një vendi: ?to=lat,lon&name=...
+let CAKU = null;
+{
+  const p = (PARAM.get("to") || "").split(",").map(Number);
+  if (p.length === 2 && p[0] > 41.1 && p[0] < 41.6 && p[1] > 19.5 && p[1] < 20.1)
+    CAKU = { lat: p[0], lng: p[1], emri: (PARAM.get("name") || tr("dest")).slice(0, 80) };
+}
+// Nisja e paracaktuar (nga formulari i faqes kryesore): ?from=lat,lon&fromname=...
+let NISJA_URL = null;
+{
+  const p = (PARAM.get("from") || "").split(",").map(Number);
+  if (p.length === 2 && p[0] > 41.1 && p[0] < 41.6 && p[1] > 19.5 && p[1] < 20.1)
+    NISJA_URL = { lat: p[0], lng: p[1], emri: (PARAM.get("fromname") || tr("start_here")).slice(0, 80) };
+}
+</script>
+<script>
+// ===========================================================================
+// HARTA
+// ===========================================================================
+// KUJDES: MapLibre i shkruan koordinatat [gjatësia, gjerësia] = [lon, lat],
+// e kundërta e Leaflet-it. Gabim shumë i zakonshëm kur kalon nga njëri te tjetri!
+const QENDRA = [19.8187, 41.3275];
+const STILET = {
+  harta:  "https://tiles.openfreemap.org/styles/liberty",
+  celet:  "https://tiles.openfreemap.org/styles/positron",   // e zbehtë: linjat me ngjyra dallohen më shumë
+  satelit: "https://tiles.openfreemap.org/styles/liberty",   // liberty + imazhet satelitore sipër
+};
+let pamja = "harta";        // harta | celet | satelit
+let ne3D = false;
+
+const map = new maplibregl.Map({
+  container: "map",
+  style: STILET.harta,
+  center: QENDRA,
+  zoom: 13,
+  maxPitch: 75,
+});
+map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), "top-right");
+// "Ku jam unë?": shfletuesi jep vendndodhjen (GPS në telefon; Wi-Fi ose IP në kompjuter, shpesh e përafërt)
+const kGjeo = new maplibregl.GeolocateControl({
+  positionOptions: { enableHighAccuracy: true, timeout: 15000 }, trackUserLocation: true, showAccuracyCircle: true,
+});
+map.addControl(kGjeo, "top-right");
+let vendndodhjaIme = null;
+kGjeo.on("geolocate", e => {
+  const saktesia = Math.round(e.coords.accuracy);                    // rrezja e pasigurisë në metra
+  vendndodhjaIme = { lat: e.coords.latitude, lng: e.coords.longitude, saktesia };
+  const tekst = saktesia >= 1000 ? `${(saktesia / 1000).toFixed(1)} km` : `${saktesia} m`;
+  const hint = document.getElementById("hint");
+  if (skeda !== "udhetim" || nisja) return;
+  if (saktesia > 300) {
+    hint.textContent = tr("geo_rough", { d: tekst });
+  } else {
+    hint.innerHTML = `${esc(tr("geo_ok", { d: tekst }))} <button class="link-btn" id="nisKetu">${esc(tr("start_here"))}</button>`;
+    document.getElementById("nisKetu").onclick = () => {
+      if (!vendndodhjaIme) return;
+      pastro(false);
+      nisja = { lat: vendndodhjaIme.lat, lng: vendndodhjaIme.lng };
+      shenjaA = shenje(nisja, "#13865a");
+      if (destinacioni) kerko();
+      azhornoUI();
+    };
+  }
+});
+kGjeo.on("error", e => {
+  document.getElementById("hint").textContent = e.code === 1
+    ? tr("geo_denied") : tr("geo_fail");
+});
+map.addControl(new maplibregl.ScaleControl({ unit: "metric" }), "bottom-right");
+// Respektojmë "lëvizje të reduktuara" në sistemin operativ: kamera kërcen pa animacion
+const LEVIZJE = matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 1;
+
+// ---------------------------------------------------------------------------
+// Kontrolle të vetat: një grup butonash si në Google Maps
+// ---------------------------------------------------------------------------
+function grupButonash(butonat, klasa = "") {
+  const div = document.createElement("div");
+  div.className = "maplibregl-ctrl maplibregl-ctrl-group " + klasa;
+  for (const { tekst, titull, kur } of butonat) {
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "btn-3d"; b.innerHTML = tekst; b.title = titull;
+    b.onclick = () => kur(b);
+    div.appendChild(b);
+  }
+  return { onAdd: () => div, onRemove: () => div.remove(), div };
+}
+
+// 3D: anon kamerën dhe ngre relievin (malet)
+const k3D = grupButonash([{ tekst: "3D", titull: tr("t3d"), kur: () => vendos3D(!ne3D) }]);
+map.addControl(k3D, "top-right");
+
+// Pamjet e hartës
+const kPamja = grupButonash([
+  { tekst: tr("map"), titull: tr("map"), kur: () => ndryshoPamjen("harta") },
+  { tekst: tr("light"), titull: tr("light_t"), kur: () => ndryshoPamjen("celet") },
+  { tekst: tr("sat"), titull: tr("sat"), kur: () => ndryshoPamjen("satelit") },
+], "pamjet");
+map.addControl(kPamja, "top-right");
+function shenjoButonat() {
+  const rendi = ["harta", "celet", "satelit"];
+  kPamja.div.querySelectorAll("button").forEach((b, i) => b.classList.toggle("aktiv", rendi[i] === pamja));
+  k3D.div.querySelector("button").classList.toggle("aktiv", ne3D);
+  k3D.div.querySelector("button").textContent = ne3D ? "2D" : "3D";
+}
+
+function ndryshoPamjen(e_re) {
+  const stiliIVjeter = STILET[pamja];
+  pamja = e_re;
+  shenjoButonat();
+  if (STILET[e_re] !== stiliIVjeter) {
+    // Ndërrimi i stilit i fshin të gjitha shtresat tona; i rishtojmë te "style.load" më poshtë
+    // diff: false = ringarkim i plotë, që MapLibre të lëshojë sinjalin "style.load"
+    map.setStyle(STILET[e_re], { diff: false });
+  } else {
+    aplikoPamjen();
+  }
+}
+function aplikoPamjen() {
+  if (map.getLayer("satelit")) map.setLayoutProperty("satelit", "visibility", pamja === "satelit" ? "visible" : "none");
+}
+
+function vendos3D(po) {
+  ne3D = po;
+  shenjoButonat();
+  aplikoRelievin();
+  if (po) map.easeTo({ pitch: 60, bearing: -20, duration: 1200 * LEVIZJE });
+  else map.easeTo({ pitch: 0, bearing: 0, duration: 800 * LEVIZJE });
+}
+function aplikoRelievin() {
+  // Terreni: MapLibre e ngre sipërfaqen e hartës sipas lartësisë së çdo pike (modeli dixhital i terrenit)
+  map.setTerrain(ne3D && map.getSource("terreni") ? { source: "terreni", exaggeration: 1.3 } : null);
+  if (map.getLayer("hijet")) map.setLayoutProperty("hijet", "visibility", ne3D ? "visible" : "none");
+}
+
+// ---------------------------------------------------------------------------
+// Shtresat tona. Mbajmë një kopje të të dhënave, që t'i rivendosim pas çdo ndërrimi stili.
+// ---------------------------------------------------------------------------
+const BOSH = { type: "FeatureCollection", features: [] };
+const kopja = { linjat: BOSH, stacionet: BOSH, rruga: BOSH, "rruga-skajet": BOSH, "te-gjitha": BOSH };
+let linjatDuken = true;
+
+function shtoShtresatTona() {
+  // Pa ndërtesa 3D: i heqim nga stili (stili "Liberty" i ka në shtresën "building-3d")
+  for (const l of map.getStyle().layers)
+    if (l.type === "fill-extrusion") map.removeLayer(l.id);
+
+  const shtresat = map.getStyle().layers;
+  const emratEPare = (shtresat.find(l => l.type === "symbol") || {}).id;   // shtresa e parë me emra
+
+  // 0. Satelit (poshtë emrave të rrugëve, si "Hybrid" në Google Maps)
+  map.addSource("satelit", {
+    type: "raster", tileSize: 256, maxzoom: 19,
+    tiles: ["https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"],
+    attribution: "Imazhet satelitore &copy; Esri, Maxar, Earthstar Geographics",
+  });
+  map.addLayer({ id: "satelit", type: "raster", source: "satelit", layout: { visibility: "none" } }, emratEPare);
+
+  // 0b. Relievi: lartësitë nga "Terrain Tiles" (të dhëna të hapura në AWS, pa API key)
+  const dem = {
+    type: "raster-dem", encoding: "terrarium", tileSize: 256, maxzoom: 15,
+    tiles: ["https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png"],
+    attribution: "Relievi &copy; Mapzen, AWS Terrain Tiles",
+  };
+  map.addSource("terreni", dem);
+  map.addSource("terreni-hije", dem);   // burim i veçantë për hijet (rekomandohet nga MapLibre)
+  map.addLayer({ id: "hijet", type: "hillshade", source: "terreni-hije", layout: { visibility: "none" },
+                 paint: { "hillshade-exaggeration": 0.35, "hillshade-shadow-color": "#3d3a33" } }, emratEPare);
+
+  // 1. Të gjitha linjat + etiketat e tyre mbi vijë
+  map.addSource("linjat", { type: "geojson", data: kopja.linjat });
+  const eZgjedhur = ["boolean", ["feature-state", "zgjedhur"], false];
+  const eZbehur = ["boolean", ["feature-state", "zbehur"], false];
+  map.addLayer({
+    id: "linjat-vija", type: "line", source: "linjat",
+    layout: { "line-join": "round", "line-cap": "round" },
+    paint: {
+      "line-color": ["get", "ngjyra"],
+      // gjerësia rritet me zoom-in: e hollë kur sheh gjithë qytetin, e trashë kur je afër
+      "line-width": ["interpolate", ["linear"], ["zoom"], 11, ["case", eZgjedhur, 4, 1.5], 16, ["case", eZgjedhur, 9, 4]],
+      "line-opacity": ["case", eZgjedhur, 1, eZbehur, 0.12, 0.55],
+    },
+  });
+  map.addLayer({
+    id: "linjat-etiketa", type: "symbol", source: "linjat", minzoom: 14,
+    layout: {
+      "symbol-placement": "line", "symbol-spacing": 280,
+      "text-field": ["get", "ref"], "text-font": ["Noto Sans Bold"], "text-size": 11,
+      "text-keep-upright": true,
+    },
+    paint: { "text-color": "#fff", "text-halo-color": ["get", "ngjyra"], "text-halo-width": 2.5 },
+  });
+
+  // 2. Të gjitha stacionet: pika të vogla nga zoom 13.5, emrat nga zoom 16
+  map.addSource("te-gjitha", { type: "geojson", data: kopja["te-gjitha"] });
+  map.addLayer({
+    id: "te-gjitha-pika", type: "circle", source: "te-gjitha", minzoom: 13.5,
+    paint: {
+      "circle-radius": ["interpolate", ["linear"], ["zoom"], 13.5, 2, 17, 5.5],
+      "circle-color": "#fff", "circle-stroke-color": "#5b636b",
+      "circle-stroke-width": ["interpolate", ["linear"], ["zoom"], 13.5, 1, 17, 2],
+    },
+  });
+  map.addLayer({
+    id: "te-gjitha-emri", type: "symbol", source: "te-gjitha", minzoom: 16,
+    layout: { "text-field": ["get", "emri"], "text-font": ["Noto Sans Regular"], "text-size": 11.5,
+              "text-offset": [0, 1.1], "text-anchor": "top", "text-optional": true },
+    paint: { "text-color": "#2b2b30", "text-halo-color": "#fff", "text-halo-width": 1.6 },
+  });
+
+  // 3. Stacionet e linjës së zgjedhur
+  map.addSource("stacionet", { type: "geojson", data: kopja.stacionet });
+  map.addLayer({
+    id: "stacionet-pika", type: "circle", source: "stacionet",
+    paint: { "circle-radius": 5.5, "circle-color": ["get", "ngjyra"], "circle-stroke-color": "#fff", "circle-stroke-width": 2 },
+  });
+
+  // 4. Rruga e planifikuar: kufi i bardhë poshtë vijës së autobusit, që të dallohet mbi çdo sfond
+  map.addSource("rruga", { type: "geojson", data: kopja.rruga });
+  const vijeAutobusi = ["==", ["get", "lloji"], "autobus"];
+  map.addLayer({
+    id: "rruga-kufi", type: "line", source: "rruga", filter: vijeAutobusi,
+    layout: { "line-cap": "round", "line-join": "round" },
+    paint: { "line-color": "#fff", "line-width": ["interpolate", ["linear"], ["zoom"], 11, 7, 17, 15] },
+  });
+  map.addLayer({
+    id: "rruga-bus", type: "line", source: "rruga", filter: vijeAutobusi,
+    layout: { "line-cap": "round", "line-join": "round" },
+    paint: { "line-color": ["get", "ngjyra"], "line-width": ["interpolate", ["linear"], ["zoom"], 11, 4, 17, 10] },
+  });
+  map.addLayer({
+    id: "rruga-ecje", type: "line", source: "rruga", filter: ["==", ["get", "lloji"], "ecje"],
+    layout: { "line-cap": "round", "line-join": "round" },
+    paint: { "line-color": pamja === "satelit" ? "#fff" : "#3a3a3f", "line-width": 4.5, "line-dasharray": [0.1, 2] },
+  });
+  map.addLayer({
+    id: "rruga-pika", type: "circle", source: "rruga", filter: ["==", ["geometry-type"], "Point"],
+    paint: { "circle-radius": ["get", "r"], "circle-color": ["get", "ngjyra"], "circle-stroke-color": "#fff", "circle-stroke-width": 2 },
+  });
+  // Emrat në burim të veçantë: nëse fontet nuk ngarkohen, vetë rruga vizatohet gjithsesi
+  map.addSource("rruga-skajet", { type: "geojson", data: kopja["rruga-skajet"] });
+  map.addLayer({
+    id: "rruga-emri", type: "symbol", source: "rruga-skajet",
+    layout: { "text-field": ["get", "titulli"], "text-font": ["Noto Sans Bold"], "text-size": 12,
+              "text-offset": [0, 1.2], "text-anchor": "top" },
+    paint: { "text-color": "#1d1d1f", "text-halo-color": "#fff", "text-halo-width": 2 },
+  });
+
+  shfaqLinjat(linjatDuken);
+  aplikoPamjen();
+  aplikoRelievin();
+  // Rivendosim linjën e zgjedhur (feature-state humbet kur ndërron stili)
+  if (typeof zgjedhur !== "undefined" && zgjedhur)
+    for (const x of linjat) map.setFeatureState({ source: "linjat", id: x.id }, { zgjedhur: x === zgjedhur, zbehur: x !== zgjedhur });
+}
+
+let gatiHerenEPare;
+const hartaGati = new Promise(r => { gatiHerenEPare = r; });
+map.on("style.load", () => { shtoShtresatTona(); gatiHerenEPare(); });
+
+// Gjurma e rrugës së një linje nga pozicioni i në j (grafi.json -> "gjurmet")
+function gjurmaELinjes(linja, i, j) {
+  if (!linja.gjurmet) return null;
+  const koord = [];
+  for (let k = i; k < j; k++) koord.push(...(k > i ? linja.gjurmet[k].slice(1) : linja.gjurmet[k]));
+  return koord.length > 1 ? koord : null;
+}
+
+// Ndihmës të vegjël
+const vendos = (burimi, features) => {
+  kopja[burimi] = { type: "FeatureCollection", features };
+  const b = map.getSource(burimi);
+  if (b) b.setData(kopja[burimi]);
+  if (burimi === "rruga")   // stacionet e hipjes dhe zbritjes, për emrat
+    vendos("rruga-skajet", features.filter(f => f.properties.skaj));
+};
+const vije = (koordinatat, props) => ({ type: "Feature", properties: props, geometry: { type: "LineString", coordinates: koordinatat } });
+const pike = (lon, lat, props) => ({ type: "Feature", properties: props, geometry: { type: "Point", coordinates: [lon, lat] } });
+function shfaqLinjat(po) {
+  linjatDuken = po;
+  for (const id of ["linjat-vija", "linjat-etiketa"])
+    if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", po ? "visible" : "none");
+}
+function pershtatPamjen(koordinatat, padding = 50) {
+  if (!koordinatat.length) return;
+  const k = new maplibregl.LngLatBounds(koordinatat[0], koordinatat[0]);
+  koordinatat.forEach(c => k.extend(c));
+  // Në kompjuter paneli mbulon pjesën e majtë të hartës, prandaj lëmë më shumë hapësirë majtas
+  const telefon = innerWidth <= 760;
+  const p = telefon ? { top: padding, bottom: innerHeight * 0.56 + 20, left: padding, right: padding }
+                    : { top: padding, bottom: padding, left: 384 + 16 + padding, right: padding + 50 };
+  map.fitBounds(k, { padding: p, maxZoom: 16, duration: 700 * LEVIZJE });
+}
+
+// Etiketa kur kalon miun mbi një linjë ose stacion
+const etiketaMiut = new maplibregl.Popup({ closeButton: false, closeOnClick: false, offset: 10, maxWidth: "260px" });
+for (const shtresa of ["linjat-vija", "te-gjitha-pika", "stacionet-pika", "rruga-pika"]) {
+  map.on("mousemove", shtresa, e => {
+    map.getCanvas().style.cursor = "pointer";
+    etiketaMiut.setLngLat(e.lngLat).setHTML(e.features[0].properties.titulli).addTo(map);
+  });
+  map.on("mouseleave", shtresa, () => { etiketaMiut.remove(); azhornoKursorin(); });
+}
+shenjoButonat();
+
+const NGJYRAT = ["#c8102e", "#1f6feb", "#1a7f37", "#bf8700", "#8250df", "#d1242f", "#0969da", "#cf222e",
+                 "#116329", "#953800", "#6639ba", "#0550ae", "#e16f24", "#2da44e", "#a40e26", "#3e63dd"];
+function ngjyraPer(ref) {
+  let h = 0;
+  for (const c of ref) h = (h * 31 + c.charCodeAt(0)) % 9973;
+  return NGJYRAT[h % NGJYRAT.length];
+}
+// Ngjyra zyrtare e linjës nga OpenStreetMap; nëse mungon, një ngjyrë e qëndrueshme nga kodi
+const ngjyraLinjes = (ref, zyrtare) => zyrtare || ngjyraPer(ref);
+// Teksti mbi etiketë: i zi mbi ngjyra të çelëta, i bardhë mbi të errëta (që të lexohet)
+function ngjyraTekstit(hex) {
+  const n = parseInt(hex.slice(1), 16), r = n >> 16, g = (n >> 8) & 255, b = n & 255;
+  return (0.299 * r + 0.587 * g + 0.114 * b) > 160 ? "#1d1d1f" : "#fff";
+}
+const etiketa = (ref, ngjyra) =>
+  `<span class="badge" style="background:${ngjyra};color:${ngjyraTekstit(ngjyra)}">${ref}</span>`;
+const minuta = sek => Math.max(1, Math.round(sek / 60));
+const pastroEmrin = e => e.replace(/^Bus\s+[^:]+:\s*/, "");
+
+// ===========================================================================
+// NGARKIMI I TË DHËNAVE
+// ===========================================================================
+let G = null;              // grafi i përgatitur për Dijkstra
+let linjat = [];           // për skedën Linjat
+let ZYRTARE = null;        // data/linjat_zyrtare.json
+function infoZyrtare(ref) {
+  const z = ZYRTARE?.qytetese?.[ref], j = ZYRTARE?.jashte_listes?.[ref];
+  return { emri: z?.emri, operatori: z?.operatori, perdoret: j ? j.perdoret : true, shenim: j?.shenim };
+}
+
+Promise.all([
+  fetch("../data/grafi.json").then(r => { if (!r.ok) throw new Error("Mungon data/grafi.json: ekzekuto scripts\\02_nderto_grafin.py"); return r.json(); }),
+  fetch("../data/linjat.json").then(r => { if (!r.ok) throw new Error("Mungon data/linjat.json"); return r.json(); }),
+  hartaGati,
+  // Lista zyrtare e Bashkisë (emrat, operatorët, linjat jashtë listës); planifikuesi punon edhe pa të
+  fetch("../data/linjat_zyrtare.json").then(r => r.ok ? r.json() : null).catch(() => null),
+]).then(([grafi, teDhenat, , zyrtare]) => {
+  ZYRTARE = zyrtare;
+  // Rrjeti i këmbësorëve ngarkohet më vete (~4 MB): planifikimi funksionon edhe pa të, me vijë të drejtë
+  fetch("../data/rruget_kembe.json").then(r => r.ok ? r.json() : null).then(j => {
+    if (!j) return;
+    RRJETI_KEMBE = new RrjetiKembe(j);
+    if (nisja && destinacioni) kerko();   // rillogarit udhëtimin aktual me ecjen e saktë
+  }).catch(() => {});
+  // Linjat që nuk janë në listën e Bashkisë dhe janë shënuar "perdoret": false nuk hyjnë në planifikim
+  G = pergatitGrafin({ ...grafi, linjat: grafi.linjat.filter(l => infoZyrtare(l.ref).perdoret !== false) });
+
+  // Stacionet e renditura nga grafi, sipas emrit të linjës (për skedën Linjat)
+  const stacionetSipasEmrit = {};
+  for (const l of grafi.linjat) stacionetSipasEmrit[l.emri] = l.stacionet.map(i => grafi.stacionet[i]);
+
+  const features = [];
+  for (const d of teDhenat) {
+    if (!d.segmentet.length) continue;
+    const ref = d.ref || (d.emri.match(/^Bus\s+([^:]+):/) || [, "–"])[1].trim();
+    const linja = { id: linjat.length, ref, emri: d.emri, km: d.gjatesia_km, ngjyra: ngjyraLinjes(ref, d.ngjyra),
+                    stacionet: stacionetSipasEmrit[d.emri] || [],
+                    koordinatat: d.segmentet.flat() };   // për të përshtatur pamjen te linja
+    // "id" i feature-it na lejon të ndryshojmë stilin e një linje të vetme (feature-state)
+    features.push({ type: "Feature", id: linja.id,
+      properties: { ngjyra: linja.ngjyra, ref, titulli: `<b>${ref}</b> ${pastroEmrin(d.emri)}` },
+      geometry: { type: "MultiLineString", coordinates: d.segmentet } });   // segmentet janë tashmë [lon, lat]
+    linjat.push(linja);
+  }
+  // Linjat manuale (data/linjat_manuale.json) s'kanë gjurmë rruge: i vizatojmë nëpër stacionet e tyre
+  for (const l of grafi.linjat.filter(x => x.manuale)) {
+    const stacionet = l.stacionet.map(i => grafi.stacionet[i]);
+    const koord = gjurmaELinjes(l, 0, l.stacionet.length - 1) || stacionet.map(st => [st.lon, st.lat]);
+    const linja = { id: linjat.length, ref: l.ref, emri: l.emri, km: null, manuale: true,
+                    ngjyra: ngjyraLinjes(l.ref, l.ngjyra), stacionet, koordinatat: koord };
+    features.push({ type: "Feature", id: linja.id,
+      properties: { ngjyra: linja.ngjyra, ref: l.ref, titulli: `<b>${l.ref}</b> ${l.emri}` },
+      geometry: { type: "LineString", coordinates: koord } });
+    linjat.push(linja);
+  }
+  // Linjat e OSM që janë zëvendësuar nga një version manual nuk shfaqen më
+  const zevendesuara = new Set(grafi.linjat.map(x => x.zevendeson).filter(Boolean));
+  for (let i = linjat.length - 1; i >= 0; i--)
+    if (zevendesuara.has(linjat[i].emri)) { features.splice(features.findIndex(f => f.id === linjat[i].id), 1); linjat.splice(i, 1); }
+  vendos("linjat", features);
+
+  // Të gjitha stacionet, me listën e linjave që ndalojnë në secilin
+  const linjatNeStacion = grafi.stacionet.map(() => new Set());
+  grafi.linjat.forEach(l => l.stacionet.forEach(i => linjatNeStacion[i].add(l.ref)));
+  const ngjyraSipasRef = Object.fromEntries(linjat.map(l => [l.ref, l.ngjyra]));
+  vendos("te-gjitha", grafi.stacionet.map((s, i) => {
+    if (s.emri === "(pa emer)") return null;
+    const refs = [...linjatNeStacion[i]].sort((a, b) => a.localeCompare(b, "sq", { numeric: true }));
+    return pike(s.lon, s.lat, {
+      emri: s.emri,
+      titulli: `<b>${s.emri}</b><div style="margin-top:4px">${refs.map(r =>
+        etiketa(r, ngjyraSipasRef[r] || ngjyraPer(r))).join(" ")}</div>`,
+    });
+  }).filter(Boolean));
+  linjat.sort((a, b) => a.ref.localeCompare(b.ref, "sq", { numeric: true }) || a.emri.localeCompare(b.emri, "sq"));
+
+  document.getElementById("stats").textContent =
+    tr("stats", { l: new Set(G.linjat.map(l => l.ref)).size, s: grafi.stacionet.length });
+  shfaqListen("");
+  if (CAKU) pastro();
+  if (NISJA_URL) {                                 // të dyja pikat nga URL: kërkojmë menjëherë
+    if (!CAKU) pastro(false);
+    nisja = { lat: NISJA_URL.lat, lng: NISJA_URL.lng };
+    shenjaA = shenje(nisja, "#1a7f37");
+    if (destinacioni) {
+      kerko();
+      map.fitBounds([[Math.min(nisja.lng, destinacioni.lng), Math.min(nisja.lat, destinacioni.lat)],
+                     [Math.max(nisja.lng, destinacioni.lng), Math.max(nisja.lat, destinacioni.lat)]], { padding: 80, maxZoom: 15 });
+    } else map.flyTo({ center: [nisja.lng, nisja.lat], zoom: 14 });
+    azhornoUI();
+  } else if (CAKU) {
+    map.flyTo({ center: [CAKU.lng, CAKU.lat], zoom: 14 });
+    nisNgaVendndodhja();                           // destinacioni nga faqja e vendit: nisja = ku je tani
+  }
+}).catch(err => {
+  document.getElementById("stats").innerHTML = `<b style="color:#c8102e">${tr("error")}:</b> ${esc(err.message)}`;
+});
+
+// ===========================================================================
+// SKEDAT
+// ===========================================================================
+let skeda = "udhetim";
+document.querySelectorAll(".tab").forEach(t => t.onclick = () => {
+  skeda = t.dataset.view;
+  document.querySelectorAll(".tab").forEach(x => x.classList.toggle("active", x === t));
+  document.querySelectorAll(".view").forEach(v => v.classList.toggle("active", v.id === skeda));
+  if (skeda === "udhetim") { rivendosLinjat(); vizatoRezultatin(); }
+  else if (skeda === "kalibrim") { vendos("rruga", []); shfaqLinjat(true); vizatoKalibrimin(); }
+  else { vendos("rruga", []); shfaqLinjat(true); rivendosLinjat(); }
+  azhornoKursorin();
+});
+
+// ===========================================================================
+// UDHËTIM: zgjedhja e pikave dhe kërkimi
+// ===========================================================================
+let nisja = null, destinacioni = null, rezultati = null, opsioniZgjedhur = 0;
+let shenjaA = null, shenjaB = null;
+
+// Shenjat e nisjes dhe destinacionit (kunjat klasike të hartës)
+const shenje = (pika, ngjyra) => new maplibregl.Marker({ color: ngjyra }).setLngLat(pika).addTo(map);
+function azhornoKursorin() {
+  map.getCanvas().style.cursor = skeda === "udhetim" && !(nisja && destinacioni) ? "crosshair" : "";
+}
+
+map.on("click", e => {
+  if (skeda !== "udhetim" || !G) return;
+  const pika = { lat: e.lngLat.lat, lng: e.lngLat.lng };
+  if (CAKU) {                                     // destinacioni është fiks: çdo klikim zgjedh nisjen
+    pastro(false);
+    nisja = pika;
+    shenjaA = shenje(nisja, "#1a7f37");
+    if (destinacioni) kerko();
+    azhornoUI();
+    return;
+  }
+  if (!nisja || (nisja && destinacioni)) {        // klikimi i parë (ose fillim i ri)
+    pastro(false);
+    nisja = pika;
+    shenjaA = shenje(nisja, "#1a7f37");
+  } else {
+    destinacioni = pika;
+    shenjaB = shenje(destinacioni, "#c8102e");
+    kerko();
+  }
+  azhornoUI();
+});
+
+// Skeda Linjat: klikimi mbi një linjë e zgjedh atë
+map.on("click", "linjat-vija", e => {
+  if (skeda !== "linjat") return;
+  const l = linjat.find(x => x.id === e.features[0].id);
+  if (l) zgjidhLinjen(l);
+});
+
+function azhornoUI() {
+  const pershkruaj = p => {
+    if (CAKU && p.lat === CAKU.lat && p.lng === CAKU.lng) return CAKU.emri;
+    if (NISJA_URL && p.lat === NISJA_URL.lat && p.lng === NISJA_URL.lng) return NISJA_URL.emri;
+    if (NISJA_GJEO && p.lat === NISJA_GJEO.lat && p.lng === NISJA_GJEO.lng) return tr("my_loc");
+    // emri i stacionit më të afërt, që përdoruesi ta njohë vendin
+    let me = null, dm = Infinity;
+    for (const s of G.stacionet) {
+      if (s.emri === "(pa emer)") continue;
+      const d = distancaM(p.lat, p.lng, s.lat, s.lon);
+      if (d < dm) { dm = d; me = s; }
+    }
+    return dm < 300 ? tr("near", { n: me.emri }) : `${p.lat.toFixed(4)}, ${p.lng.toFixed(4)}`;
+  };
+  const tA = document.getElementById("txtA"), tB = document.getElementById("txtB");
+  tA.textContent = nisja ? pershkruaj(nisja) : tr("click_map");
+  tB.textContent = destinacioni ? pershkruaj(destinacioni) : (nisja ? tr("click_map") : tr("then_dest"));
+  tA.classList.toggle("set", !!nisja); tB.classList.toggle("set", !!destinacioni);
+  document.getElementById("ptA").classList.toggle("waiting", !nisja);
+  document.getElementById("ptB").classList.toggle("waiting", !!nisja && !destinacioni);
+  document.getElementById("hint").textContent =
+    CAKU ? (nisja ? tr("hint_fixed_new") : tr("hint_fixed")) :
+    !nisja ? tr("hint_start") :
+    !destinacioni ? tr("hint_dest") :
+    tr("hint_new");
+  azhornoKursorin();
+}
+
+function kerko() {
+  const t0 = performance.now();
+  rezultati = gjejOpsionet(G, { lat: nisja.lat, lon: nisja.lng }, { lat: destinacioni.lat, lon: destinacioni.lng });
+  rezultati.ms = performance.now() - t0;
+  opsioniZgjedhur = 0;
+  vizatoRezultatin();
+}
+
+// Kur vjen nga faqja e një vendi (?to=...) pa nisje, kërkojmë vendndodhjen e personit dhe
+// e përdorim si nisje, që rruga të dalë menjëherë. Shfletuesi e pyet personin para se ta japë.
+let NISJA_GJEO = null;
+function nisNgaVendndodhja() {
+  if (!navigator.geolocation || nisja) return;
+  const hint = document.getElementById("hint");
+  hint.textContent = tr("geo_auto");
+  navigator.geolocation.getCurrentPosition(pos => {
+    if (nisja) return;                              // personi ka klikuar vetë në hartë ndërkohë
+    const lat = pos.coords.latitude, lng = pos.coords.longitude, saktesia = Math.round(pos.coords.accuracy);
+    if (!(lat > 41.1 && lat < 41.6 && lng > 19.5 && lng < 20.1)) { hint.textContent = tr("geo_far"); return; }
+    const vendos = () => {
+      pastro(false);
+      nisja = NISJA_GJEO = { lat, lng };
+      shenjaA = shenje(nisja, "#1a7f37");
+      if (destinacioni) {
+        kerko();
+        map.fitBounds([[Math.min(lng, destinacioni.lng), Math.min(lat, destinacioni.lat)],
+                       [Math.max(lng, destinacioni.lng), Math.max(lat, destinacioni.lat)]],
+                      { padding: 80, maxZoom: 15, duration: 800 * LEVIZJE });
+      }
+      azhornoUI();
+    };
+    if (saktesia <= 300) return vendos();
+    // vendndodhja e përafërt (zakonisht në kompjuter): e pyesim personin para se ta përdorim
+    const tekst = saktesia >= 1000 ? `${(saktesia / 1000).toFixed(1)} km` : `${saktesia} m`;
+    hint.innerHTML = `${esc(tr("geo_rough", { d: tekst }))} <button class="link-btn" id="nisPrape">${esc(tr("start_anyway"))}</button>`;
+    document.getElementById("nisPrape").onclick = vendos;
+  }, err => {
+    if (!nisja) hint.textContent = err.code === 1 ? tr("geo_denied") : tr("geo_fail");
+  }, { enableHighAccuracy: true, timeout: 12000, maximumAge: 60000 });
+}
+
+function pastro(azhorno = true) {
+  nisja = destinacioni = rezultati = null;
+  if (shenjaA) shenjaA.remove();
+  if (shenjaB) shenjaB.remove();
+  shenjaA = shenjaB = null;
+  vendos("rruga", []);
+  shfaqLinjat(true);
+  document.getElementById("result").innerHTML = "";
+  if (CAKU) {                                     // destinacioni i paracaktuar mbetet
+    destinacioni = { lat: CAKU.lat, lng: CAKU.lng };
+    shenjaB = shenje(destinacioni, "#c8102e");
+  }
+  if (azhorno) azhornoUI();
+}
+document.getElementById("pastro").onclick = () => pastro();
+document.getElementById("nderro").onclick = () => {
+  if (!nisja || !destinacioni) return;
+  [nisja, destinacioni] = [destinacioni, nisja];
+  shenjaA.setLngLat(nisja); shenjaB.setLngLat(destinacioni);
+  kerko(); azhornoUI();
+};
+
+// ===========================================================================
+// UDHËTIM: shfaqja e rezultatit
+// ===========================================================================
+function vizatoRezultatin() {
+  vendos("rruga", []);
+  const el = document.getElementById("result");
+  if (!nisja || !destinacioni) { el.innerHTML = ""; return; }
+  if (!rezultati || !rezultati.opsionet.length) {
+    el.innerHTML = `<div class="empty"><strong>${tr("none_t")}</strong> ${tr("none_s")}</div>`;
+    return;
+  }
+  shfaqLinjat(false);   // fshehim linjat e tjera që rruga të dallohet
+
+  // ---- Orët: nisja = tani, pastaj shtojmë kohën e çdo hapi ----
+  const tani = Date.now();
+  const ora = sek => new Date(tani + sek * 1000).toLocaleTimeString(LOC, { hour: "2-digit", minute: "2-digit", hourCycle: "h23" });
+  const pritja = h => h.pritjaPerbashketSek ?? h.pritjaSek;
+
+  // ---- Lista e opsioneve, secili me shiritin proporcional të kohës ----
+  const shiriti = o => o.hapat.map(h => h.lloji === "ecje"
+      ? `<span class="seg ecje" style="flex:${h.kohaSek}" title="${tr("walk_t", { n: minuta(h.kohaSek) })}"></span>`
+      : `<span class="seg pritje" style="flex:${pritja(h)}" title="${tr("wait_t", { n: minuta(pritja(h)) })}"></span>` +
+        `<span class="seg" style="flex:${h.kohaSek};background:${ngjyraLinjes(h.linja, h.ngjyra)}" title="${h.linja}: ${minuta(h.kohaSek)} min"></span>`
+    ).join("");
+  const permbledhje = o => o.hapat.map(h => h.lloji === "ecje"
+      ? `<span class="walk" aria-label="${tr("walking")}">🚶${minuta(h.kohaSek)}</span>`
+      : etiketa(h.linja, ngjyraLinjes(h.linja, h.ngjyra))).join(`<span class="sep">›</span>`);
+  const opsionetHtml = rezultati.opsionet.map((o, i) => {
+    const vetemEcje = o.hapat.every(h => h.lloji === "ecje");
+    const lbl = i === 0 ? tr("fastest") : vetemEcje ? tr("on_foot") : "";
+    return `<button class="opt ${i === opsioniZgjedhur ? "active" : ""} ${i === 0 ? "fastest" : ""}" data-i="${i}">
+      <div class="top"><span class="min">${minuta(o.kohaRealeSek)}<small>min</small></span>
+        <span class="arr">${tr("arrive_at", { t: ora(o.kohaRealeSek) })}</span><span class="lbl">${lbl}</span></div>
+      <div class="bar">${shiriti(o)}</div>
+      <div class="chips">${permbledhje(o)}</div></button>`;
+  }).join("");
+
+  // ---- Detajet e opsionit të zgjedhur ----
+  const o = rezultati.opsionet[opsioniZgjedhur];
+  const items = [];
+  const kufijte = [[nisja.lng, nisja.lat], [destinacioni.lng, destinacioni.lat]];
+  const objektet = [];   // çfarë do vizatojmë në hartë për këtë opsion
+  let t = 0;             // sekonda nga nisja
+
+  for (const h of o.hapat) {
+    if (h.lloji === "ecje") {
+      const koord = h.gjurma || h.pikat.map(p => [p.lon, p.lat]);   // përgjatë rrugëve nëse kemi rrjetin
+      objektet.push(vije(koord, { lloji: "ecje" }));
+      kufijte.push(...koord);
+      const ku = h.deri.emri === "Destinacioni" ? (CAKU ? `→ ${esc(CAKU.emri)}` : tr("to_dest")) : tr("to_stop", { n: h.deri.emri });
+      items.push(`<li class="step"><time>${ora(t)}</time><span class="rail"><span class="ic"></span></span>
+        <div><div class="t">${tr("walk_t", { n: minuta(h.kohaSek) })}</div><div class="s">${ku}</div></div></li>`);
+      t += h.kohaSek;
+    } else {
+      const c = ngjyraLinjes(h.linja, h.ngjyra);
+      // Vija ndjek rrugën: bashkojmë gjurmët e segmenteve nga stacioni i hipjes te zbritja
+      const koord = gjurmaELinjes(G.linjat[h.li], h.pozFillim, h.pozFund)
+                    || h.stacionet.map(s => [s.lon, s.lat]);
+      objektet.push(vije(koord, { lloji: "autobus", ngjyra: c }));
+      h.stacionet.forEach((s, i) => objektet.push(pike(s.lon, s.lat, {
+        ngjyra: c, r: i === 0 || i === h.stacionet.length - 1 ? 7 : 4, titulli: s.emri,
+        skaj: i === 0 || i === h.stacionet.length - 1 })));   // emri shfaqet vetëm te hipja dhe zbritja
+      kufijte.push(...koord);
+      t += pritja(h);
+      const ndal = h.stacionet.length - 1;
+      const burimi = h.burimi === "osm" ? "" : tr("estimate");
+      const alt = h.paralele.length ? `<div class="alt">${tr("alt")}
+          ${h.paralele.map(p => etiketa(p.linja, ngjyraLinjes(p.linja, p.ngjyra)) +
+            `<span class="muted">${minuta(p.kohaSek)} min</span>`).join(" ")}
+          <div class="muted" style="margin-top:3px">${tr("alt_wait", { k: h.paralele.length + 1, n: minuta(pritja(h)) })}</div></div>` : "";
+      items.push(`<li class="step bus" style="--c:${c}"><time>${ora(t)}</time><span class="rail"><span class="ic"></span></span>
+        <div><div class="t">${tr("board", { b: etiketa(h.linja, c), s: h.stacionet[0].emri })}</div>
+        <div class="s"><span>${pastroEmrin(h.emri)}</span><span>${tr("every", { n: h.intervaliMin })}${burimi}</span></div>
+        ${alt}
+        <details><summary>${tr("stops_sum", { k: ndal, s: h.stacionet[ndal].emri, t: ora(t + h.kohaSek) })}</summary>
+          <ol>${h.stacionet.slice(1).map(s => `<li>${s.emri}</li>`).join("")}</ol></details></div></li>`);
+      t += h.kohaSek;
+    }
+  }
+  items.push(`<li class="step end"><time>${ora(t)}</time><span class="rail"><span class="ic"></span></span>
+    <div><div class="t">${tr("arrive")}</div></div></li>`);
+
+  el.innerHTML = `
+    <div class="options">${opsionetHtml}</div>
+    <div class="steps-head"><h2>${tr("steps")}</h2><span>${tr("leave_now", { t: ora(0) })}</span></div>
+    <ol class="steps">${items.join("")}</ol>
+    <div class="note">${tr("note", { v: PARAMETRAT.shpejtesiaAutobusitKmh, p: rezultati.perpunuara.toLocaleString(LOC), ms: rezultati.ms.toFixed(1) })}</div>`;
+  if (ZHVILLUES) { el.insertAdjacentHTML("beforeend", kutiaKrahasimit()); lidhKutineKrahasimit(); }
+  el.querySelectorAll(".opt").forEach(d => d.onclick = () => { opsioniZgjedhur = +d.dataset.i; vizatoRezultatin(); });
+  vendos("rruga", objektet);
+  pershtatPamjen(kufijte, 60);
+}
+
+// ===========================================================================
+// KALIBRIMI
+//   1. Përdoruesi planifikon një udhëtim dhe e hap të njëjtin në Google Maps (link zyrtar
+//      "Maps URLs", i lejuar për përdorim publik).
+//   2. Shkruan kohën totale që tregon Google dhe e ruan (në localStorage të shfletuesit).
+//   3. "Gjej parametrat më të mirë" provon shumë kombinime shpejtësie dhe pritjeje dhe
+//      zgjedh atë me gabimin mesatar më të vogël (metoda "grid search").
+// ===========================================================================
+const CELESI = "tirana-transit-kalibrimi";
+function lexoMatjet() {
+  try { return JSON.parse(localStorage.getItem(CELESI) || "[]"); } catch { return []; }
+}
+function ruajMatjet(m) {
+  try { localStorage.setItem(CELESI, JSON.stringify(m)); } catch { alert("Shfletuesi nuk lejon ruajtjen lokale."); }
+}
+const pikeTekst = p => `${p.lat.toFixed(5)},${p.lng.toFixed(5)}`;
+const linkGoogle = (a, b) =>
+  `https://www.google.com/maps/dir/?api=1&origin=${pikeTekst(a)}&destination=${pikeTekst(b)}&travelmode=transit`;
+
+function kutiaKrahasimit() {
+  return `<div class="cmp"><h3>Krahaso me Google Maps (për kalibrim)</h3>
+    <div>Hape këtë udhëtim në Google Maps, shiko kohën totale të opsionit të parë me autobus dhe shkruaje këtu.</div>
+    <div class="row">
+      <a class="btn" href="${linkGoogle(nisja, destinacioni)}" target="_blank" rel="noopener">Hap në Google Maps ↗</a>
+    </div>
+    <div class="row">
+      <input id="gMin" type="number" min="1" max="240" placeholder="min">
+      <input id="gLinjat" class="wide" placeholder="linjat sipas Google, p.sh. L12, L9">
+      <button class="btn primary" id="gRuaj">Ruaj</button>
+    </div>
+    <div id="gMsg" style="margin-top:6px;color:var(--muted)">Ke ${lexoMatjet().length} matje të ruajtura.</div></div>`;
+}
+function lidhKutineKrahasimit() {
+  const b = document.getElementById("gRuaj");
+  if (!b) return;
+  b.onclick = () => {
+    const min = parseFloat(document.getElementById("gMin").value);
+    if (!(min > 0)) { document.getElementById("gMsg").textContent = "Shkruaj kohën në minuta."; return; }
+    const m = lexoMatjet();
+    m.push({
+      nga: { lat: nisja.lat, lng: nisja.lng, emri: document.getElementById("txtA").textContent.replace(/^Nisja: /, "") },
+      deri: { lat: destinacioni.lat, lng: destinacioni.lng, emri: document.getElementById("txtB").textContent.replace(/^Destinacioni: /, "") },
+      googleMin: min,
+      googleLinjat: document.getElementById("gLinjat").value.trim(),
+      data: new Date().toISOString().slice(0, 16).replace("T", " "),
+    });
+    ruajMatjet(m);
+    document.getElementById("gMsg").innerHTML = `U ruajt. Ke <b>${m.length}</b> matje. Kliko përsëri në hartë për udhëtimin tjetër.`;
+    document.getElementById("gMin").value = ""; document.getElementById("gLinjat").value = "";
+  };
+}
+
+// Vlerësimi ynë për një matje me parametrat aktualë (rruga më e shpejtë)
+function vleresimi(m) {
+  const r = gjejRrugen(G, { lat: m.nga.lat, lon: m.nga.lng }, { lat: m.deri.lat, lon: m.deri.lng });
+  return r ? r.kohaSek / 60 : NaN;
+}
+function gabimiMesatar(matjet) {
+  // MAE (Mean Absolute Error): mesatarja e |vlerësimi - Google|, në minuta
+  const g = matjet.map(m => Math.abs(vleresimi(m) - m.googleMin)).filter(x => !isNaN(x));
+  return g.length ? g.reduce((a, b) => a + b, 0) / g.length : NaN;
+}
+
+function vizatoKalibrimin(mesazh = "") {
+  const el = document.getElementById("kal");
+  const m = lexoMatjet();
+  const P = PARAMETRAT;
+  if (!G) { el.innerHTML = "<p>Po ngarkohen të dhënat...</p>"; return; }
+  const rreshtat = m.map((x, i) => {
+    const v = vleresimi(x), d = v - x.googleMin;
+    return `<tr><td>${i + 1}</td><td>${x.nga.emri}<br><span style="color:var(--muted)">→ ${x.deri.emri}</span></td>
+      <td class="num">${x.googleMin}</td><td class="num">${isNaN(v) ? "–" : v.toFixed(0)}</td>
+      <td class="num ${d > 0 ? "pos" : "neg"}">${isNaN(d) ? "–" : (d > 0 ? "+" : "") + d.toFixed(0)}</td>
+      <td><button class="del" data-i="${i}" title="Fshi">×</button></td></tr>`;
+  }).join("");
+  const mae = gabimiMesatar(m);
+  el.innerHTML = `
+    <p>Planifiko udhëtime te skeda <b>Udhëtim</b>, hapi në Google Maps dhe ruaj kohën e Google-it.
+       Me 15–20 udhëtime të ndryshme (të shkurtra dhe të gjata, me e pa ndërrim linje) kalibrimi bëhet i besueshëm.</p>
+    <div class="stat">
+      <div><b>${m.length}</b><span>matje</span></div>
+      <div><b>${isNaN(mae) ? "–" : mae.toFixed(1) + " min"}</b><span>gabimi mesatar (MAE)</span></div>
+      <div><b>${P.shpejtesiaAutobusitKmh} km/h</b><span>shpejtësia, pritja ×${P.faktoriPritjes}</span></div>
+    </div>
+    ${mesazh}
+    ${m.length ? `<table><tr><th>#</th><th>Udhëtimi</th><th class="num">Google</th><th class="num">Ne</th><th class="num">Diferenca</th><th></th></tr>${rreshtat}</table>` : ""}
+    <div class="actions" style="flex-wrap:wrap">
+      <button class="btn primary" id="kGjej" ${m.length < 3 ? "disabled" : ""}>Gjej parametrat më të mirë</button>
+      <button class="btn" id="kCsv" ${m.length ? "" : "disabled"}>Shkarko CSV</button>
+      <button class="btn" id="kRivendos">Rivendos parametrat</button>
+    </div>
+    ${m.length < 3 ? `<p style="margin-top:10px">Duhen të paktën 3 matje për kalibrimin.</p>` : ""}`;
+  el.querySelectorAll(".del").forEach(b => b.onclick = () => {
+    const mm = lexoMatjet(); mm.splice(+b.dataset.i, 1); ruajMatjet(mm); vizatoKalibrimin();
+  });
+  document.getElementById("kCsv").onclick = shkarkoCsv;
+  document.getElementById("kRivendos").onclick = () => {
+    P.shpejtesiaAutobusitKmh = 15; P.faktoriPritjes = 1; vizatoKalibrimin();
+  };
+  document.getElementById("kGjej").onclick = gjejParametrat;
+}
+
+// Grid search: provojmë çdo kombinim nga dy listat dhe mbajmë atë me MAE më të vogël
+async function gjejParametrat() {
+  const m = lexoMatjet(), P = PARAMETRAT;
+  const shpejtesite = [], faktoret = [];
+  for (let v = 8; v <= 26; v += 1) shpejtesite.push(v);
+  for (let f = 0.5; f <= 2.001; f += 0.25) faktoret.push(+f.toFixed(2));
+  const para = { v: P.shpejtesiaAutobusitKmh, f: P.faktoriPritjes, mae: gabimiMesatar(m) };
+  let mire = { ...para };
+  const gjithsej = shpejtesite.length * faktoret.length;
+  let bera = 0;
+  const btn = document.getElementById("kGjej");
+  for (const v of shpejtesite) {
+    for (const f of faktoret) {
+      P.shpejtesiaAutobusitKmh = v; P.faktoriPritjes = f;
+      const mae = gabimiMesatar(m);
+      if (mae < mire.mae) mire = { v, f, mae };
+      bera++;
+    }
+    btn.textContent = `Duke provuar... ${Math.round(100 * bera / gjithsej)}%`;
+    await new Promise(r => setTimeout(r, 0));   // i japim shfletuesit kohë të vizatojë progresin
+  }
+  P.shpejtesiaAutobusitKmh = mire.v; P.faktoriPritjes = mire.f;
+  vizatoKalibrimin(`<div class="best">
+    U provuan <b>${gjithsej}</b> kombinime. Më i miri:
+    shpejtësia <b>${mire.v} km/h</b>, pritja <b>×${mire.f}</b>.<br>
+    Gabimi mesatar ra nga <b>${para.mae.toFixed(1)}</b> në <b>${mire.mae.toFixed(1)} min</b>.<br>
+    <span style="color:var(--muted)">Parametrat u aplikuan për këtë sesion. Për t'i bërë të përhershëm, ndrysho
+    <code>shpejtesiaAutobusitKmh</code> dhe <code>faktoriPritjes</code> te <code>js/dijkstra.js</code>.</span></div>`);
+}
+
+function shkarkoCsv() {
+  const m = lexoMatjet();
+  const q = t => `"${String(t).replace(/"/g, '""')}"`;
+  const rreshta = [["nr", "nga", "nga_lat", "nga_lon", "deri", "deri_lat", "deri_lon", "google_min", "linjat_google", "vleresimi_yne_min", "data"].join(",")];
+  m.forEach((x, i) => rreshta.push([i + 1, q(x.nga.emri), x.nga.lat.toFixed(6), x.nga.lng.toFixed(6), q(x.deri.emri),
+    x.deri.lat.toFixed(6), x.deri.lng.toFixed(6), x.googleMin, q(x.googleLinjat), vleresimi(x).toFixed(1), q(x.data)].join(",")));
+  const blob = new Blob(["\ufeff" + rreshta.join("\n")], { type: "text/csv;charset=utf-8" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob); a.download = "kalibrimi.csv"; a.click();
+}
+
+// ===========================================================================
+// LINJAT
+// ===========================================================================
+let zgjedhur = null;
+
+function shfaqListen(teksti) {
+  const q = teksti.trim().toLowerCase();
+  const el = document.getElementById("list");
+  el.innerHTML = "";
+  for (const l of linjat) {
+    const z = infoZyrtare(l.ref);
+    const kerkim = [l.ref, l.emri, z.emri || "", z.operatori || ""].join(" ").toLowerCase();
+    if (q && !kerkim.includes(q)) continue;
+    const div = document.createElement("div");
+    div.className = "item" + (l === zgjedhur ? " active" : "");
+    const shenim = z.shenim === "not_listed" ? `<span class="warn">${tr("not_listed")}</span>`
+                 : z.shenim === "kamez" ? tr("kamez") : "";
+    div.innerHTML = `${etiketa(l.ref, l.ngjyra)}
+      <div><div class="name">${pastroEmrin(l.emri)}</div>
+      <div class="meta">${l.stacionet.length
+        ? (l.manuale ? tr("line_manual", { n: l.stacionet.length }) : tr("line_meta", { n: l.stacionet.length, km: l.km }))
+        : `<span class="warn">${tr("line_bad")}</span>`}${z.operatori ? ` · ${esc(tr("op", { o: z.operatori }))}` : ""}</div>
+      ${shenim ? `<div class="meta">${shenim}</div>` : ""}</div>`;
+    div.onclick = () => zgjidhLinjen(l);
+    el.appendChild(div);
+  }
+  // Linjat rrethqytetëse nga lista e Bashkisë: vetëm informacion, s'kanë stacione në hartë
+  const rr = (ZYRTARE?.rrethqytetese || []).filter(r => !linjat.some(l => l.ref === r.ref) &&
+    (!q || [r.ref, r.emri, r.operatori].join(" ").toLowerCase().includes(q)));
+  if (rr.length) {
+    const sek = document.createElement("div");
+    sek.className = "suburban";
+    sek.innerHTML = `<h3>${esc(tr("sub_h"))}</h3><p>${esc(tr("sub_note"))}</p><ul>${rr.map(r =>
+      `<li><b>RR ${esc(r.ref.replace(/^L/, "").replace(/R$/, ""))}</b> ${esc(r.emri)}${r.degezimet.length ? ` <span>(${esc(r.degezimet.join(", "))})</span>` : ""}${r.operatori ? `<span class="op">${esc(r.operatori)}</span>` : ""}</li>`).join("")}</ul>`;
+    el.appendChild(sek);
+  }
+}
+document.getElementById("search").addEventListener("input", e => shfaqListen(e.target.value));
+
+function zgjidhLinjen(l) {
+  zgjedhur = l;
+  // feature-state: ndryshojmë stilin e çdo linje pa i rindërtuar të dhënat
+  for (const x of linjat) map.setFeatureState({ source: "linjat", id: x.id }, { zgjedhur: x === l, zbehur: x !== l });
+  pershtatPamjen(l.koordinatat, 30);
+  vendos("stacionet", l.stacionet.map((s, i) => pike(s.lon, s.lat, { ngjyra: l.ngjyra, titulli: `${i + 1}. ${s.emri}` })));
+
+  const d = document.getElementById("details");
+  d.className = "details show";
+  d.style.setProperty("--c", l.ngjyra);
+  d.innerHTML = `<h2><span>${etiketa(l.ref, l.ngjyra)} ${tr("stops_h")}</span>
+      <button class="btn" id="mbyll">${tr("show_all")}</button></h2>
+    ${(z => z.emri ? `<p class="official">${esc(tr("official", { e: z.emri }))}<br>${esc(tr("op", { o: z.operatori }))}</p>` : "")(infoZyrtare(l.ref))}
+    <ol class="stops">${l.stacionet.map((s, i) => `<li data-i="${i}">${s.emri}</li>`).join("")}</ol>`;
+  d.querySelector("#mbyll").onclick = () => { rivendosLinjat(); map.flyTo({ center: QENDRA, zoom: 13 }); };
+  d.querySelectorAll(".stops li").forEach(li => li.onclick = () => {
+    const s = l.stacionet[li.dataset.i]; map.flyTo({ center: [s.lon, s.lat], zoom: 17 });
+  });
+  shfaqListen(document.getElementById("search").value);
+}
+
+function rivendosLinjat() {
+  zgjedhur = null;
+  for (const x of linjat) map.setFeatureState({ source: "linjat", id: x.id }, { zgjedhur: false, zbehur: false });
+  vendos("stacionet", []);
+  document.getElementById("details").className = "details";
+  shfaqListen(document.getElementById("search").value);
+}
+
+azhornoKursorin();
+</script>
+</body>
+</html>

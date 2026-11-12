@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /private/
+Disallow: /burimi_faqes/
+Disallow: /scripts/
+
+Sitemap: https://isuf743.github.io/go-tirana/sitemap.xml

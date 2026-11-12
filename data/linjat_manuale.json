@@ -1,0 +1,36 @@
+{
+  "_shpjegim": [
+    "Linjat qe mungojne ose jane te gabuara ne OpenStreetMap, te shkruara me dore.",
+    "Per cdo drejtim, shkruaj stacionet me radhe, me emrin qe kane ne harte (shiko skeden Linjat ose kaloje miun mbi stacion).",
+    "Skripti 02_nderto_grafin.py i gjen stacionet sipas emrit; nese ka dy me te njejtin emer (dy anet e rruges), merr ate me afer stacionit te meparshem.",
+    "Nese nje linje me te njejtin emer ekziston ne OSM, versioni ketu e zevendeson.",
+    "Pas cdo ndryshimi: python scripts\\02_nderto_grafin.py"
+  ],
+  "linjat": [
+    {
+      "ref": "Kamëz",
+      "emri": "Kamëz → Tiranë",
+      "ngjyra": "#7a4fa3",
+      "intervali_min": 10,
+      "zevendeson": "Kamëz - Tiranë",
+      "stacionet": [
+        "Tre Katëshet", "Ibrahim Rugova", "Bathore", "Nokia", "Fafa", "Qendra e Institutit", "Tregu",
+        "Ura e Paskuqanit", "Pallatet e Verdha", "Terminali i Autobusave të Jugut dhe Veriut",
+        "Sheshi Shqiponja", "Blloku Gintash", "Pallatet Arabe", "Kupola", "Asllan Rusi",
+        "Qemal Stafa", "Banka", "15 Katëshi"
+      ]
+    },
+    {
+      "ref": "Kamëz",
+      "emri": "Tiranë → Kamëz",
+      "ngjyra": "#7a4fa3",
+      "intervali_min": 10,
+      "stacionet": [
+        "15 Katëshi", "Muzeu Kombëtar", "Gazheli", "Asllan Rusi", "Kupola", "Pallatet Arabe",
+        "Blloku Gintash", "Sheshi Shqiponja", "Terminali i Autobusave të Jugut dhe Veriut",
+        "Pallatet e Verdha", "Ura e Paskuqanit", "Tregu", "Qendra e Institutit", "Fafa", "Nokia",
+        "Bathore", "Ibrahim Rugova", "Tre Katëshet"
+      ]
+    }
+  ]
+}
