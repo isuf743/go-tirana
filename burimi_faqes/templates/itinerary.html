@@ -9,7 +9,7 @@
   {% else %}<a class="leg__link" href="{{ s.href }}" rel="noopener" target="_blank">{{ ui.directions }}</a>{% endif %}
 </div>
 {%- endmacro %}
-{% block head %}<link rel="stylesheet" href="{{ root }}assets/vendor/maplibre-gl.css">{% endblock %}
+{% block head %}{% if not cfg.google_maps_key %}<link rel="stylesheet" href="{{ root }}assets/vendor/maplibre-gl.css">{% endif %}{% endblock %}
 {% block main %}
 <header class="page-hero">
   <div class="page-hero__img" aria-hidden="true">{{ photo(it.hero, "100vw", eager=true) }}</div>
@@ -71,6 +71,6 @@
 <script type="application/json" id="itin-data">{{ it.map_json | safe }}</script>
 {% endblock %}
 {% block scripts %}
-<script src="{{ root }}assets/vendor/maplibre-gl.js" defer></script>
+{% if cfg.google_maps_key %}<script src="{{ root }}assets/js/gmaps-shim.js?v={{ v }}" data-key="{{ cfg.google_maps_key }}" defer></script>{% else %}<script src="{{ root }}assets/vendor/maplibre-gl.js" defer></script>{% endif %}
 <script src="{{ root }}assets/js/itinerary.js?v={{ v }}" defer></script>
 {% endblock %}

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% from "_macros.html" import photo, tags, card, icon %}
-{% block head %}<link rel="stylesheet" href="{{ root }}assets/vendor/maplibre-gl.css">{% endblock %}
+{% block head %}{% if not cfg.google_maps_key %}<link rel="stylesheet" href="{{ root }}assets/vendor/maplibre-gl.css">{% endif %}{% endblock %}
 {% block main %}
 <div class="wrap">
   <nav class="crumbs" aria-label="Breadcrumb">
@@ -89,7 +89,7 @@
 </div>
 {% endblock %}
 {% block scripts %}
-<script src="{{ root }}assets/vendor/maplibre-gl.js" defer></script>
+{% if cfg.google_maps_key %}<script src="{{ root }}assets/js/gmaps-shim.js?v={{ v }}" data-key="{{ cfg.google_maps_key }}" defer></script>{% else %}<script src="{{ root }}assets/vendor/maplibre-gl.js" defer></script>{% endif %}
 <script src="{{ root }}assets/js/place.js?v={{ v }}" defer></script>
 {% if p.gallery %}<script src="{{ root }}assets/js/gallery.js?v={{ v }}" defer></script>{% endif %}
 {% endblock %}

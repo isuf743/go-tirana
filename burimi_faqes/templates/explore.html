@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% from "_macros.html" import card, photo, icon, credits %}
-{% block head %}<link rel="stylesheet" href="{{ root }}assets/vendor/maplibre-gl.css">{% endblock %}
+{% block head %}{% if not cfg.google_maps_key %}<link rel="stylesheet" href="{{ root }}assets/vendor/maplibre-gl.css">{% endif %}{% endblock %}
 {% block main %}
 <div data-places-map data-pm-mode="explore" data-more="{{ t.view_details }}">
 {% if current %}
@@ -57,6 +57,6 @@
 <script type="application/json" id="places-data">{{ places_json | safe }}</script>
 {% endblock %}
 {% block scripts %}
-<script src="{{ root }}assets/vendor/maplibre-gl.js" defer></script>
+{% if cfg.google_maps_key %}<script src="{{ root }}assets/js/gmaps-shim.js?v={{ v }}" data-key="{{ cfg.google_maps_key }}" defer></script>{% else %}<script src="{{ root }}assets/vendor/maplibre-gl.js" defer></script>{% endif %}
 <script src="{{ root }}assets/js/placesmap.js?v={{ v }}" defer></script>
 {% endblock %}
