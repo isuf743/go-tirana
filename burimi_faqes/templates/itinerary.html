@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% from "_macros.html" import photo, icon, itin_card, credits %}
+{% set walk_ic %}<svg width="18" height="18" viewBox="0 0 22 22" aria-hidden="true"><circle cx="12" cy="3.5" r="1.8" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m9 20 2.5-6.5L14 16v4M8 11l2-4h3l2 4 2 1M11.5 13.5 10 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>{% endset %}
+{% macro leg(s) -%}
+<div class="leg leg--{{ s.type }}">
+  <span class="leg__ic">{% if s.type == "bus" %}{{ icon("bus", 17) }}{% else %}{{ walk_ic }}{% endif %}</span>
+  <span class="leg__text"><strong>{{ s.text }}</strong>{% if s.type == "walk" %}<span>{{ s.dist }}</span>{% endif %}</span>
+  {% if s.type == "bus" %}<a class="btn btn--accent btn--sm" href="{{ s.href }}">{{ icon("bus", 15) }}{{ ui.bus_btn }}</a>
+  {% else %}<a class="leg__link" href="{{ s.href }}" rel="noopener" target="_blank">{{ ui.directions }}</a>{% endif %}
+</div>
+{%- endmacro %}
+{% block head %}<link rel="stylesheet" href="{{ root }}assets/vendor/maplibre-gl.css">{% endblock %}
+{% block main %}
+<header class="page-hero">
+  <div class="page-hero__img" aria-hidden="true">{{ photo(it.hero, "100vw", eager=true) }}</div>
+  <div class="wrap">
+    <p class="eyebrow eyebrow--light">{{ ui.eyebrow }}</p>
+    <h1>{{ it.title }}</h1>
+    <p class="lead">{{ it.lead }}</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="facts-strip">
+    <div><strong>{{ it.n }}</strong><span>{{ ui.stops }}</span></div>
+    <div><strong>{{ it.walk_text }}</strong><span>{{ ui.km_walk }}</span></div>
+    <div><strong>{{ it.bus_n if it.bus_n else ui.none }}</strong><span>{{ ui.bus_rides }}</span></div>
+    <div><strong class="facts-strip__txt">{{ it.when }}</strong><span>{{ ui.best_day }}</span></div>
+  </div>
+
+  <div class="itin">
+    <div class="itin__main">
+      {% if it.start %}
+      <div class="tl-start">{{ icon("pin", 16) }}<span>{{ ui.start_from.format(name=it.start.name) }}</span></div>
+      {{ leg(it.intro) }}
+      {% endif %}
+      <ol class="tl">
+        {% for nd in it.stops %}{% set p = nd.p %}
+        <li class="tl__stop" id="stop-{{ nd.n }}" data-reveal>
+          <div class="tl__rail" aria-hidden="true"><span class="tl__num">{{ nd.n }}</span></div>
+          <div class="tl__content">
+            <p class="tl__time"><time>{{ nd.time }}</time></p>
+            <article class="tl__card">
+              <div class="tl__img">{{ photo(p, "(max-width: 600px) 100vw, 220px") }}</div>
+              <div class="tl__body">
+                <p class="tl__meta">{{ icon("pin", 13) }}{{ p.area }}<i aria-hidden="true"></i>{{ ui.time_there }}: {{ p.duration_text }}</p>
+                <h2 class="tl__title"><a href="{{ root }}{{ lang }}/places/{{ p.slug }}/">{{ p.name }}</a></h2>
+                <p class="tl__note">{{ nd.note }}</p>
+                {% if p.hours %}<p class="tl__hours"><strong>{{ ui.hours }}:</strong> {{ p.hours }}</p>{% endif %}
+              </div>
+            </article>
+            {% if nd.next %}{{ leg(nd.next) }}{% endif %}
+          </div>
+        </li>
+        {% endfor %}
+      </ol>
+      <p class="info-note">{{ ui.note }}</p>
+    </div>
+    <aside class="itin__aside">
+      <div class="itin__map" id="itin-map" role="region" aria-label="{{ ui.map }}: {{ it.title }}"></div>
+    </aside>
+  </div>
+
+  <section class="section" style="padding-top:24px" aria-labelledby="others-h">
+    <div class="section__head"><div><p class="eyebrow">{{ ui.nav }}</p><h2 id="others-h">{{ ui.others }}</h2></div></div>
+    <div class="icards icards--2">{% for o in others %}{{ itin_card(o, root, lang, ui, reveal=loop.index) }}{% endfor %}</div>
+    <div style="margin-top:40px">{{ credits(credit_list, t) }}</div>
+  </section>
+</div>
+<script type="application/json" id="itin-data">{{ it.map_json | safe }}</script>
+{% endblock %}
+{% block scripts %}
+<script src="{{ root }}assets/vendor/maplibre-gl.js" defer></script>
+<script src="{{ root }}assets/js/itinerary.js?v={{ v }}" defer></script>
+{% endblock %}

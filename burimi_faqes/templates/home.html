@@ -1,0 +1,261 @@
+{% extends "base.html" %}
+{% from "_macros.html" import itin_card, card, photo, icon, credits %}
+{% block bodyclass %}has-hero{% endblock %}
+{% block head %}
+<link rel="preload" as="image" imagesrcset="{{ root }}assets/img/hero/hero-1280.webp?v={{ v }} 1280w, {{ root }}assets/img/hero/hero-1811.webp?v={{ v }} 1811w" imagesizes="(max-aspect-ratio: 2/1) 210vh, 100vw" fetchpriority="high">
+<link rel="stylesheet" href="{{ root }}assets/vendor/maplibre-gl.css">
+{% endblock %}
+{% block main %}
+
+{# ===================== 1. HERO ===================== #}
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero__media" aria-hidden="true">
+    <img class="hero__img" src="{{ root }}assets/img/hero/hero-1811.webp?v={{ v }}"
+         srcset="{{ root }}assets/img/hero/hero-1280.webp?v={{ v }} 1280w, {{ root }}assets/img/hero/hero-1811.webp?v={{ v }} 1811w"
+         sizes="(max-aspect-ratio: 2/1) 210vh, 100vw" width="1811" height="868" alt="" fetchpriority="high" decoding="async">
+  </div>
+  <div class="wrap hero__inner">
+    <p class="hero__eyebrow" data-enter style="--d:0">{{ t.hero_kicker }}</p>
+    {% set ht = t.hero_title.split(', ', 1) %}
+    <h1 id="hero-title" data-enter style="--d:1">{% if ht|length == 2 %}<span class="hero__t1">{{ ht[0] }},</span> <span class="hero__t2">{{ ht[1] }}</span>{% else %}{{ t.hero_title }}{% endif %}</h1>
+    <p class="hero__lead" data-enter style="--d:2">{{ t.hero_lead }}</p>
+    <div class="hero__actions" data-enter style="--d:3">
+      <a class="btn hero__btn hero__btn--light" href="{{ root }}{{ lang }}/explore/">{{ t.hero_cta }} {{ icon("arrow", 17) }}</a>
+      <a class="btn hero__btn hero__btn--glass" href="#planner"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 6.5 9 4l6 2.5L20.5 4v13.5L15 20l-6-2.5-5.5 2.5zM9 4v13.5M15 6.5V20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>{{ t.hero_cta2 }}</a>
+    </div>
+    <nav class="hq" aria-label="{{ t.hq_label }}" data-enter style="--d:4">
+      <a class="hq__item" href="{{ root }}{{ lang }}/destinations/"><svg class="hq__ic" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>{{ t.hq[0] }}</span><svg class="hq__arrow" width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9h12m-5-5 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a class="hq__item" href="{{ root }}{{ lang }}/explore/history/"><svg class="hq__ic" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 9 12 4l8.5 5M4.5 9h15M6 9v8M10 9v8M14 9v8M18 9v8M3.5 19.5h17M4.5 17h15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>{{ t.hq[1] }}</span><svg class="hq__arrow" width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9h12m-5-5 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a class="hq__item" href="{{ root }}{{ lang }}/explore/food/"><svg class="hq__ic" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.5v6.5a2 2 0 0 0 4 0V3.5M9 3.5v17M16.5 20.5v-17c-1.8.8-3 3-3 6v4.5h3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>{{ t.hq[2] }}</span><svg class="hq__arrow" width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9h12m-5-5 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a class="hq__item" href="{{ root }}{{ lang }}/explore/nature/"><svg class="hq__ic" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 19 8.5 9.5l3.5 5.5 2.5-3.5L21.5 19z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="m7 12 1.5 1 1.5-1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>{{ t.hq[3] }}</span><svg class="hq__arrow" width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9h12m-5-5 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </nav>
+  </div>
+  <div class="hero__meta">
+    <div class="wrap">
+      <p class="hero__place"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>{{ t.hero_location }}</span><i aria-hidden="true"></i><span>41.33° N, 19.82° E</span></p>
+    </div>
+  </div>
+</section>
+
+{# ===================== 2. KATEGORITË ===================== #}
+<section class="section" id="discover" aria-labelledby="cats-title">
+  <div class="wrap">
+    <div class="section__head" data-reveal>
+      <div>
+        <p class="eyebrow">{{ t.explore_city }}</p>
+        <h2 id="cats-title">{{ t.home_cats }}</h2>
+        <p class="lead">{{ t.home_cats_lead }}</p>
+      </div>
+      <a class="link-arrow" href="{{ root }}{{ lang }}/explore/">{{ t.discover_all }} {{ icon("arrow", 15) }}</a>
+    </div>
+    <div class="cats">
+      {% for c in cat_list %}
+      <a class="cat" href="{{ root }}{{ lang }}/explore/{{ c.slug }}/" style="--c:{{ c.color }}; --i:{{ loop.index0 }}" data-reveal>
+        <span class="cat__img" aria-hidden="true">{% if cat_img[c.slug] %}{{ photo({"img": cat_img[c.slug], "alt": ""}, "(max-width: 680px) 82vw, (max-width: 1020px) 50vw, 680px") }}{% endif %}</span>
+        <span class="cat__num" aria-hidden="true">0{{ loop.index }}</span>
+        <span class="cat__arrow" aria-hidden="true">{{ icon("arrow", 18) }}</span>
+        <span class="cat__count">{{ t.places_count.format(n=c.count) }}</span>
+        <span class="cat__name">{{ c.name }}</span>
+        <span class="cat__desc">{{ c.desc }}</span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{# ===================== 3. VENDE TË ZGJEDHURA ===================== #}
+<section class="section section--sand" aria-labelledby="feat-title">
+  <div class="wrap">
+    <div class="section__head" data-reveal>
+      <div>
+        <p class="eyebrow">{{ t.nav_destinations }}</p>
+        <h2 id="feat-title">{% set ft = t.feat_title.split(', ', 1) %}{% if ft|length == 2 %}{{ ft[0] }}, <em>{{ ft[1] }}</em>{% else %}{{ t.feat_title }}{% endif %}</h2>
+        <p class="lead">{{ t.feat_lead }}</p>
+      </div>
+    </div>
+    <div class="cards">
+      {% for p in featured %}{{ card(p, root, lang, t, reveal=loop.index) }}{% endfor %}
+    </div>
+    <div class="cards-foot"><a class="btn" href="{{ root }}{{ lang }}/destinations/">{{ t.discover_all }} {{ icon("arrow", 16) }}</a></div>
+  </div>
+</section>
+
+{# ===================== 3b. ITINERARET ===================== #}
+<section class="section" aria-labelledby="itin-title">
+  <div class="wrap">
+    <div class="section__head" data-reveal>
+      <div>
+        <p class="eyebrow">{{ it_ui.home_eyebrow }}</p>
+        <h2 id="itin-title">{{ it_ui.home_title }}</h2>
+        <p class="lead">{{ it_ui.home_lead }}</p>
+      </div>
+      <a class="link-arrow" href="{{ root }}{{ lang }}/itineraries/">{{ t.see_all }} {{ icon("arrow", 15) }}</a>
+    </div>
+    <div class="icards">
+      {% for it in itins %}{{ itin_card(it, root, lang, it_ui, reveal=loop.index) }}{% endfor %}
+    </div>
+  </div>
+</section>
+
+{# ===================== 4. PLANIFIKUESI I AUTOBUSËVE ===================== #}
+<section class="section section--dark" id="planner" aria-labelledby="bus-title">
+  <div class="wrap bus">
+    <div data-reveal>
+      <p class="eyebrow eyebrow--light">{{ t.bus_eyebrow }}</p>
+      <h2 id="bus-title">{{ t.bus_title }}</h2>
+      <p class="lead">{{ t.bus_text }}</p>
+      <ul class="bus__points">
+        <li><svg viewBox="0 0 22 22" aria-hidden="true"><circle cx="5" cy="17" r="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="17" cy="5" r="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M7 17h6a3 3 0 0 0 0-6H9a3 3 0 0 1 0-6h6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>{{ t.bus_points[0] }}</li>
+        <li><svg viewBox="0 0 22 22" aria-hidden="true"><circle cx="12" cy="3.5" r="1.8" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m9 20 2.5-6.5L14 16v4M8 11l2-4h3l2 4 2 1M11.5 13.5 10 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>{{ t.bus_points[1] }}</li>
+        <li><svg viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="8" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M11 6.5V11l3 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>{{ t.bus_points[2] }}</li>
+      </ul>
+      <p class="bus__note">{{ t.bus_note }}</p>
+      <a class="link-arrow bus__info" href="{{ root }}{{ lang }}/info/">{{ t.info_link }} {{ icon("arrow", 15) }}</a>
+    </div>
+
+    <div class="planner-card" data-reveal style="--i:1">
+      <h3>{{ t.bus_card_title }}</h3>
+      <form class="route-form" id="route-form" action="{{ root }}planner/" method="get" novalidate
+            data-msg='{{ bus_msgs | safe }}'>
+        <input type="hidden" name="lang" value="{{ lang }}">
+        <div class="route-field">
+          <label for="rf-from">{{ t.from_label }}</label>
+          <span class="dot dot--from" aria-hidden="true"></span>
+          <select id="rf-from" aria-describedby="rf-msg">
+            <option value="">{{ t.from_ph }}</option>
+            <option value="geo">{{ t.my_location }}</option>
+            {% for c in cat_list %}<optgroup label="{{ c.name }}">{% for p in places_by_cat[c.slug] %}<option value="{{ p.slug }}" data-ll="{{ p.lat }},{{ p.lon }}">{{ p.name }}</option>{% endfor %}</optgroup>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="route-line"><button class="swap-btn" type="button" id="rf-swap" aria-label="{{ t.swap }}" title="{{ t.swap }}">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 2v12M5 2 2 5M5 2l3 3M11 14V2m0 12-3-3m3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+        <div class="route-field">
+          <label for="rf-to">{{ t.to_label }}</label>
+          <span class="dot dot--to" aria-hidden="true"></span>
+          <select id="rf-to" aria-describedby="rf-msg">
+            <option value="">{{ t.to_ph }}</option>
+            {% for c in cat_list %}<optgroup label="{{ c.name }}">{% for p in places_by_cat[c.slug] %}<option value="{{ p.slug }}" data-ll="{{ p.lat }},{{ p.lon }}">{{ p.name }}</option>{% endfor %}</optgroup>
+            {% endfor %}
+          </select>
+        </div>
+        <button class="geo-btn" type="button" id="rf-geo">{{ icon("pin", 15) }}{{ t.use_location }}</button>
+        <p class="form-msg" id="rf-msg" role="status" aria-live="polite"></p>
+        <button class="btn btn--accent" type="submit">{{ icon("search", 16) }}{{ t.search_route }}</button>
+      </form>
+      <p class="planner-card__foot">{{ t.or_map }} <a href="{{ root }}planner/?lang={{ lang }}">{{ t.open_planner }}</a></p>
+    </div>
+  </div>
+</section>
+
+{# ===================== 5. HARTA E QYTETIT ===================== #}
+<section class="section" aria-labelledby="map-title">
+  <div class="wrap">
+    <div class="section__head" data-reveal>
+      <div>
+        <p class="eyebrow">{{ t.nav_explore }}</p>
+        <h2 id="map-title">{{ t.map_title }}</h2>
+        <p class="lead">{{ t.map_lead }}</p>
+      </div>
+    </div>
+    <div class="citymap" data-places-map data-more="{{ t.view_details }}" data-reveal>
+      <div class="citymap__side">
+        <div class="citymap__tools">
+          <div class="search">{{ icon("search", 17) }}<label class="visually-hidden" for="pm-q">{{ t.search_label }}</label>
+            <input id="pm-q" type="search" placeholder="{{ t.search_ph }}" autocomplete="off" data-pm-search></div>
+          <div class="chips" role="group" aria-label="{{ t.nav_explore }}">
+            <button class="chip chip--all" type="button" data-pm-cat="" aria-pressed="true">{{ t.filter_all }}</button>
+            {% for c in cat_list %}<button class="chip" type="button" style="--c:{{ c.color }}" data-pm-cat="{{ c.slug }}" aria-pressed="false">{{ c.name }}</button>
+            {% endfor %}
+          </div>
+          <p class="citymap__count" data-pm-count data-tpl="{{ t.results_n }}" data-tpl1="{{ t.results_1 }}" aria-live="polite"></p>
+        </div>
+        <ul class="citymap__list">
+          {% for p in places %}
+          <li data-slug="{{ p.slug }}" data-cats="{{ p.cats | join(' ') }}" data-search="{{ (p.name ~ ' ' ~ p.local ~ ' ' ~ p.area) | lower }}">
+            <button class="pm-item" type="button" data-pm-focus="{{ p.slug }}" style="--c:{{ p.cat_objs[0].color }}">
+              <span class="pm-item__img">{{ photo(p, "64px") }}</span>
+              <span><span class="pm-item__name">{{ p.name }}</span><span class="pm-item__meta"><i></i>{{ p.cat_objs[0].name }} · {{ p.area }}</span></span>
+            </button>
+          </li>
+          {% endfor %}
+        </ul>
+        <p class="empty" data-pm-empty hidden>{{ t.no_results }}</p>
+      </div>
+      <div class="citymap__map" data-pm-map role="region" aria-label="{{ t.map_title }}"></div>
+    </div>
+  </div>
+</section>
+
+{# ===================== 6. PSE GO TIRANA ===================== #}
+<section class="section section--sand" aria-labelledby="why-title">
+  <div class="wrap why">
+    <div data-reveal>
+      <p class="eyebrow">GO TIRANA</p>
+      <h2 id="why-title">{{ t.why_title_a }} <em>{{ t.why_title_b }}</em></h2>
+      <p class="lead why__text">{{ t.why_text }}</p>
+    </div>
+    <ul class="why__items">
+      {% set icons = [
+        '<svg viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="11" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="m18.5 9.5-2.8 6.2-6.2 2.8 2.8-6.2z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>',
+        '<svg viewBox="0 0 28 28" aria-hidden="true"><circle cx="7" cy="21" r="2.6" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="21" cy="7" r="2.6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M9.6 21H17a3.5 3.5 0 0 0 0-7h-6a3.5 3.5 0 0 1 0-7h7.4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>',
+        '<svg viewBox="0 0 28 28" aria-hidden="true"><path d="M14 4l2.6 6.4L23 11l-5 4.4 1.6 6.6L14 18.5 8.4 22 10 15.4 5 11l6.4-.6z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>'] %}
+      {% for title, text in t.why_items %}
+      <li class="why__item" data-reveal style="--i:{{ loop.index0 }}">
+        {{ icons[loop.index0] | safe }}
+        <div><h3><small>0{{ loop.index }}</small>{{ title }}</h3><p>{{ text }}</p></div>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
+{# ===================== 7. RRETH TIRANËS ===================== #}
+<section class="section" aria-labelledby="story-title">
+  <div class="wrap story">
+    <div class="story__imgs" data-reveal>
+      <div class="a">{{ photo(story_imgs[0], "(max-width: 900px) 78vw, 520px") }}</div>
+      <div class="b">{{ photo(story_imgs[1], "(max-width: 900px) 46vw, 300px") }}</div>
+    </div>
+    <div data-reveal style="--i:1">
+      <p class="eyebrow">{{ t.nav_about }}</p>
+      <h2 id="story-title">{{ t.about_title_a }} <em>{{ t.about_title_b }}</em></h2>
+      <p class="lead">{{ t.about_text }}</p>
+      <a class="btn" href="{{ root }}{{ lang }}/about/">{{ t.about_cta }} {{ icon("arrow", 16) }}</a>
+    </div>
+  </div>
+</section>
+
+{# ===================== 8. LISTA E EMAILEVE ===================== #}
+<section class="section" style="padding-top:0" aria-labelledby="nl-title">
+  <div class="wrap">
+    <div class="nl" data-reveal>
+      <div>
+        <h2 id="nl-title">{{ t.nl_title }}</h2>
+        <p>{{ t.nl_text }}</p>
+      </div>
+      <form class="nl-form" id="nl-form" action="{{ root }}api/subscribe.php" method="post" novalidate data-msg='{{ nl_msgs | safe }}'>
+        <input type="hidden" name="lang" value="{{ lang }}">
+        <input type="hidden" name="token" value="">
+        <div class="hp" aria-hidden="true"><label for="nl-website">{{ t.f_hp }}</label><input id="nl-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+        <div class="nl-row">
+          <label class="visually-hidden" for="nl-email">{{ t.nl_label }}</label>
+          <input id="nl-email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="120" required placeholder="{{ t.nl_ph }}" aria-describedby="nl-status">
+          <button class="btn btn--light" type="submit">{{ t.nl_btn }}</button>
+        </div>
+        <label class="nl-check"><input type="checkbox" name="consent" value="1" required> <span>{{ t.nl_consent }} <a href="{{ root }}{{ lang }}/privacy/">{{ t.privacy }}</a></span></label>
+        <p class="nl-status" id="nl-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+    {{ credits(credit_list, t) }}
+  </div>
+</section>
+
+<script type="application/json" id="places-data">{{ places_json | safe }}</script>
+{% endblock %}
+{% block scripts %}
+<script src="{{ root }}assets/vendor/maplibre-gl.js" defer></script>
+<script src="{{ root }}assets/js/placesmap.js?v={{ v }}" defer></script>
+<script src="{{ root }}assets/js/routeform.js?v={{ v }}" defer></script>
+<script src="{{ root }}assets/js/newsletter.js?v={{ v }}" defer></script>
+{% endblock %}

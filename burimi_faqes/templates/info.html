@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% from "_macros.html" import photo, icon, credits %}
+{% block main %}
+<header class="page-hero">
+  <div class="page-hero__img" aria-hidden="true">{{ photo(hero_place, "100vw", eager=true) }}</div>
+  <div class="wrap">
+    <p class="eyebrow eyebrow--light">{{ info.eyebrow }}</p>
+    <h1>{{ info.title }}</h1>
+    <p class="lead">{{ info.lead }}</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="facts-strip">
+    {% for big, small in info.facts %}<div data-reveal style="--i:{{ loop.index0 }}"><strong>{{ big }}</strong><span>{{ small }}</span></div>{% endfor %}
+  </div>
+
+  <div class="info-grid">
+    <div class="info-main">
+      {% for key, title, paras in info.sections %}
+      <section class="info-block" id="{{ key }}" aria-labelledby="ib-{{ key }}" data-reveal>
+        <span class="info-block__icon" aria-hidden="true">{{ info_icons[key] | safe }}</span>
+        <div>
+          <h2 id="ib-{{ key }}">{{ title }}</h2>
+          {% for para in paras %}<p>{{ para }}</p>{% endfor %}
+          {% if key == "bus" %}<a class="link-arrow" href="{{ root }}planner/?lang={{ lang }}">{{ t.nav_planner }} {{ icon("arrow", 15) }}</a>{% endif %}
+        </div>
+      </section>
+      {% endfor %}
+      <p class="info-note">{{ info.disclaimer }} <span>{{ checked }}</span></p>
+    </div>
+
+    <aside class="info-aside">
+      <section class="sos" aria-labelledby="sos-title">
+        <h2 id="sos-title">{{ info.emergency_title }}</h2>
+        <ul>
+          {% for num, names in emergency %}<li><a href="tel:{{ num }}"><strong>{{ num }}</strong><span>{{ names[lang] }}</span></a></li>
+          {% endfor %}
+        </ul>
+        <p>{{ info.emergency_note }}</p>
+      </section>
+      <section class="info-cta" aria-labelledby="cta-title">
+        <h2 id="cta-title">{{ info.planner_title }}</h2>
+        <p>{{ info.planner_text }}</p>
+        <a class="btn btn--accent" href="{{ root }}planner/?lang={{ lang }}">{{ icon("bus", 16) }}{{ info.planner_cta }}</a>
+      </section>
+    </aside>
+  </div>
+
+  <section class="info-sources" aria-labelledby="src-title">
+    <h2 id="src-title">{{ info.sources }}</h2>
+    <ul>{% for name, href in sources %}<li><a href="{{ href }}" rel="noopener" target="_blank">{{ name }}</a></li>{% endfor %}</ul>
+    {{ credits([hero_place], t) }}
+  </section>
+</div>
+{% endblock %}

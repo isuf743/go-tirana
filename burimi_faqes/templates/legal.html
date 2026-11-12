@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block main %}
+<div class="wrap">
+  <article class="legal">
+    <h1>{{ heading }}</h1>
+    {% for title, text in sections %}
+    <h2>{{ title }}</h2>
+    <p>{{ text }}</p>
+    {% endfor %}
+    <p class="updated">{{ t.updated }}: {{ cfg.updated }}</p>
+  </article>
+</div>
+{% endblock %}

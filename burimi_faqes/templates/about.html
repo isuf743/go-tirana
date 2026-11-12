@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% from "_macros.html" import photo, icon, credits %}
+{% block main %}
+<header class="page-hero">
+  <div class="page-hero__img" aria-hidden="true">{{ photo(hero_place, "100vw", eager=true) }}</div>
+  <div class="wrap">
+    <p class="eyebrow eyebrow--light">{{ t.hero_location }}</p>
+    <h1>{{ t.about_title_a }} <em>{{ t.about_title_b }}</em></h1>
+    <p class="lead">{{ t.about_page_lead }}</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="facts-strip">
+    {% for big, small in t.about_facts %}<div data-reveal style="--i:{{ loop.index0 }}"><strong>{{ big }}</strong><span>{{ small }}</span></div>{% endfor %}
+  </div>
+
+  {% for key, slug, title, paras in t.about_sections %}
+  {% set p = sections_places[slug] %}
+  <section class="chapter" id="{{ key }}" aria-labelledby="ch-{{ key }}">
+    <a class="chapter__img" href="{{ root }}{{ lang }}/places/{{ p.slug }}/" data-reveal>{{ photo(p, "(max-width: 860px) 100vw, 600px") }}</a>
+    <div data-reveal style="--i:1">
+      <span class="chapter__num">0{{ loop.index }}</span>
+      <h2 id="ch-{{ key }}">{{ title }}</h2>
+      {% for para in paras %}<p>{{ para }}</p>{% endfor %}
+      <a class="link-arrow" href="{{ root }}{{ lang }}/places/{{ p.slug }}/">{{ p.name }} {{ icon("arrow", 15) }}</a>
+    </div>
+  </section>
+  {% endfor %}
+
+  <section class="section about-us" id="about-us" aria-labelledby="us-title">
+    <p class="eyebrow">GO TIRANA</p>
+    <h2 id="us-title">{{ t.about_us_title }}</h2>
+    <p class="lead">{{ t.about_us_text }}</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:28px">
+      <a class="btn" href="{{ root }}{{ lang }}/explore/">{{ t.hero_cta }} {{ icon("arrow", 16) }}</a>
+      <a class="btn btn--outline" href="{{ root }}{{ lang }}/contact/">{{ t.contact_title }}</a>
+    </div>
+    {{ credits(credit_list, t) }}
+  </section>
+</div>
+{% endblock %}

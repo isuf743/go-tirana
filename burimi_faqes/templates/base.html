@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="{{ lang }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ page.title }}</title>
+<meta name="description" content="{{ page.desc }}">
+<link rel="canonical" href="{{ page.url }}">
+{% for l, u in page.alternates.items() %}<link rel="alternate" hreflang="{{ l }}" href="{{ u }}">
+{% endfor %}<link rel="alternate" hreflang="x-default" href="{{ page.alternates['en'] }}">
+<meta property="og:site_name" content="{{ cfg.site_name }}">
+<meta property="og:type" content="{{ page.og_type or 'website' }}">
+<meta property="og:title" content="{{ page.og_title or page.title }}">
+<meta property="og:description" content="{{ page.desc }}">
+<meta property="og:url" content="{{ page.url }}">
+<meta property="og:image" content="{{ page.og_image }}">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:locale" content="{{ locale }}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#171c22">
+<link rel="icon" href="{{ root }}favicon.svg" type="image/svg+xml">
+<link rel="icon" href="{{ root }}favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="{{ root }}apple-touch-icon.png">
+<link rel="manifest" href="{{ root }}site.webmanifest">
+<link rel="preload" href="{{ root }}assets/fonts/manrope-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="{{ root }}assets/css/site.css?v={{ v }}">
+<script>document.documentElement.classList.add("js")</script>
+{% block head %}{% endblock %}
+{% if page.jsonld %}<script type="application/ld+json">{{ page.jsonld | safe }}</script>{% endif %}
+</head>
+<body class="{% block bodyclass %}{% endblock %}" data-lang="{{ lang }}" data-root="{{ root }}" data-goatcounter="{{ cfg.goatcounter_code }}">
+<a class="skip" href="#main">{{ t.skip }}</a>
+{% set nav = [("explore", root ~ lang ~ "/explore/", t.nav_explore),
+              ("destinations", root ~ lang ~ "/destinations/", t.nav_destinations),
+              ("planner", root ~ "planner/?lang=" ~ lang, t.nav_planner),
+              ("info", root ~ lang ~ "/info/", t.nav_info),
+              ("about", root ~ lang ~ "/about/", t.nav_about),
+              ("contact", root ~ lang ~ "/contact/", t.nav_contact)] %}
+<header class="hdr" id="hdr">
+  <div class="wrap hdr__in">
+    <a class="brand" href="{{ root }}{{ lang }}/" aria-label="{{ cfg.site_name }}">{{ brand_mark | safe }}<span class="brand__word">GO <b>TIRANA</b></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="{{ t.nav_menu }}"><span></span><span></span><span></span></button>
+    <nav class="nav" id="nav" aria-label="Main">
+      {% for key, href, label in nav %}<a class="nav__link" href="{{ href }}"{% if active == key %} aria-current="page"{% endif %}>{{ label }}</a>
+      {% endfor %}
+      <div class="langs" role="group" aria-label="{{ t.lang_label }}">
+        {% for l in ["en", "sq", "it"] %}<a href="{{ root }}{{ l }}/{{ page.path }}" hreflang="{{ l }}" lang="{{ l }}" data-setlang="{{ l }}" title="{{ lang_names[l] }}"{% if l == lang %} aria-current="true"{% endif %}>{{ l | upper }}</a>{% endfor %}
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+{% block main %}{% endblock %}
+</main>
+
+<footer class="ftr">
+  <div class="wrap">
+    <div class="ftr__grid">
+      <div>
+        <a class="brand" href="{{ root }}{{ lang }}/">{{ brand_mark | safe }}<span class="brand__word">GO <b>TIRANA</b></span></a>
+        <p class="ftr__about">{{ t.footer_about }}</p>
+      </div>
+      <div>
+        <h2>{{ t.nav_explore }}</h2>
+        <ul>
+          {% for c in cat_list %}<li><a href="{{ root }}{{ lang }}/explore/{{ c.slug }}/">{{ c.name }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div>
+        <h2>GO TIRANA</h2>
+        <ul>
+          <li><a href="{{ root }}{{ lang }}/about/#about-us">{{ t.footer_about_us }}</a></li>
+          <li><a href="{{ root }}planner/?lang={{ lang }}">{{ t.nav_planner }}</a></li>
+          <li><a href="{{ root }}{{ lang }}/itineraries/">{{ t.nav_itins }}</a></li>
+          <li><a href="{{ root }}{{ lang }}/info/">{{ t.info_title }}</a></li>
+          <li><a href="{{ root }}{{ lang }}/contact/">{{ t.nav_contact }}</a></li>
+          <li><a href="{{ root }}{{ lang }}/privacy/">{{ t.privacy }}</a></li>
+          <li><a href="{{ root }}{{ lang }}/terms/">{{ t.terms }}</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>{{ t.footer_connect }}</h2>
+        <ul>
+          {% if cfg.instagram_url %}<li><a href="{{ cfg.instagram_url }}" rel="noopener me" target="_blank">Instagram</a></li>{% endif %}
+          {% if cfg.facebook_url %}<li><a href="{{ cfg.facebook_url }}" rel="noopener me" target="_blank">Facebook</a></li>{% endif %}
+          {% if cfg.email and not cfg.email.startswith("[") %}<li><a href="mailto:{{ cfg.email }}">{{ cfg.email }}</a></li>{% endif %}
+          <li><a href="{{ root }}{{ lang }}/contact/">{{ t.contact_title }}</a></li>
+          <li><button class="ftr__btn" type="button" data-open-consent>{{ t.cookie_settings }}</button></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ftr__bottom">
+      <p>© {{ year }} GO TIRANA. {{ t.footer_rights }}</p>
+      <p>{{ t.footer_disclaimer }} {{ t.footer_data_short }}</p>
+    </div>
+  </div>
+</footer>
+
+<div class="consent" role="dialog" aria-labelledby="consent-title" aria-describedby="consent-text" hidden>
+  <h2 id="consent-title">{{ t.cookie_title }}</h2>
+  <p id="consent-text">{{ t.cookie_text }}</p>
+  <div class="consent__actions">
+    <button class="btn" type="button" data-consent="yes">{{ t.cookie_accept }}</button>
+    <button class="btn btn--outline" type="button" data-consent="no">{{ t.cookie_decline }}</button>
+    <a href="{{ root }}{{ lang }}/privacy/">{{ t.cookie_more }}</a>
+  </div>
+</div>
+
+<script src="{{ root }}assets/js/site.js?v={{ v }}" defer></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

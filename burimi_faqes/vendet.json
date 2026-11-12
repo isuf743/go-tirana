@@ -1,0 +1,1649 @@
+[
+ {
+  "slug": "skanderbeg-square",
+  "cats": [
+   "history",
+   "photo"
+  ],
+  "featured": true,
+  "lat": 41.32806,
+  "lon": 19.817681,
+  "local": "Sheshi Skënderbej",
+  "area": "Qendra",
+  "fee": "free",
+  "duration": [
+   20,
+   45
+  ],
+  "name": {
+   "en": "Skanderbeg Square",
+   "it": "Piazza Scanderbeg",
+   "sq": "Sheshi Skënderbej"
+  },
+  "summary": {
+   "en": "The city's vast main square, paved with stone from every corner of Albania.",
+   "it": "L'immensa piazza principale della città, lastricata con pietre provenienti da tutta l'Albania.",
+   "sq": "Sheshi i madh qendror i qytetit, i shtruar me gurë nga çdo cep i Shqipërisë."
+  },
+  "about": {
+   "en": "Redesigned in 2017 as a car-free plaza, the square is the natural starting point for any visit. The equestrian statue of Skanderbeg, the 15th-century national hero, faces the National Historical Museum with its huge mosaic, while the Et'hem Bey Mosque, the Clock Tower and the Palace of Culture frame the other sides.",
+   "it": "Ridisegnata nel 2017 come spazio pedonale, la piazza è il punto di partenza naturale di ogni visita. La statua equestre di Scanderbeg, eroe nazionale del XV secolo, guarda verso il Museo Storico Nazionale con il suo grande mosaico, mentre la Moschea di Et'hem Bey, la Torre dell'Orologio e il Palazzo della Cultura chiudono gli altri lati.",
+   "sq": "E rikonceptuar në vitin 2017 si shesh pa makina, është pika natyrale e nisjes për çdo vizitë. Statuja e Skënderbeut, heroit kombëtar të shekullit XV, sheh nga Muzeu Historik Kombëtar me mozaikun e tij të madh, ndërsa Xhamia e Et'hem Beut, Kulla e Sahatit dhe Pallati i Kulturës e rrethojnë nga anët e tjera."
+  },
+  "tips": {
+   "en": [
+    "Come at dusk, when the fountains and the museum mosaic are lit.",
+    "Look down: the paving stones were brought from towns and villages across the country."
+   ],
+   "it": [
+    "Vieni al tramonto, quando si illuminano le fontane e il mosaico del museo.",
+    "Guarda in basso: le pietre del pavimento arrivano da città e villaggi di tutto il paese."
+   ],
+   "sq": [
+    "Eja në mbrëmje, kur ndizen dritat e shatërvanëve dhe të mozaikut.",
+    "Shiko poshtë: gurët e shtrimit janë sjellë nga qytete dhe fshatra të gjithë vendit."
+   ]
+  }
+ },
+ {
+  "slug": "etem-bey-mosque",
+  "cats": [
+   "history",
+   "photo"
+  ],
+  "featured": true,
+  "lat": 41.327798,
+  "lon": 19.819308,
+  "local": "Xhamia e Et'hem Beut",
+  "area": "Qendra",
+  "fee": "free",
+  "duration": [
+   15,
+   30
+  ],
+  "name": {
+   "en": "Et'hem Bey Mosque",
+   "it": "Moschea di Et'hem Bey",
+   "sq": "Xhamia e Et'hem Beut"
+  },
+  "summary": {
+   "en": "A small Ottoman-era mosque with rare painted landscapes on its walls.",
+   "it": "Una piccola moschea di epoca ottomana con rari paesaggi dipinti sulle pareti.",
+   "sq": "Një xhami e vogël e periudhës osmane, me peizazhe të rralla të pikturuara në mure."
+  },
+  "about": {
+   "en": "Completed in the early 19th century, the mosque is famous for its frescoes of trees, waterfalls and bridges, motifs seldom seen in Islamic art. Closed during the communist ban on religion, it reopened in 1991 when thousands gathered here, a moment many Albanians still remember.",
+   "it": "Completata all'inizio dell'Ottocento, la moschea è famosa per i suoi affreschi di alberi, cascate e ponti, motivi rari nell'arte islamica. Chiusa durante il divieto comunista della religione, fu riaperta nel 1991 davanti a migliaia di persone, un momento che molti albanesi ricordano ancora.",
+   "sq": "E përfunduar në fillim të shekullit XIX, xhamia njihet për afresket me pemë, ujëvara dhe ura, motive të rralla në artin islam. E mbyllur gjatë ndalimit komunist të fesë, u rihap në vitin 1991 përpara mijëra njerëzve, një moment që shumë shqiptarë e kujtojnë ende."
+  },
+  "tips": {
+   "en": [
+    "Visitors are welcome outside prayer times; dress modestly and remove your shoes.",
+    "Pair it with the Clock Tower right next door."
+   ],
+   "it": [
+    "I visitatori sono benvenuti al di fuori degli orari di preghiera; abbigliamento sobrio e scarpe tolte.",
+    "Abbinala alla Torre dell'Orologio, proprio accanto."
+   ],
+   "sq": [
+    "Vizitorët janë të mirëpritur jashtë orarit të faljes; vishu thjesht dhe hiq këpucët.",
+    "Bashkoje me Kullën e Sahatit, që është menjëherë pranë."
+   ]
+  }
+ },
+ {
+  "slug": "clock-tower",
+  "cats": [
+   "history",
+   "photo"
+  ],
+  "lat": 41.327707,
+  "lon": 19.819676,
+  "local": "Kulla e Sahatit",
+  "area": "Qendra",
+  "fee": "paid",
+  "duration": [
+   15,
+   30
+  ],
+  "name": {
+   "en": "Clock Tower",
+   "it": "Torre dell'Orologio",
+   "sq": "Kulla e Sahatit"
+  },
+  "summary": {
+   "en": "Tirana's 19th-century landmark, with a view over the square from the top.",
+   "it": "Simbolo di Tirana dell'Ottocento, con vista sulla piazza dalla cima.",
+   "sq": "Simboli i Tiranës i shekullit XIX, me pamje nga sheshi që nga maja."
+  },
+  "about": {
+   "en": "Built in the 1820s on the initiative of Haxhi Et'hem Bey, the same patron as the neighbouring mosque, the tower was for a long time the tallest building in the city. A narrow staircase leads to the top for a close-up view of Skanderbeg Square.",
+   "it": "Costruita negli anni Venti dell'Ottocento su iniziativa di Haxhi Et'hem Bey, lo stesso committente della vicina moschea, la torre è stata a lungo l'edificio più alto della città. Una stretta scala porta in cima, con vista ravvicinata su Piazza Scanderbeg.",
+   "sq": "E ndërtuar në vitet 1820 me nismën e Haxhi Et'hem Beut, të njëjtit që ngriti xhaminë fqinje, kulla ishte për një kohë të gjatë ndërtesa më e lartë e qytetit. Një shkallë e ngushtë të çon në majë, me pamje nga afër mbi Sheshin Skënderbej."
+  },
+  "tips": {
+   "en": [
+    "The stairs are steep and narrow, so skip it if you dislike tight spaces.",
+    "Opening times vary by season; check at the entrance."
+   ],
+   "it": [
+    "Le scale sono ripide e strette: evitala se non ami gli spazi stretti.",
+    "Gli orari cambiano con le stagioni; verifica all'ingresso."
+   ],
+   "sq": [
+    "Shkallët janë të pjerrëta dhe të ngushta, ndaj shmange nëse s'të pëlqejnë hapësirat e mbyllura.",
+    "Orari ndryshon sipas stinës; kontrollo te hyrja."
+   ]
+  }
+ },
+ {
+  "slug": "national-historical-museum",
+  "cats": [
+   "history"
+  ],
+  "featured": true,
+  "lat": 41.329287,
+  "lon": 19.817132,
+  "local": "Muzeu Historik Kombëtar",
+  "area": "Qendra",
+  "fee": "paid",
+  "duration": [
+   90,
+   150
+  ],
+  "hours": {
+   "en": "Tue–Sat 09:00–16:00, Sun 10:00–15:00",
+   "it": "mar–sab 09:00–16:00, dom 10:00–15:00",
+   "sq": "Mar–Sht 09:00–16:00, Die 10:00–15:00"
+  },
+  "name": {
+   "en": "National Historical Museum",
+   "it": "Museo Storico Nazionale",
+   "sq": "Muzeu Historik Kombëtar"
+  },
+  "summary": {
+   "en": "Albania's largest museum, from Illyrian treasures to the communist era.",
+   "it": "Il più grande museo dell'Albania, dai tesori illirici all'epoca comunista.",
+   "sq": "Muzeu më i madh i Shqipërisë, nga thesaret ilire deri te periudha komuniste."
+  },
+  "about": {
+   "en": "Opened in 1981, the museum is recognisable from afar by the giant mosaic on its façade, known as 'The Albanians'. Inside, the galleries walk you through antiquity, the Middle Ages, the struggle for independence and the dictatorship, including a sober pavilion dedicated to its victims.",
+   "it": "Aperto nel 1981, il museo si riconosce da lontano per il gigantesco mosaico sulla facciata, noto come 'Gli Albanesi'. All'interno, le sale ripercorrono l'antichità, il Medioevo, la lotta per l'indipendenza e la dittatura, con un sobrio padiglione dedicato alle sue vittime.",
+   "sq": "I hapur në vitin 1981, muzeu njihet nga larg për mozaikun gjigant në fasadë, të njohur si 'Shqipëria'. Brenda, sallat të çojnë nëpër antikitet, mesjetë, luftën për pavarësi dhe diktaturën, përfshirë një pavijon të përmbajtur kushtuar viktimave të saj."
+  },
+  "tips": {
+   "en": [
+    "Plan at least 90 minutes; the antiquity halls alone deserve time.",
+    "Closed on Mondays."
+   ],
+   "it": [
+    "Prevedi almeno 90 minuti: le sale dell'antichità meritano tempo.",
+    "Chiuso il lunedì."
+   ],
+   "sq": [
+    "Planifiko të paktën 90 minuta; vetëm sallat e antikitetit kërkojnë kohë.",
+    "E mbyllur të hënën."
+   ]
+  }
+ },
+ {
+  "slug": "bunkart-1",
+  "cats": [
+   "history"
+  ],
+  "featured": true,
+  "lat": 41.349812,
+  "lon": 19.860437,
+  "local": "Bunk'Art 1",
+  "area": "Linzë",
+  "fee": "paid",
+  "duration": [
+   90,
+   150
+  ],
+  "hours": {
+   "en": "Daily 09:30–17:00",
+   "it": "Tutti i giorni 09:30–17:00",
+   "sq": "Çdo ditë 09:30–17:00"
+  },
+  "name": {
+   "en": "Bunk'Art 1",
+   "it": "Bunk'Art 1",
+   "sq": "Bunk'Art 1"
+  },
+  "summary": {
+   "en": "A Cold War nuclear bunker turned into a museum and art space.",
+   "it": "Un bunker antiatomico della Guerra Fredda trasformato in museo e spazio d'arte.",
+   "sq": "Një bunker kundërbërthamor i Luftës së Ftohtë, i kthyer në muze dhe hapësirë arti."
+  },
+  "about": {
+   "en": "Dug into the hillside in the 1970s for the communist leadership, the bunker has more than a hundred rooms spread over several underground floors. Since 2014 it tells the story of daily life, the army and paranoia under Enver Hoxha's regime, with art installations along the way.",
+   "it": "Scavato nella collina negli anni Settanta per la dirigenza comunista, il bunker conta più di cento stanze su diversi piani sotterranei. Dal 2014 racconta la vita quotidiana, l'esercito e la paranoia sotto il regime di Enver Hoxha, con installazioni artistiche lungo il percorso.",
+   "sq": "I gërmuar në kodër në vitet 1970 për udhëheqjen komuniste, bunkeri ka më shumë se njëqind dhoma në disa kate nëntokësore. Që nga viti 2014 rrëfen jetën e përditshme, ushtrinë dhe paranojën nën regjimin e Enver Hoxhës, me instalacione arti gjatë rrugës."
+  },
+  "tips": {
+   "en": [
+    "It's cool underground all year, so bring a light layer in summer.",
+    "Combine it with the Dajti Ekspres cable car, whose lower station is a short walk away."
+   ],
+   "it": [
+    "Sottoterra fa fresco tutto l'anno: porta uno strato leggero anche d'estate.",
+    "Abbinalo alla funivia Dajti Ekspres, la cui stazione a valle è a pochi passi."
+   ],
+   "sq": [
+    "Nën tokë është freskët gjithë vitin, ndaj merr diçka të lehtë për t'u veshur edhe në verë.",
+    "Bashkoje me teleferikun Dajti Ekspres, stacioni i poshtëm i të cilit është afër."
+   ]
+  }
+ },
+ {
+  "slug": "bunkart-2",
+  "cats": [
+   "history"
+  ],
+  "lat": 41.327022,
+  "lon": 19.819551,
+  "local": "Bunk'Art 2",
+  "area": "Qendra",
+  "fee": "paid",
+  "duration": [
+   60,
+   90
+  ],
+  "name": {
+   "en": "Bunk'Art 2",
+   "it": "Bunk'Art 2",
+   "sq": "Bunk'Art 2"
+  },
+  "summary": {
+   "en": "The former Interior Ministry bunker, now a museum of the secret police.",
+   "it": "L'ex bunker del Ministero dell'Interno, oggi museo della polizia segreta.",
+   "sq": "Ish-bunkeri i Ministrisë së Brendshme, sot muze i policisë sekrete."
+  },
+  "about": {
+   "en": "Just off Skanderbeg Square, a concrete dome marks the entrance to a bunker built for the Ministry of Internal Affairs. Opened as a museum in 2016, its corridors document the history of the police and the Sigurimi, the communist secret service, and the people they persecuted.",
+   "it": "A due passi da Piazza Scanderbeg, una cupola di cemento segna l'ingresso di un bunker costruito per il Ministero dell'Interno. Museo dal 2016, i suoi corridoi documentano la storia della polizia e della Sigurimi, il servizio segreto comunista, e delle persone perseguitate.",
+   "sq": "Pranë Sheshit Skënderbej, një kupolë betoni shënon hyrjen e bunkerit të ndërtuar për Ministrinë e Punëve të Brendshme. Muze që nga viti 2016, korridoret e tij dokumentojnë historinë e policisë dhe të Sigurimit, shërbimit sekret komunist, dhe të njerëzve që ata persekutuan."
+  },
+  "tips": {
+   "en": [
+    "A good choice if you're short on time: it's central and takes about an hour.",
+    "Some rooms are dim and narrow."
+   ],
+   "it": [
+    "Ottima scelta se hai poco tempo: è centrale e richiede circa un'ora.",
+    "Alcune stanze sono buie e strette."
+   ],
+   "sq": [
+    "Zgjedhje e mirë nëse ke pak kohë: është në qendër dhe zgjat rreth një orë.",
+    "Disa dhoma janë të errëta dhe të ngushta."
+   ]
+  }
+ },
+ {
+  "slug": "house-of-leaves",
+  "cats": [
+   "history"
+  ],
+  "lat": 41.326503,
+  "lon": 19.816316,
+  "local": "Shtëpia me Gjethe",
+  "area": "Qendra",
+  "fee": "paid",
+  "duration": [
+   60,
+   90
+  ],
+  "hours": {
+   "en": "Daily 09:00–19:00",
+   "it": "Tutti i giorni 09:00–19:00",
+   "sq": "Çdo ditë 09:00–19:00"
+  },
+  "name": {
+   "en": "House of Leaves",
+   "it": "Casa delle Foglie",
+   "sq": "Shtëpia me Gjethe"
+  },
+  "summary": {
+   "en": "The museum of secret surveillance, in the building where it actually happened.",
+   "it": "Il museo della sorveglianza segreta, nell'edificio dove avveniva davvero.",
+   "sq": "Muzeu i përgjimeve të fshehta, në ndërtesën ku ndodhnin vërtet."
+  },
+  "about": {
+   "en": "Named after the ivy that covers its walls, this villa housed the Sigurimi's surveillance centre. Opened as a museum in 2017, it displays bugging devices, hidden cameras and files, and explains how ordinary citizens were watched for decades.",
+   "it": "Chiamata così per l'edera che ne ricopre i muri, questa villa ospitava il centro di intercettazione della Sigurimi. Museo dal 2017, espone microspie, telecamere nascoste e fascicoli, e spiega come i cittadini comuni venissero sorvegliati per decenni.",
+   "sq": "E quajtur kështu nga dredhkat që mbulojnë muret, kjo vilë strehonte qendrën e përgjimeve të Sigurimit. Muze që nga viti 2017, ekspozon pajisje përgjimi, kamera të fshehta dhe dosje, dhe tregon si u ndoqën qytetarët e zakonshëm për dekada."
+  },
+  "tips": {
+   "en": [
+    "Rich in text and audio, so allow time to read.",
+    "Good on a rainy day, a few minutes from the square."
+   ],
+   "it": [
+    "Ricco di testi e audio: concediti il tempo di leggere.",
+    "Ideale in un giorno di pioggia, a pochi minuti dalla piazza."
+   ],
+   "sq": [
+    "Ka shumë tekst dhe audio, ndaj lër kohë për të lexuar.",
+    "E mirë për një ditë me shi, disa minuta nga sheshi."
+   ]
+  }
+ },
+ {
+  "slug": "pyramid",
+  "cats": [
+   "history",
+   "photo"
+  ],
+  "featured": true,
+  "lat": 41.323059,
+  "lon": 19.821443,
+  "local": "Piramida e Tiranës",
+  "area": "Qendra",
+  "fee": "free",
+  "duration": [
+   20,
+   40
+  ],
+  "name": {
+   "en": "Pyramid of Tirana",
+   "it": "Piramide di Tirana",
+   "sq": "Piramida e Tiranës"
+  },
+  "summary": {
+   "en": "A communist-era monument reborn as a youth tech centre you can climb.",
+   "it": "Un monumento dell'epoca comunista rinato come centro tecnologico per giovani, su cui si può salire.",
+   "sq": "Një monument i periudhës komuniste, i rilindur si qendër teknologjike për të rinjtë, ku mund të ngjitesh."
+  },
+  "about": {
+   "en": "Built in 1988 as a museum to Enver Hoxha, the Pyramid spent decades half-abandoned while locals slid down its sloping sides. After a major renovation it reopened in 2023, with colourful boxes housing classrooms and steps that lead all the way to the top.",
+   "it": "Costruita nel 1988 come museo dedicato a Enver Hoxha, la Piramide è rimasta per decenni semiabbandonata, mentre i ragazzi scivolavano lungo i suoi fianchi. Dopo un grande restauro ha riaperto nel 2023, con cubi colorati che ospitano aule e gradini che portano fino in cima.",
+   "sq": "E ndërtuar në vitin 1988 si muze për Enver Hoxhën, Piramida qëndroi për dekada gjysmë e braktisur, ndërsa të rinjtë rrëshqisnin në faqet e saj. Pas një rikonstruksioni të madh u rihap në vitin 2023, me kuti shumëngjyrëshe që strehojnë klasa dhe shkallë që të çojnë deri në majë."
+  },
+  "tips": {
+   "en": [
+    "Climb the steps at sunset for a free view over the boulevard.",
+    "Wear shoes with grip; the steps can be slippery after rain."
+   ],
+   "it": [
+    "Sali i gradini al tramonto per una vista gratuita sul viale.",
+    "Indossa scarpe con buona aderenza: dopo la pioggia i gradini scivolano."
+   ],
+   "sq": [
+    "Ngjitu shkallëve në perëndim të diellit për pamje falas mbi bulevardin.",
+    "Vish këpucë që nuk rrëshqasin; pas shiut shkallët janë të lëmuara."
+   ]
+  }
+ },
+ {
+  "slug": "tirana-castle",
+  "cats": [
+   "history",
+   "food"
+  ],
+  "lat": 41.326545,
+  "lon": 19.822575,
+  "local": "Kalaja e Tiranës",
+  "area": "Qendra",
+  "fee": "free",
+  "duration": [
+   20,
+   60
+  ],
+  "name": {
+   "en": "Tirana Castle",
+   "it": "Castello di Tirana",
+   "sq": "Kalaja e Tiranës"
+  },
+  "summary": {
+   "en": "Old fortress walls wrapped around a lively pedestrian lane of cafés.",
+   "it": "Antiche mura di fortezza attorno a una vivace via pedonale piena di caffè.",
+   "sq": "Mure të vjetra kështjelle rreth një rruge këmbësorësh plot kafene."
+  },
+  "about": {
+   "en": "Also known as the Fortress of Justinian, the castle survives as stretches of stone wall in the heart of the city. Its restored interior is now a pedestrian street with restaurants, craft shops and terraces, a pleasant break between museums.",
+   "it": "Nota anche come Fortezza di Giustiniano, sopravvive in tratti di mura di pietra nel cuore della città. L'interno restaurato è oggi una via pedonale con ristoranti, botteghe artigiane e terrazze, una piacevole pausa tra un museo e l'altro.",
+   "sq": "E njohur edhe si Kalaja e Justinianit, ruhet në copa muresh guri në zemër të qytetit. Pjesa e brendshme e restauruar është sot një rrugë këmbësorësh me restorante, dyqane artizanale dhe tarraca, një pushim i këndshëm mes muzeve."
+  },
+  "tips": {
+   "en": [
+    "Good for lunch or an evening drink.",
+    "Just a few steps from Skanderbeg Square and the Parliament."
+   ],
+   "it": [
+    "Ideale per pranzo o per un drink serale.",
+    "A pochi passi da Piazza Scanderbeg e dal Parlamento."
+   ],
+   "sq": [
+    "E mirë për drekë ose për një pije në mbrëmje.",
+    "Disa hapa nga Sheshi Skënderbej dhe Parlamenti."
+   ]
+  }
+ },
+ {
+  "slug": "great-mosque",
+  "cats": [
+   "history"
+  ],
+  "lat": 41.325811,
+  "lon": 19.824162,
+  "local": "Xhamia e Namazgjasë",
+  "area": "Qendra",
+  "fee": "free",
+  "duration": [
+   15,
+   30
+  ],
+  "name": {
+   "en": "Great Mosque of Tirana",
+   "it": "Grande Moschea di Tirana",
+   "sq": "Xhamia e Madhe e Tiranës"
+  },
+  "summary": {
+   "en": "One of the largest mosques in the Balkans, opened in 2024.",
+   "it": "Una delle più grandi moschee dei Balcani, inaugurata nel 2024.",
+   "sq": "Një nga xhamitë më të mëdha në Ballkan, e hapur në vitin 2024."
+  },
+  "about": {
+   "en": "Known locally as the Namazgah Mosque, after the open-air prayer ground that once stood here, the mosque was decades in the making. Its domes and twin minarets now dominate the skyline near the Parliament.",
+   "it": "Conosciuta localmente come Moschea di Namazgah, dal luogo di preghiera all'aperto che sorgeva qui, la moschea ha richiesto decenni di attesa. Le sue cupole e i due minareti dominano oggi lo skyline vicino al Parlamento.",
+   "sq": "E njohur si Xhamia e Namazgjasë, nga vendi i faljes në ajër të hapur që ndodhej dikur këtu, xhamia u prit për dekada. Kupolat dhe dy minaret e saj sot mbizotërojnë horizontin pranë Parlamentit."
+  },
+  "tips": {
+   "en": [
+    "Visit outside prayer times and dress modestly.",
+    "Beautiful from the outside at night."
+   ],
+   "it": [
+    "Visitala al di fuori degli orari di preghiera, con abbigliamento sobrio.",
+    "Bellissima dall'esterno di sera."
+   ],
+   "sq": [
+    "Vizitoje jashtë orarit të faljes dhe vishu thjesht.",
+    "Shumë e bukur nga jashtë në mbrëmje."
+   ]
+  }
+ },
+ {
+  "slug": "resurrection-cathedral",
+  "cats": [
+   "history"
+  ],
+  "lat": 41.326523,
+  "lon": 19.817527,
+  "local": "Katedralja Ngjallja e Krishtit",
+  "area": "Qendra",
+  "fee": "free",
+  "duration": [
+   15,
+   30
+  ],
+  "name": {
+   "en": "Resurrection Cathedral",
+   "it": "Cattedrale della Resurrezione",
+   "sq": "Katedralja Ngjallja e Krishtit"
+  },
+  "summary": {
+   "en": "Albania's grand Orthodox cathedral, consecrated in 2012.",
+   "it": "La grande cattedrale ortodossa d'Albania, consacrata nel 2012.",
+   "sq": "Katedralja e madhe ortodokse e Shqipërisë, e shenjtëruar në vitin 2012."
+  },
+  "about": {
+   "en": "A short walk south of Skanderbeg Square, the cathedral is among the largest Orthodox churches in the Balkans. Inside, the dome and the iconostasis glitter with gold; outside, a free-standing bell tower rises above the complex.",
+   "it": "A pochi passi a sud di Piazza Scanderbeg, la cattedrale è tra le più grandi chiese ortodosse dei Balcani. All'interno cupola e iconostasi brillano d'oro; all'esterno si erge un campanile indipendente.",
+   "sq": "Pak në jug të Sheshit Skënderbej, katedralja është ndër kishat më të mëdha ortodokse në Ballkan. Brenda, kupola dhe ikonostasi shkëlqejnë nga ari; jashtë ngrihet një kambanore më vete."
+  },
+  "tips": {
+   "en": [
+    "Visitors are welcome outside services; cover shoulders and knees.",
+    "A good stop between the square and the Blloku area."
+   ],
+   "it": [
+    "Visite consentite al di fuori delle funzioni; spalle e ginocchia coperte.",
+    "Una buona sosta tra la piazza e il quartiere del Blloku."
+   ],
+   "sq": [
+    "Vizitorët pranohen jashtë shërbesave; mbulo shpatullat dhe gjunjët.",
+    "Ndalesë e mirë mes sheshit dhe Bllokut."
+   ]
+  }
+ },
+ {
+  "slug": "national-gallery",
+  "cats": [
+   "history"
+  ],
+  "lat": 41.325605,
+  "lon": 19.820238,
+  "local": "Galeria Kombëtare e Arteve",
+  "area": "Qendra",
+  "fee": "paid",
+  "duration": [
+   45,
+   90
+  ],
+  "name": {
+   "en": "National Gallery of Arts",
+   "it": "Galleria Nazionale delle Arti",
+   "sq": "Galeria Kombëtare e Arteve"
+  },
+  "summary": {
+   "en": "The country's main art collection, including rare socialist-realist works.",
+   "it": "La principale collezione d'arte del paese, con rare opere del realismo socialista.",
+   "sq": "Koleksioni kryesor i artit në vend, përfshirë vepra të rralla të realizmit socialist."
+  },
+  "about": {
+   "en": "The gallery traces Albanian art from icons and 19th-century painting to the propaganda canvases of the communist era and contemporary work. Behind the building, a small garden collects statues of Lenin and Stalin removed from public squares after 1991.",
+   "it": "La galleria ripercorre l'arte albanese dalle icone e dalla pittura ottocentesca alle tele di propaganda dell'epoca comunista, fino all'arte contemporanea. Dietro l'edificio, un piccolo giardino raccoglie le statue di Lenin e Stalin rimosse dalle piazze dopo il 1991.",
+   "sq": "Galeria ndjek artin shqiptar nga ikonat dhe piktura e shekullit XIX te tablotë propagandistike të periudhës komuniste dhe arti bashkëkohor. Prapa ndërtesës, një kopsht i vogël mbledh statujat e Leninit dhe Stalinit të hequra nga sheshet pas vitit 1991."
+  },
+  "tips": {
+   "en": [
+    "Don't miss the statue garden at the back.",
+    "Exhibitions rotate; check what's on before you go."
+   ],
+   "it": [
+    "Non perdere il giardino delle statue sul retro.",
+    "Le mostre cambiano: verifica il programma prima di andare."
+   ],
+   "sq": [
+    "Mos humb kopshtin e statujave prapa ndërtesës.",
+    "Ekspozitat ndryshojnë; shiko programin para se të shkosh."
+   ]
+  }
+ },
+ {
+  "slug": "tirana-mosaic",
+  "cats": [
+   "history"
+  ],
+  "lat": 41.330004,
+  "lon": 19.804142,
+  "local": "Mozaiku i Tiranës",
+  "area": "Rruga e Durrësit",
+  "fee": null,
+  "duration": [
+   15,
+   30
+  ],
+  "name": {
+   "en": "Tirana Mosaic",
+   "it": "Mosaico di Tirana",
+   "sq": "Mozaiku i Tiranës"
+  },
+  "summary": {
+   "en": "Late Roman floor mosaics, uncovered in the middle of a residential area.",
+   "it": "Mosaici pavimentali tardoromani, emersi in mezzo a un quartiere residenziale.",
+   "sq": "Mozaikë dyshemeje të periudhës së vonë romake, të zbuluar mes një lagjeje banimi."
+  },
+  "about": {
+   "en": "Discovered by chance in 1972, the site preserves mosaics from a Roman villa that was later turned into an early Christian basilica. It is one of the few visible traces of Tirana long before it became a city.",
+   "it": "Scoperto per caso nel 1972, il sito conserva i mosaici di una villa romana poi trasformata in basilica paleocristiana. È una delle poche tracce visibili di Tirana molto prima che diventasse una città.",
+   "sq": "I zbuluar rastësisht në vitin 1972, vendi ruan mozaikët e një vile romake që më vonë u kthye në bazilikë paleokristiane. Është një nga gjurmët e pakta të dukshme të Tiranës shumë kohë para se të bëhej qytet."
+  },
+  "tips": {
+   "en": [
+    "Small and quiet: best for history lovers.",
+    "Combine it with a walk along Rruga e Durrësit."
+   ],
+   "it": [
+    "Piccolo e tranquillo: ideale per gli appassionati di storia.",
+    "Abbinalo a una passeggiata lungo Rruga e Durrësit."
+   ],
+   "sq": [
+    "I vogël dhe i qetë: më i miri për dashamirët e historisë.",
+    "Bashkoje me një shëtitje në Rrugën e Durrësit."
+   ]
+  }
+ },
+ {
+  "slug": "tanners-bridge",
+  "cats": [
+   "history",
+   "photo"
+  ],
+  "lat": 41.32672,
+  "lon": 19.82835,
+  "local": "Ura e Tabakëve",
+  "area": "Qendra",
+  "fee": "free",
+  "duration": [
+   10,
+   15
+  ],
+  "name": {
+   "en": "Tanners' Bridge",
+   "it": "Ponte dei Conciatori",
+   "sq": "Ura e Tabakëve"
+  },
+  "summary": {
+   "en": "A small Ottoman stone bridge from the 18th century.",
+   "it": "Un piccolo ponte ottomano in pietra del XVIII secolo.",
+   "sq": "Një urë e vogël guri osmane e shekullit XVIII."
+  },
+  "about": {
+   "en": "The bridge once carried a trade route over the Lana stream into the tanners' quarter, which gave it its name. Today it stands as a pedestrian monument next to the small Tanners' Mosque, a quiet corner a few minutes from the New Bazaar.",
+   "it": "Il ponte portava una via commerciale sopra il torrente Lana fino al quartiere dei conciatori, da cui prende il nome. Oggi è un monumento pedonale accanto alla piccola Moschea dei Conciatori, un angolo tranquillo a pochi minuti dal Nuovo Bazar.",
+   "sq": "Ura mbante dikur një rrugë tregtare mbi përroin e Lanës drejt lagjes së tabakëve, prej nga mori emrin. Sot është monument për këmbësorët pranë Xhamisë së vogël të Tabakëve, një cep i qetë disa minuta nga Pazari i Ri."
+  },
+  "tips": {
+   "en": [
+    "Quick stop: pair it with the New Bazaar.",
+    "Morning light is softest for photos."
+   ],
+   "it": [
+    "Sosta veloce: abbinala al Nuovo Bazar.",
+    "La luce del mattino è la più morbida per le foto."
+   ],
+   "sq": [
+    "Ndalesë e shkurtër: bashkoje me Pazarin e Ri.",
+    "Drita e mëngjesit është më e buta për foto."
+   ]
+  }
+ },
+ {
+  "slug": "postbllok",
+  "cats": [
+   "history",
+   "photo"
+  ],
+  "lat": 41.320962,
+  "lon": 19.820149,
+  "local": "Postbllok",
+  "area": "Blloku",
+  "fee": "free",
+  "duration": [
+   10,
+   20
+  ],
+  "name": {
+   "en": "Postbllok Memorial",
+   "it": "Memoriale Postbllok",
+   "sq": "Memoriali Postbllok"
+  },
+  "summary": {
+   "en": "A memorial with a bunker, a piece of the Berlin Wall and pillars from a labour camp.",
+   "it": "Un memoriale con un bunker, un pezzo del Muro di Berlino e pilastri di un campo di lavoro.",
+   "sq": "Një memorial me bunker, një copë të Murit të Berlinit dhe shtylla nga një kamp pune."
+  },
+  "about": {
+   "en": "At the edge of Blloku, the once-forbidden district of the communist elite, this open-air memorial brings together three symbols: a bunker, a segment of the Berlin Wall and concrete pillars from the Spaç prison camp, where political prisoners were forced to work.",
+   "it": "Ai margini del Blloku, l'ex quartiere proibito dell'élite comunista, questo memoriale all'aperto riunisce tre simboli: un bunker, un segmento del Muro di Berlino e pilastri di cemento del campo di prigionia di Spaç, dove i detenuti politici erano costretti a lavorare.",
+   "sq": "Në skaj të Bllokut, ish-lagjes së ndaluar të elitës komuniste, ky memorial në ajër të hapur bashkon tre simbole: një bunker, një copë të Murit të Berlinit dhe shtylla betoni nga kampi i burgut të Spaçit, ku të burgosurit politikë detyroheshin të punonin."
+  },
+  "tips": {
+   "en": [
+    "Free and open at all hours.",
+    "A natural start for an evening in Blloku."
+   ],
+   "it": [
+    "Gratuito e sempre accessibile.",
+    "Un punto di partenza naturale per una serata nel Blloku."
+   ],
+   "sq": [
+    "Falas dhe i hapur në çdo orë.",
+    "Fillim natyral për një mbrëmje në Bllok."
+   ]
+  }
+ },
+ {
+  "slug": "grand-park",
+  "cats": [
+   "nature",
+   "photo"
+  ],
+  "featured": true,
+  "lat": 41.311741,
+  "lon": 19.825618,
+  "local": "Parku i Madh dhe Liqeni Artificial",
+  "area": "Liqeni",
+  "fee": "free",
+  "duration": [
+   45,
+   120
+  ],
+  "name": {
+   "en": "Grand Park & Artificial Lake",
+   "it": "Grande Parco e Lago Artificiale",
+   "sq": "Parku i Madh dhe Liqeni Artificial"
+  },
+  "summary": {
+   "en": "Tirana's green lung: a large park wrapped around a lake.",
+   "it": "Il polmone verde di Tirana: un grande parco attorno a un lago.",
+   "sq": "Mushkëria e gjelbër e Tiranës: një park i madh rreth një liqeni."
+  },
+  "about": {
+   "en": "Created in the 1950s, the park is where locals jog, walk their dogs and meet for coffee. A path circles the artificial lake, passing monuments, cafés and the city's botanical garden and zoo nearby.",
+   "it": "Creato negli anni Cinquanta, il parco è il luogo dove gli abitanti fanno jogging, portano a spasso il cane e si incontrano per un caffè. Un sentiero gira attorno al lago artificiale, tra monumenti, caffè e, poco distanti, l'orto botanico e lo zoo.",
+   "sq": "I krijuar në vitet 1950, parku është vendi ku banorët vrapojnë, shëtisin qentë dhe takohen për kafe. Një shteg rrethon liqenin artificial, duke kaluar pranë monumenteve, kafeneve, kopshtit botanik dhe kopshtit zoologjik."
+  },
+  "tips": {
+   "en": [
+    "Go in the late afternoon, when the light over the lake is golden.",
+    "The full loop around the lake takes about an hour on foot."
+   ],
+   "it": [
+    "Vai nel tardo pomeriggio, quando la luce sul lago è dorata.",
+    "Il giro completo del lago richiede circa un'ora a piedi."
+   ],
+   "sq": [
+    "Shko pasdite vonë, kur drita mbi liqen është e artë.",
+    "Xhiro e plotë e liqenit zgjat rreth një orë në këmbë."
+   ]
+  }
+ },
+ {
+  "slug": "dajti-ekspres",
+  "cats": [
+   "nature",
+   "photo"
+  ],
+  "featured": true,
+  "lat": 41.350786,
+  "lon": 19.861049,
+  "local": "Teleferiku Dajti Ekspres",
+  "area": "Linzë",
+  "fee": "paid",
+  "duration": [
+   120,
+   240
+  ],
+  "name": {
+   "en": "Dajti Ekspres Cable Car",
+   "it": "Funivia Dajti Ekspres",
+   "sq": "Teleferiku Dajti Ekspres"
+  },
+  "summary": {
+   "en": "A cable car ride from the edge of the city up Mount Dajti.",
+   "it": "Una corsa in funivia dal margine della città fino al Monte Dajti.",
+   "sq": "Një udhëtim me teleferik nga skaji i qytetit deri në Malin e Dajtit."
+  },
+  "about": {
+   "en": "In around fifteen minutes, the gondolas climb over villages and forest to the slopes of Mount Dajti, with Tirana spreading out below. At the top you'll find restaurants, walking trails and some of the best views of the city.",
+   "it": "In circa quindici minuti le cabine salgono sopra villaggi e boschi fino alle pendici del Monte Dajti, con Tirana che si apre sotto di te. In cima trovi ristoranti, sentieri e alcune delle migliori viste sulla città.",
+   "sq": "Për rreth pesëmbëdhjetë minuta, kabinat ngjiten mbi fshatra dhe pyje deri në shpatet e Malit të Dajtit, me Tiranën që shtrihet poshtë. Lart gjen restorante, shtigje për ecje dhe disa nga pamjet më të bukura të qytetit."
+  },
+  "tips": {
+   "en": [
+    "It may stop in strong wind or storms; check the weather before you go.",
+    "Bunk'Art 1 is a short walk from the lower station."
+   ],
+   "it": [
+    "Può fermarsi con vento forte o temporali: controlla il meteo prima di andare.",
+    "Bunk'Art 1 è a pochi passi dalla stazione a valle."
+   ],
+   "sq": [
+    "Mund të ndalojë me erë të fortë ose stuhi; shiko motin para se të shkosh.",
+    "Bunk'Art 1 është afër stacionit të poshtëm."
+   ]
+  }
+ },
+ {
+  "slug": "mount-dajti",
+  "cats": [
+   "nature",
+   "photo"
+  ],
+  "lat": 41.367793,
+  "lon": 19.905172,
+  "local": "Mali i Dajtit",
+  "area": "Dajt",
+  "fee": "free",
+  "duration": [
+   180,
+   360
+  ],
+  "name": {
+   "en": "Mount Dajti",
+   "it": "Monte Dajti",
+   "sq": "Mali i Dajtit"
+  },
+  "summary": {
+   "en": "The mountain that watches over Tirana, a national park with forests and viewpoints.",
+   "it": "La montagna che veglia su Tirana, un parco nazionale con boschi e punti panoramici.",
+   "sq": "Mali që mbikëqyr Tiranën, park kombëtar me pyje dhe pika panoramike."
+  },
+  "about": {
+   "en": "Rising to over 1,600 metres just east of the city, Mount Dajti is where Tirana goes to escape the summer heat. Beech and pine forests, hiking paths, an adventure park and terraces with sweeping views make it an easy half-day trip.",
+   "it": "Con i suoi oltre 1.600 metri appena a est della città, il Monte Dajti è il rifugio dei tiranesi dal caldo estivo. Boschi di faggi e pini, sentieri, un parco avventura e terrazze panoramiche ne fanno una facile gita di mezza giornata.",
+   "sq": "Me mbi 1.600 metra lartësi, menjëherë në lindje të qytetit, Mali i Dajtit është vendi ku tiranasit ikin nga vapa e verës. Pyjet me ah dhe pisha, shtigjet, parku i aventurave dhe tarracat me pamje të gjerë e bëjnë një shëtitje të lehtë gjysmë dite."
+  },
+  "tips": {
+   "en": [
+    "The easiest way up is the Dajti Ekspres cable car.",
+    "It's noticeably cooler than the city, so bring a jacket."
+   ],
+   "it": [
+    "Il modo più semplice per salire è la funivia Dajti Ekspres.",
+    "Fa molto più fresco che in città: porta una giacca."
+   ],
+   "sq": [
+    "Mënyra më e lehtë për t'u ngjitur është teleferiku Dajti Ekspres.",
+    "Është dukshëm më freskët se në qytet, ndaj merr një xhaketë."
+   ]
+  }
+ },
+ {
+  "slug": "botanical-garden",
+  "cats": [
+   "nature"
+  ],
+  "lat": 41.30977,
+  "lon": 19.805824,
+  "local": "Kopshti Botanik",
+  "area": "Liqeni",
+  "fee": null,
+  "duration": [
+   30,
+   60
+  ],
+  "name": {
+   "en": "Botanical Garden",
+   "it": "Orto Botanico",
+   "sq": "Kopshti Botanik"
+  },
+  "summary": {
+   "en": "A quiet university garden next to the Grand Park.",
+   "it": "Un tranquillo giardino universitario accanto al Grande Parco.",
+   "sq": "Një kopsht i qetë universitar pranë Parkut të Madh."
+  },
+  "about": {
+   "en": "Run by the University of Tirana, the garden gathers plants native to Albania alongside species from around the Mediterranean. It's a calm, shaded place for a slow walk away from the traffic.",
+   "it": "Gestito dall'Università di Tirana, il giardino riunisce piante autoctone dell'Albania e specie di tutto il Mediterraneo. È un luogo calmo e ombreggiato per una passeggiata lontano dal traffico.",
+   "sq": "I administruar nga Universiteti i Tiranës, kopshti mbledh bimë vendase të Shqipërisë dhe lloje nga i gjithë Mesdheu. Është një vend i qetë dhe me hije për një shëtitje larg trafikut."
+  },
+  "tips": {
+   "en": [
+    "Easy to combine with the Grand Park and the zoo.",
+    "Opening hours can be limited; check before going."
+   ],
+   "it": [
+    "Facile da abbinare al Grande Parco e allo zoo.",
+    "Gli orari possono essere ridotti: verifica prima di andare."
+   ],
+   "sq": [
+    "Bashkohet lehtë me Parkun e Madh dhe kopshtin zoologjik.",
+    "Orari mund të jetë i kufizuar; kontrollo para se të shkosh."
+   ]
+  }
+ },
+ {
+  "slug": "farka-lake",
+  "cats": [
+   "nature"
+  ],
+  "lat": 41.315807,
+  "lon": 19.862609,
+  "local": "Liqeni i Farkës",
+  "area": "Farkë",
+  "fee": "free",
+  "duration": [
+   60,
+   180
+  ],
+  "name": {
+   "en": "Farka Lake",
+   "it": "Lago di Farka",
+   "sq": "Liqeni i Farkës"
+  },
+  "summary": {
+   "en": "A quieter lake on the south-eastern edge of the city.",
+   "it": "Un lago più tranquillo ai margini sud-orientali della città.",
+   "sq": "Një liqen më i qetë në skajin juglindor të qytetit."
+  },
+  "about": {
+   "en": "Less crowded than the Grand Park, Farka Lake is popular with locals for weekend walks and lakeside lunches. Restaurants and paths line its shores, with hills rising behind.",
+   "it": "Meno affollato del Grande Parco, il Lago di Farka è amato dagli abitanti per le passeggiate del fine settimana e i pranzi in riva al lago. Ristoranti e sentieri ne costeggiano le rive, con le colline sullo sfondo.",
+   "sq": "Më pak i mbushur se Parku i Madh, Liqeni i Farkës pëlqehet nga banorët për shëtitje në fundjavë dhe dreka buzë liqenit. Restorante dhe shtigje rreshtohen në breg, me kodra që ngrihen prapa."
+  },
+  "tips": {
+   "en": [
+    "Best on a sunny weekend afternoon.",
+    "Further from the centre: check the bus route before you go."
+   ],
+   "it": [
+    "Ideale in un pomeriggio di sole nel fine settimana.",
+    "Più lontano dal centro: verifica il percorso in autobus prima di andare."
+   ],
+   "sq": [
+    "Më i bukur në një pasdite me diell në fundjavë.",
+    "Më larg nga qendra: shiko linjën e autobusit para se të nisesh."
+   ]
+  }
+ },
+ {
+  "slug": "new-bazaar",
+  "cats": [
+   "food",
+   "photo"
+  ],
+  "featured": true,
+  "lat": 41.330046,
+  "lon": 19.824683,
+  "local": "Pazari i Ri",
+  "area": "Pazari i Ri",
+  "fee": "free",
+  "duration": [
+   45,
+   120
+  ],
+  "name": {
+   "en": "New Bazaar",
+   "it": "Nuovo Bazar",
+   "sq": "Pazari i Ri"
+  },
+  "summary": {
+   "en": "A colourful covered market surrounded by some of the city's best traditional food.",
+   "it": "Un mercato coperto e colorato, circondato da alcuni dei migliori locali di cucina tradizionale.",
+   "sq": "Një treg i mbuluar plot ngjyra, i rrethuar nga disa prej lokaleve më të mira me gatime tradicionale."
+  },
+  "about": {
+   "en": "Renovated in 2017, the market hall sells fruit, vegetables, cheese, honey, olives and homemade raki. Around it, the painted façades hide small restaurants serving Albanian classics such as fërgesë, tavë kosi and grilled meats.",
+   "it": "Ristrutturato nel 2017, il mercato vende frutta, verdura, formaggi, miele, olive e raki fatta in casa. Tutt'intorno, le facciate colorate nascondono piccoli ristoranti con i classici albanesi come fërgesë, tavë kosi e carne alla griglia.",
+   "sq": "I rikonstruktuar në vitin 2017, tregu shet fruta, perime, djathë, mjaltë, ullinj dhe raki shtëpie. Përreth, fasadat e lyera fshehin restorante të vogla me gatime klasike shqiptare si fërgesë, tavë kosi dhe mish në skarë."
+  },
+  "tips": {
+   "en": [
+    "Come in the morning for the market, stay for lunch.",
+    "Small producers often prefer cash."
+   ],
+   "it": [
+    "Vieni al mattino per il mercato e resta per pranzo.",
+    "I piccoli produttori preferiscono spesso i contanti."
+   ],
+   "sq": [
+    "Eja në mëngjes për tregun dhe qëndro për drekë.",
+    "Prodhuesit e vegjël shpesh preferojnë para në dorë."
+   ]
+  }
+ },
+ {
+  "slug": "blloku",
+  "cats": [
+   "nightlife",
+   "food"
+  ],
+  "featured": true,
+  "lat": 41.321333,
+  "lon": 19.816066,
+  "local": "Blloku",
+  "area": "Blloku",
+  "fee": "free",
+  "duration": [
+   120,
+   300
+  ],
+  "name": {
+   "en": "Blloku",
+   "it": "Blloku",
+   "sq": "Blloku"
+  },
+  "summary": {
+   "en": "Once closed to ordinary citizens, now the city's busiest district for bars and cafés.",
+   "it": "Un tempo vietato ai cittadini comuni, oggi il quartiere più animato per bar e caffè.",
+   "sq": "Dikur i ndaluar për qytetarët e zakonshëm, sot lagjja më e gjallë me bare dhe kafene."
+  },
+  "about": {
+   "en": "Until 1991, these few blocks were reserved for the communist leadership, and Enver Hoxha's villa still stands here. Today Blloku is packed with cafés, cocktail bars, restaurants and boutiques, busy from morning espresso until late at night.",
+   "it": "Fino al 1991 questi pochi isolati erano riservati alla dirigenza comunista, e la villa di Enver Hoxha è ancora qui. Oggi il Blloku è pieno di caffè, cocktail bar, ristoranti e boutique, animato dall'espresso del mattino fino a tarda notte.",
+   "sq": "Deri në vitin 1991, këto pak blloqe ishin të rezervuara për udhëheqjen komuniste, dhe vila e Enver Hoxhës qëndron ende këtu. Sot Blloku është plot kafene, bare koktejesh, restorante dhe butikë, i gjallë nga kafeja e mëngjesit deri vonë natën."
+  },
+  "tips": {
+   "en": [
+    "Evenings are liveliest from Thursday to Saturday.",
+    "Start at the Postbllok memorial on the edge of the district."
+   ],
+   "it": [
+    "Le serate più vivaci sono dal giovedì al sabato.",
+    "Inizia dal memoriale Postbllok, al margine del quartiere."
+   ],
+   "sq": [
+    "Mbrëmjet më të gjalla janë nga e enjtja te e shtuna.",
+    "Fillo te memoriali Postbllok, në skaj të lagjes."
+   ]
+  }
+ },
+ {
+  "slug": "komiteti",
+  "cats": [
+   "nightlife"
+  ],
+  "lat": 41.323302,
+  "lon": 19.822594,
+  "local": "Komiteti – Kafe Muzeum",
+  "area": "Qendra",
+  "fee": null,
+  "duration": [
+   45,
+   120
+  ],
+  "hours": {
+   "en": "Daily 07:00–00:00",
+   "it": "Tutti i giorni 07:00–00:00",
+   "sq": "Çdo ditë 07:00–00:00"
+  },
+  "website": "https://www.instagram.com/komitetibar/",
+  "name": {
+   "en": "Komiteti – Kafe Muzeum",
+   "it": "Komiteti – Kafe Muzeum",
+   "sq": "Komiteti – Kafe Muzeum"
+  },
+  "summary": {
+   "en": "A café-bar furnished with objects from communist-era Albania, known for its raki.",
+   "it": "Un caffè-bar arredato con oggetti dell'Albania comunista, noto per la sua raki.",
+   "sq": "Një kafe-bar i mobiluar me objekte të Shqipërisë komuniste, i njohur për rakinë."
+  },
+  "about": {
+   "en": "Old radios, posters and household items from the socialist decades fill the rooms of this café-museum. It's a relaxed place to try different kinds of raki, the local fruit brandy, at any time of day.",
+   "it": "Vecchie radio, manifesti e oggetti di casa dei decenni socialisti riempiono le sale di questo caffè-museo. È un luogo rilassato per assaggiare diversi tipi di raki, l'acquavite di frutta locale, a qualsiasi ora.",
+   "sq": "Radio të vjetra, afishe dhe sende shtëpiake nga dekadat socialiste mbushin dhomat e këtij kafe-muzeu. Është një vend i qetë për të provuar lloje të ndryshme rakie, në çdo orë të ditës."
+  },
+  "tips": {
+   "en": [
+    "Ask for a tasting of different rakis.",
+    "Opening hours can change; check their page before going."
+   ],
+   "it": [
+    "Chiedi una degustazione di diverse raki.",
+    "Gli orari possono cambiare: controlla la loro pagina prima di andare."
+   ],
+   "sq": [
+    "Kërko një provë me disa lloje rakie.",
+    "Orari mund të ndryshojë; shiko faqen e tyre para se të shkosh."
+   ]
+  }
+ },
+ {
+  "slug": "radio-bar",
+  "cats": [
+   "nightlife"
+  ],
+  "lat": 41.32014,
+  "lon": 19.815008,
+  "local": "Radio Bar",
+  "area": "Blloku",
+  "fee": null,
+  "duration": [
+   60,
+   180
+  ],
+  "name": {
+   "en": "Radio Bar",
+   "it": "Radio Bar",
+   "sq": "Radio Bar"
+  },
+  "summary": {
+   "en": "A long-standing Blloku bar with a laid-back, retro feel.",
+   "it": "Uno storico bar del Blloku dall'atmosfera rilassata e retrò.",
+   "sq": "Një bar i vjetër i Bllokut me atmosferë të qetë dhe retro."
+  },
+  "about": {
+   "en": "Tucked into a side street of Blloku, Radio Bar is a favourite for an unhurried evening drink. Expect a mixed crowd of locals and visitors, and music at a level that still lets you talk.",
+   "it": "Nascosto in una strada laterale del Blloku, il Radio Bar è il preferito per un drink serale senza fretta. Clientela mista di locali e visitatori, e musica a un volume che permette ancora di chiacchierare.",
+   "sq": "I fshehur në një rrugë anësore të Bllokut, Radio Bar preferohet për një pije të qetë në mbrëmje. Pret një publik të përzier banorësh dhe vizitorësh, dhe muzikë që të lejon ende të bisedosh."
+  },
+  "tips": {
+   "en": [
+    "Arrive early on weekends to get a table.",
+    "Venues change: check current hours before you go."
+   ],
+   "it": [
+    "Nel fine settimana arriva presto per trovare un tavolo.",
+    "I locali cambiano: verifica gli orari attuali prima di andare."
+   ],
+   "sq": [
+    "Në fundjavë eja herët për të gjetur tavolinë.",
+    "Lokalet ndryshojnë: kontrollo orarin aktual para se të shkosh."
+   ]
+  }
+ },
+ {
+  "slug": "hemingway-bar",
+  "cats": [
+   "nightlife"
+  ],
+  "lat": 41.329558,
+  "lon": 19.812302,
+  "local": "Hemingway Bar",
+  "area": "Rruga e Kavajës",
+  "fee": null,
+  "duration": [
+   60,
+   180
+  ],
+  "website": "https://hemingway.al/",
+  "name": {
+   "en": "Hemingway Bar",
+   "it": "Hemingway Bar",
+   "sq": "Hemingway Bar"
+  },
+  "summary": {
+   "en": "A cosy cocktail bar a short walk west of the centre.",
+   "it": "Un accogliente cocktail bar a pochi passi a ovest del centro.",
+   "sq": "Një bar koktejesh i ngrohtë, pak në perëndim të qendrës."
+  },
+  "about": {
+   "en": "Away from the Blloku crowds, Hemingway Bar is a quieter option for cocktails and spirits in an intimate setting. A good choice to start or end a night out.",
+   "it": "Lontano dalla folla del Blloku, l'Hemingway Bar è un'opzione più tranquilla per cocktail e distillati in un ambiente raccolto. Ottimo per iniziare o concludere una serata.",
+   "sq": "Larg turmave të Bllokut, Hemingway Bar është një zgjedhje më e qetë për koktejle dhe pije në një ambient intim. I mirë për të nisur ose për të mbyllur një natë jashtë."
+  },
+  "tips": {
+   "en": [
+    "Check their website for events and opening hours.",
+    "Venues change: confirm before you go."
+   ],
+   "it": [
+    "Consulta il loro sito per eventi e orari.",
+    "I locali cambiano: verifica prima di andare."
+   ],
+   "sq": [
+    "Shiko faqen e tyre për evente dhe orar.",
+    "Lokalet ndryshojnë: konfirmo para se të shkosh."
+   ]
+  }
+ },
+ {
+  "slug": "tunel-music-venue",
+  "cats": [
+   "nightlife"
+  ],
+  "lat": 41.328601,
+  "lon": 19.820267,
+  "local": "Tunel Music Venue",
+  "area": "Qendra",
+  "fee": null,
+  "duration": [
+   120,
+   300
+  ],
+  "name": {
+   "en": "Tunel Music Venue",
+   "it": "Tunel Music Venue",
+   "sq": "Tunel Music Venue"
+  },
+  "summary": {
+   "en": "A central music venue for live sets and late nights.",
+   "it": "Un locale musicale in centro per live set e notti lunghe.",
+   "sq": "Një lokal muzikor në qendër për muzikë live dhe netë të gjata."
+  },
+  "about": {
+   "en": "Just north of Skanderbeg Square, Tunel hosts DJs and live music for those who want to keep going after the bars. Programmes change week by week.",
+   "it": "Appena a nord di Piazza Scanderbeg, il Tunel ospita DJ e musica dal vivo per chi vuole continuare dopo i bar. La programmazione cambia di settimana in settimana.",
+   "sq": "Pak në veri të Sheshit Skënderbej, Tunel pret DJ dhe muzikë live për ata që duan të vazhdojnë pas bareve. Programi ndryshon nga java në javë."
+  },
+  "tips": {
+   "en": [
+    "Look up the line-up before you go.",
+    "Venues change: confirm opening times."
+   ],
+   "it": [
+    "Controlla la line-up prima di andare.",
+    "I locali cambiano: verifica gli orari."
+   ],
+   "sq": [
+    "Shiko programin para se të shkosh.",
+    "Lokalet ndryshojnë: konfirmo orarin."
+   ]
+  }
+ },
+ {
+  "slug": "patala",
+  "cats": [
+   "nightlife"
+  ],
+  "lat": 41.322613,
+  "lon": 19.824078,
+  "local": "Patala",
+  "area": "Qendra",
+  "fee": null,
+  "duration": [
+   120,
+   240
+  ],
+  "hours": {
+   "en": "Thu–Sat 23:00–03:00",
+   "it": "gio–sab 23:00–03:00",
+   "sq": "Enj–Sht 23:00–03:00"
+  },
+  "name": {
+   "en": "Patala",
+   "it": "Patala",
+   "sq": "Patala"
+  },
+  "summary": {
+   "en": "A central club where DJs take over after midnight.",
+   "it": "Un club in centro dove i DJ prendono il comando dopo mezzanotte.",
+   "sq": "Klub në qendër ku DJ-të marrin skenën pas mesnate."
+  },
+  "about": {
+   "en": "Patala is a restaurant and lounge a few minutes' walk east of Skanderbeg Square that turns into a club late in the week. Dinner and cocktails come first; the DJ sets and the dance crowd arrive after midnight.",
+   "it": "Patala è un ristorante e lounge a pochi minuti a piedi a est di piazza Skanderbeg che a fine settimana diventa un club. Prima cena e cocktail; DJ set e pista si animano dopo mezzanotte.",
+   "sq": "Patala është restorant dhe lounge disa minuta në këmbë në lindje të Sheshit Skënderbej, që në fund të javës kthehet në klub. Fillimisht darkë dhe kokteje; DJ-të dhe vallëzimi nisin pas mesnate."
+  },
+  "tips": {
+   "en": [
+    "Book a table for weekend nights.",
+    "Club nights change: check the venue's social media for tonight's line-up and entry."
+   ],
+   "it": [
+    "Prenota un tavolo per il fine settimana.",
+    "Le serate cambiano: controlla i social del locale per il programma e l'ingresso."
+   ],
+   "sq": [
+    "Rezervo tavolinë për netët e fundjavës.",
+    "Mbrëmjet ndryshojnë: shiko rrjetet sociale të lokalit për programin dhe hyrjen."
+   ]
+  }
+ },
+ {
+  "slug": "magic-club",
+  "cats": [
+   "nightlife"
+  ],
+  "lat": 41.321546,
+  "lon": 19.81748,
+  "local": "Magic Club",
+  "area": "Blloku",
+  "fee": null,
+  "duration": [
+   120,
+   240
+  ],
+  "name": {
+   "en": "Magic Club",
+   "it": "Magic Club",
+   "sq": "Magic Club"
+  },
+  "summary": {
+   "en": "A Blloku dance club with big lights and late DJ sets.",
+   "it": "Un club del Blloku con grandi luci e DJ set fino a tardi.",
+   "sq": "Klub vallëzimi në Bllok me drita të mëdha dhe DJ deri vonë."
+  },
+  "about": {
+   "en": "On Rruga Pjetër Bogdani, in the middle of Blloku, Magic Club is one of the area's best-known dance floors. Local and guest DJs play a mix of house, pop and Balkan hits to a crowd of locals and visitors.",
+   "it": "In Rruga Pjetër Bogdani, nel cuore del Blloku, il Magic Club è una delle piste più conosciute della zona. DJ locali e ospiti suonano house, pop e hit balcaniche per un pubblico misto di locali e visitatori.",
+   "sq": "Në Rrugën Pjetër Bogdani, në mes të Bllokut, Magic Club është një nga pistat më të njohura të zonës. DJ vendas dhe të ftuar luajnë house, pop dhe hite ballkanike për një publik banorësh dhe vizitorësh."
+  },
+  "tips": {
+   "en": [
+    "It fills up after midnight, especially Thursday to Saturday.",
+    "Puls House Club is right next door on the same street, if you prefer house music.",
+    "Club nights change: check the venue's social media for tonight's line-up and entry."
+   ],
+   "it": [
+    "Si riempie dopo mezzanotte, soprattutto da giovedì a sabato.",
+    "Il Puls House Club è proprio accanto, sulla stessa via, se preferisci la musica house.",
+    "Le serate cambiano: controlla i social del locale per il programma e l'ingresso."
+   ],
+   "sq": [
+    "Mbushet pas mesnate, sidomos nga e enjtja te e shtuna.",
+    "Puls House Club është ngjitur, në të njëjtën rrugë, nëse preferon muzikë house.",
+    "Mbrëmjet ndryshojnë: shiko rrjetet sociale të lokalit për programin dhe hyrjen."
+   ]
+  }
+ },
+ {
+  "slug": "escape-premium-club",
+  "cats": [
+   "nightlife"
+  ],
+  "lat": 41.283095,
+  "lon": 19.857151,
+  "local": "Escape Premium Club",
+  "area": "TEG (Tirana East Gate)",
+  "fee": "paid",
+  "duration": [
+   180,
+   300
+  ],
+  "website": "https://escape.al/",
+  "name": {
+   "en": "Escape Premium Club",
+   "it": "Escape Premium Club",
+   "sq": "Escape Premium Club"
+  },
+  "summary": {
+   "en": "A large premium club at TEG, known for concerts by Albanian stars.",
+   "it": "Un grande club di lusso al TEG, noto per i concerti delle star albanesi.",
+   "sq": "Klub i madh premium te TEG, i njohur për koncertet e yjeve shqiptarë."
+  },
+  "about": {
+   "en": "Next to the TEG shopping centre on the road to Elbasan, Escape is a big, polished venue with VIP areas and a dance floor. Its weekends are built around live shows by well-known Albanian and Kosovar singers, followed by DJ sets.",
+   "it": "Accanto al centro commerciale TEG, sulla strada per Elbasan, Escape è un locale grande e curato con aree VIP e pista da ballo. I fine settimana ruotano attorno ai concerti di noti cantanti albanesi e kosovari, seguiti da DJ set.",
+   "sq": "Pranë qendrës tregtare TEG, në rrugën e Elbasanit, Escape është lokal i madh dhe elegant me zona VIP dhe pistë vallëzimi. Fundjavat ndërtohen rreth koncerteve live të këngëtarëve të njohur shqiptarë e kosovarë, pasuar nga DJ."
+  },
+  "tips": {
+   "en": [
+    "It is outside the centre: take a taxi back at night.",
+    "Reserve a table for concert nights; tickets and minimum spend vary."
+   ],
+   "it": [
+    "È fuori dal centro: di notte torna in taxi.",
+    "Prenota un tavolo per le serate con concerto; biglietti e consumazione minima variano."
+   ],
+   "sq": [
+    "Është jashtë qendrës: natën kthehu me taksi.",
+    "Rezervo tavolinë për netët me koncert; biletat dhe konsumi minimal ndryshojnë."
+   ]
+  }
+ },
+ {
+  "slug": "sky-tower",
+  "cats": [
+   "nightlife",
+   "photo"
+  ],
+  "lat": 41.322365,
+  "lon": 19.818121,
+  "local": "Sky Tower",
+  "area": "Blloku",
+  "fee": null,
+  "duration": [
+   60,
+   150
+  ],
+  "hours": {
+   "en": "Tue–Sun 17:30–00:00",
+   "it": "mar–dom 17:30–00:00",
+   "sq": "Mar–Die 17:30–00:00"
+  },
+  "name": {
+   "en": "Sky Tower",
+   "it": "Sky Tower",
+   "sq": "Sky Tower"
+  },
+  "summary": {
+   "en": "A revolving bar and restaurant with a 360° view over Tirana.",
+   "it": "Bar e ristorante girevole con vista a 360° su Tirana.",
+   "sq": "Bar dhe restorant që rrotullohet, me pamje 360° mbi Tiranën."
+  },
+  "about": {
+   "en": "On the edge of Blloku, the top of the Sky Tower turns slowly, making a full circle in about 45 minutes. Come at sunset for a drink: you see the whole city, from Skanderbeg Square to Mount Dajti, without leaving your table.",
+   "it": "Ai margini del Blloku, la cima della Sky Tower ruota lentamente e compie un giro completo in circa 45 minuti. Vieni al tramonto per un drink: vedi tutta la città, da piazza Skanderbeg al monte Dajti, senza alzarti dal tavolo.",
+   "sq": "Në skaj të Bllokut, maja e Sky Tower rrotullohet ngadalë dhe bën një xhiro të plotë rreth 45 minuta. Eja në perëndim të diellit për një pije: sheh gjithë qytetin, nga Sheshi Skënderbej te Mali i Dajtit, pa u ngritur nga tavolina."
+  },
+  "tips": {
+   "en": [
+    "Book a window table for sunset.",
+    "Smart casual: no shorts or sportswear."
+   ],
+   "it": [
+    "Prenota un tavolo vicino alla finestra per il tramonto.",
+    "Abbigliamento curato: niente pantaloncini o tute."
+   ],
+   "sq": [
+    "Rezervo tavolinë pranë dritares për perëndimin.",
+    "Veshje e rregullt: jo pantallona të shkurtra apo tuta."
+   ]
+  }
+ },
+ {
+  "slug": "puls",
+  "cats": [
+   "nightlife"
+  ],
+  "lat": 41.321623,
+  "lon": 19.817529,
+  "local": "Puls House Club",
+  "area": "Blloku",
+  "fee": null,
+  "duration": [
+   120,
+   300
+  ],
+  "name": {
+   "en": "Puls House Club",
+   "it": "Puls House Club",
+   "sq": "Puls House Club"
+  },
+  "summary": {
+   "en": "Blloku's house and afro-house club, with international DJs.",
+   "it": "Il club house e afro-house del Blloku, con DJ internazionali.",
+   "sq": "Klubi i muzikës house dhe afro-house në Bllok, me DJ ndërkombëtarë."
+  },
+  "about": {
+   "en": "Puls is the place for house music in Blloku: a strong sound system, lighting built for the dance floor and a programme of local and international DJs, often playing afro-house until late.",
+   "it": "Puls è il posto per la musica house nel Blloku: impianto audio potente, luci pensate per la pista e un programma di DJ locali e internazionali, spesso afro-house fino a tardi.",
+   "sq": "Puls është vendi i muzikës house në Bllok: zë i fuqishëm, drita të menduara për pistën dhe DJ vendas e ndërkombëtarë, shpesh me afro-house deri vonë."
+  },
+  "tips": {
+   "en": [
+    "The best nights are Friday and Saturday after midnight.",
+    "Magic Club is right next door, for a more commercial, pop and Balkan night.",
+    "Club nights change: check the venue's social media for tonight's line-up and entry."
+   ],
+   "it": [
+    "Le serate migliori sono venerdì e sabato dopo mezzanotte.",
+    "Il Magic Club è proprio accanto, per una serata più commerciale, pop e balcanica.",
+    "Le serate cambiano: controlla i social del locale per il programma e l'ingresso."
+   ],
+   "sq": [
+    "Netët më të mira janë e premtja dhe e shtuna pas mesnate.",
+    "Magic Club është ngjitur, për një natë më komerciale, me pop dhe muzikë ballkanike.",
+    "Mbrëmjet ndryshojnë: shiko rrjetet sociale të lokalit për programin dhe hyrjen."
+   ]
+  }
+ },
+ {
+  "slug": "cinco-cavalli",
+  "cats": [
+   "nightlife"
+  ],
+  "lat": 41.306162,
+  "lon": 19.838197,
+  "local": "Cinco Cavalli Premium Club",
+  "area": "Sauk",
+  "fee": "paid",
+  "duration": [
+   180,
+   300
+  ],
+  "name": {
+   "en": "Cinco Cavalli",
+   "it": "Cinco Cavalli",
+   "sq": "Cinco Cavalli"
+  },
+  "summary": {
+   "en": "A big show club with concerts, stage acts and table service.",
+   "it": "Un grande club-spettacolo con concerti, show e servizio al tavolo.",
+   "sq": "Klub i madh spektaklesh me koncerte, shfaqje dhe shërbim në tavolinë."
+  },
+  "about": {
+   "en": "Cinco Cavalli, on Rruga Selim Brahja in Sauk, is one of Tirana's largest premium clubs. Nights are built as shows: live performances by Albanian artists, dancers and DJs, with most guests at reserved tables.",
+   "it": "Cinco Cavalli, in Rruga Selim Brahja a Sauk, è uno dei più grandi club di lusso di Tirana. Le serate sono veri spettacoli: concerti di artisti albanesi, ballerini e DJ, con la maggior parte degli ospiti ai tavoli riservati.",
+   "sq": "Cinco Cavalli, në Rrugën Selim Brahja në Sauk, është një nga klubet premium më të mëdha të Tiranës. Mbrëmjet ndërtohen si spektakle: koncerte me artistë shqiptarë, balerinë dhe DJ, me shumicën e mysafirëve në tavolina të rezervuara."
+  },
+  "tips": {
+   "en": [
+    "Reserve a table in advance, especially for concert nights.",
+    "It is outside the centre: take a taxi back at night."
+   ],
+   "it": [
+    "Prenota un tavolo in anticipo, soprattutto per i concerti.",
+    "È fuori dal centro: di notte torna in taxi."
+   ],
+   "sq": [
+    "Rezervo tavolinë më herët, sidomos për netët me koncert.",
+    "Është jashtë qendrës: natën kthehu me taksi."
+   ]
+  }
+ },
+ {
+  "slug": "frekuence",
+  "cats": [
+   "nightlife"
+  ],
+  "lat": 41.3084,
+  "lon": 19.814106,
+  "local": "Frekuence",
+  "area": "Liqeni Artificial",
+  "fee": "paid",
+  "duration": [
+   180,
+   360
+  ],
+  "name": {
+   "en": "Frekuence",
+   "it": "Frekuence",
+   "sq": "Frekuence"
+  },
+  "summary": {
+   "en": "An underground house and techno club by the Artificial Lake.",
+   "it": "Un club underground di house e techno vicino al Lago Artificiale.",
+   "sq": "Klub underground me house dhe techno pranë Liqenit Artificial."
+  },
+  "about": {
+   "en": "Below the lighthouse of the Fari complex, near Tirana's Artificial Lake, Frekuence is the city's address for electronic music. Expect house and techno from local and international artists, a dark room and a crowd that comes to dance.",
+   "it": "Sotto il faro del complesso Fari, vicino al Lago Artificiale, Frekuence è l'indirizzo della musica elettronica in città. House e techno di artisti locali e internazionali, sala buia e un pubblico che viene per ballare.",
+   "sq": "Nën farin e kompleksit Fari, pranë Liqenit Artificial, Frekuence është adresa e muzikës elektronike në qytet. House dhe techno me artistë vendas e ndërkombëtarë, sallë e errët dhe publik që vjen për të vallëzuar."
+  },
+  "tips": {
+   "en": [
+    "Nights start around 23:00, usually Friday and Saturday.",
+    "Check the programme and buy tickets online before you go."
+   ],
+   "it": [
+    "Le serate iniziano verso le 23:00, di solito venerdì e sabato.",
+    "Controlla il programma e compra il biglietto online prima di andare."
+   ],
+   "sq": [
+    "Mbrëmjet nisin rreth orës 23:00, zakonisht të premten dhe të shtunën.",
+    "Shiko programin dhe bli biletën online para se të shkosh."
+   ]
+  }
+ },
+ {
+  "slug": "mullixhiu",
+  "cats": [
+   "food"
+  ],
+  "lat": 41.313475,
+  "lon": 19.816729,
+  "local": "Mullixhiu",
+  "area": "Liqeni",
+  "fee": null,
+  "duration": [
+   90,
+   150
+  ],
+  "website": "https://www.mullixhiu.al",
+  "name": {
+   "en": "Mullixhiu",
+   "it": "Mullixhiu",
+   "sq": "Mullixhiu"
+  },
+  "summary": {
+   "en": "Chef Bledar Kola's restaurant, reinventing traditional Albanian food with local ingredients.",
+   "it": "Il ristorante dello chef Bledar Kola, che reinventa la cucina tradizionale albanese con ingredienti locali.",
+   "sq": "Restoranti i kuzhinierit Bledar Kola, që rikrijon gatimet tradicionale shqiptare me përbërës vendas."
+  },
+  "about": {
+   "en": "Mullixhiu means \"the miller\". In a small wood-panelled room at the entrance to the Grand Park, chef Bledar Kola takes classic Albanian recipes and rebuilds them with seasonal produce from local farms. It is one of the best-known places in the city to taste Albanian cooking at its most creative.",
+   "it": "Mullixhiu significa \"il mugnaio\". In una piccola sala rivestita di legno all'ingresso del Parco Grande, lo chef Bledar Kola riprende le ricette classiche albanesi e le ricostruisce con prodotti di stagione delle fattorie locali. È uno dei posti più noti della città per assaggiare la cucina albanese nella sua versione più creativa.",
+   "sq": "Mullixhiu do të thotë \"ai që bluan drithin\". Në një sallë të vogël me dru në hyrje të Parkut të Madh, kuzhinieri Bledar Kola merr recetat klasike shqiptare dhe i rindërton me prodhime stinore nga fermat vendase. Është një nga vendet më të njohura në qytet për të shijuar kuzhinën shqiptare në formën e saj më krijuese."
+  },
+  "tips": {
+   "en": [
+    "The room is small, so book a table online before you go.",
+    "Easy to combine with a walk around the Grand Park lake."
+   ],
+   "it": [
+    "La sala è piccola: prenota online prima di andare.",
+    "Facile da abbinare a una passeggiata intorno al lago del Parco Grande."
+   ],
+   "sq": [
+    "Salla është e vogël, ndaj rezervo tavolinë online para se të shkosh.",
+    "Shkon bukur me një shëtitje rreth liqenit të Parkut të Madh."
+   ]
+  }
+ },
+ {
+  "slug": "oda-garden",
+  "cats": [
+   "food"
+  ],
+  "lat": 41.329324,
+  "lon": 19.823957,
+  "local": "Oda Garden",
+  "area": "Pazari i Ri",
+  "fee": null,
+  "duration": [
+   60,
+   120
+  ],
+  "website": "https://odagardenrestaurant.com",
+  "name": {
+   "en": "Oda Garden",
+   "it": "Oda Garden",
+   "sq": "Oda Garden"
+  },
+  "summary": {
+   "en": "Traditional Albanian home cooking in an old house and garden next to the New Bazaar.",
+   "it": "Cucina casalinga tradizionale albanese in una vecchia casa con giardino accanto al Nuovo Bazar.",
+   "sq": "Gatime tradicionale shtëpiake shqiptare në një shtëpi të vjetër me kopsht pranë Pazarit të Ri."
+  },
+  "about": {
+   "en": "Oda is the guest room of a traditional Albanian house, and here you can eat at low tables in a rebuilt one or outside in a large enclosed garden. The menu covers home-style dishes from around the country, such as tavë kosi and lakror, along with house raki.",
+   "it": "L'oda è la stanza degli ospiti della casa tradizionale albanese: qui puoi mangiare ai tavoli bassi di una oda ricostruita oppure fuori, in un grande giardino recintato. Il menù raccoglie piatti casalinghi di tutto il paese, come la tavë kosi e il lakror, insieme alla raki della casa.",
+   "sq": "Oda është dhoma e miqve në shtëpinë tradicionale shqiptare, dhe këtu mund të hash në tavolina të ulëta në një odë të rindërtuar ose jashtë, në një kopsht të madh të rrethuar. Menyja përmbledh gatime shtëpiake nga gjithë vendi, si tava e kosit dhe lakrori, bashkë me rakinë e shtëpisë."
+  },
+  "tips": {
+   "en": [
+    "Ask the staff to suggest a mix of starters to share.",
+    "Two minutes' walk from the New Bazaar, so visit both together."
+   ],
+   "it": [
+    "Chiedi al personale di consigliarti un misto di antipasti da condividere.",
+    "A due minuti a piedi dal Nuovo Bazar: visitali insieme."
+   ],
+   "sq": [
+    "Kërkoji stafit të të sugjerojë disa meze për t'i ndarë.",
+    "Dy minuta në këmbë nga Pazari i Ri, ndaj vizitoji bashkë."
+   ]
+  }
+ },
+ {
+  "slug": "zgara-korcare",
+  "cats": [
+   "food"
+  ],
+  "lat": 41.314325,
+  "lon": 19.815769,
+  "local": "Zgara Korçare",
+  "area": "Liqeni",
+  "fee": null,
+  "duration": [
+   45,
+   90
+  ],
+  "name": {
+   "en": "Zgara Korçare",
+   "it": "Zgara Korçare",
+   "sq": "Zgara Korçare"
+  },
+  "summary": {
+   "en": "A simple grill house by the Grand Park, known for Korça-style qofte meatballs.",
+   "it": "Una semplice griglieria vicino al Parco Grande, famosa per le polpette qofte alla maniera di Korça.",
+   "sq": "Një zgarë e thjeshtë pranë Parkut të Madh, e njohur për qoftet në stilin e Korçës."
+  },
+  "about": {
+   "en": "Zgara means grill, and this is the place for a quick, cheap and filling Albanian meal. The speciality is qofte from Korça, served with tzatziki and bread, alongside other grilled meats and Korça beer, at wooden tables outside.",
+   "it": "Zgara significa griglia, e questo è il posto per un pasto albanese veloce, economico e sostanzioso. La specialità sono le qofte di Korça, servite con tzatziki e pane, insieme ad altre carni alla griglia e alla birra Korça, ai tavoli di legno all'aperto.",
+   "sq": "Zgara është vendi për një vakt shqiptar të shpejtë, të lirë dhe të ngopur. Specialiteti janë qoftet e Korçës, të shërbyera me xaxiki dhe bukë, bashkë me mish tjetër në zgarë dhe birrë Korça, në tavolina druri jashtë."
+  },
+  "tips": {
+   "en": [
+    "Order the qofte with tzatziki and a Korça beer.",
+    "The outdoor tables look out over the city."
+   ],
+   "it": [
+    "Ordina le qofte con tzatziki e una birra Korça.",
+    "I tavoli all'aperto guardano sulla città."
+   ],
+   "sq": [
+    "Porosit qofte me xaxiki dhe një birrë Korça.",
+    "Tavolinat jashtë kanë pamje nga qyteti."
+   ]
+  }
+ }
+]

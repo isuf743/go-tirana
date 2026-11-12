@@ -1,0 +1,72 @@
+{# Foto e vendit: fotot e lokaleve (WebP) ose miniaturat e Wikimedia (500/960/1280), ose ilustrimi #}
+{% macro photo(p, sizes, eager=false) -%}
+{% if p.img and p.img.local -%}
+<img src="{{ p.img.full }}" srcset="{{ p.img.src500 }} 500w, {{ p.img.full }} {{ p.img.w }}w"
+     sizes="{{ sizes }}" width="{{ p.img.w }}" height="{{ (p.img.w * p.img.ratio) | round | int }}" alt="{{ p.alt }}"
+     {% if eager %}fetchpriority="high"{% else %}loading="lazy"{% endif %} decoding="async">
+{%- elif p.img -%}
+<img src="{{ p.img.src960 }}" srcset="{{ p.img.src500 }} 500w, {{ p.img.src960 }} 960w, {{ p.img.src1280 }} 1280w"
+     sizes="{{ sizes }}" width="960" height="{{ (960 * p.img.ratio) | round | int }}" alt="{{ p.alt }}"
+     {% if eager %}fetchpriority="high"{% else %}loading="lazy"{% endif %} decoding="async">
+{%- else -%}
+{{ p.placeholder | safe }}
+{%- endif %}
+{%- endmacro %}
+
+{% macro tags(p, root, lang) -%}
+<div class="tags">{% for c in p.cat_objs %}<a class="tag" style="--c:{{ c.color }}" href="{{ root }}{{ lang }}/explore/{{ c.slug }}/">{{ c.name }}</a>{% endfor %}</div>
+{%- endmacro %}
+
+{% macro icon(name, size=16) -%}
+{% if name == "arrow" %}<svg class="arrow" width="{{ size }}" height="{{ size }}" viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9h12m-5-5 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+{%- elif name == "pin" %}<svg width="{{ size }}" height="{{ size }}" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 14.5s4.8-4.3 4.8-8a4.8 4.8 0 0 0-9.6 0c0 3.7 4.8 8 4.8 8z" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="8" cy="6.4" r="1.7" fill="currentColor"/></svg>
+{%- elif name == "bus" %}<svg width="{{ size }}" height="{{ size }}" viewBox="0 0 18 18" aria-hidden="true"><rect x="3" y="2" width="12" height="11" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M3 8h12M6 16v-3M12 16v-3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+{%- elif name == "search" %}<svg width="{{ size }}" height="{{ size }}" viewBox="0 0 18 18" aria-hidden="true"><circle cx="8" cy="8" r="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m12.2 12.2 3.8 3.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+{%- endif %}
+{%- endmacro %}
+
+{# Karta editoriale e një vendi. E gjithë karta hapet (lidhja e titullit), butoni i autobusit qëndron sipër saj. #}
+{% macro card(p, root, lang, t, compact=false, reveal=0) -%}
+<article class="card{% if compact %} card--compact{% endif %}" data-slug="{{ p.slug }}" data-cats="{{ p.cats | join(' ') }}" data-search="{{ (p.name ~ ' ' ~ p.local ~ ' ' ~ p.area) | lower }}"{% if reveal %} data-reveal style="--i:{{ reveal - 1 }}"{% endif %}>
+  <div class="card__media" style="--c:{{ p.cat_objs[0].color }}">
+    {{ photo(p, "(max-width: 600px) 100vw, (max-width: 1020px) 50vw, 400px") }}
+    <span class="card__tag">{{ p.cat_objs[0].name }}</span>
+  </div>
+  <div class="card__body">
+    <span class="card__loc">{{ icon("pin", 14) }}{{ p.area }}</span>
+    <h3 class="card__title"><a href="{{ root }}{{ lang }}/places/{{ p.slug }}/">{{ p.name }}</a></h3>
+    <p class="card__text">{{ p.summary }}</p>
+    <div class="card__actions">
+      <span class="more">{{ t.view_details }} {{ icon("arrow", 14) }}</span>
+      <a class="btn btn--outline btn--sm card__bus" href="{{ root }}planner/?to={{ p.lat }},{{ p.lon }}&amp;name={{ p.name | urlencode }}&amp;lang={{ lang }}" aria-label="{{ t.get_bus }}: {{ p.name }}">{{ icon("bus", 15) }}{{ t.get_bus }}</a>
+    </div>
+  </div>
+</article>
+{%- endmacro %}
+
+{# Autorët e fotove të Wikimedia të përdorura në faqe (kërkohet nga licencat CC BY / CC BY-SA) #}
+{% macro credits(list, t) -%}
+{% set wiki = [] %}{% for p in list %}{% if p.img and not p.img.local and p not in wiki %}{% set _ = wiki.append(p) %}{% endif %}{% endfor %}
+{% if wiki %}
+<details class="credits">
+  <summary>{{ t.photo_credits }}</summary>
+  <ul>{% for p in wiki %}<li>{{ p.name }}: <a href="{{ p.img.page }}" rel="noopener" target="_blank">{{ p.img.artist }}</a>, {% if p.img.licenseUrl %}<a href="{{ p.img.licenseUrl }}" rel="noopener license" target="_blank">{{ p.img.license }}</a>{% else %}{{ p.img.license }}{% endif %}, Wikimedia Commons</li>{% endfor %}</ul>
+</details>
+{% endif %}
+{%- endmacro %}
+
+{# Karta e një itinerari (faqja kryesore, lista e itinerareve, "itinerare të tjera") #}
+{% macro itin_card(it, root, lang, ui, reveal=0) -%}
+<article class="icard"{% if reveal %} data-reveal style="--i:{{ reveal - 1 }}"{% endif %}>
+  <div class="icard__media">
+    {{ photo(it.hero, "(max-width: 600px) 100vw, (max-width: 1020px) 50vw, 400px") }}
+    <span class="icard__badge">{{ ui.stops_n.format(n=it.n) }}</span>
+  </div>
+  <div class="icard__body">
+    <p class="icard__meta"><span>{{ it.span }}</span><i aria-hidden="true"></i><span>{{ it.walk_text }} {{ ui.km_walk | lower }}</span></p>
+    <h3 class="icard__title"><a href="{{ root }}{{ lang }}/itineraries/{{ it.slug }}/">{{ it.title }}</a></h3>
+    <p class="icard__text">{{ it.summary }}</p>
+    <span class="more">{{ ui.view }} {{ icon("arrow", 14) }}</span>
+  </div>
+</article>
+{%- endmacro %}

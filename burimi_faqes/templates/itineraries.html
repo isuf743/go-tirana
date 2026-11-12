@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% from "_macros.html" import itin_card, credits %}
+{% block main %}
+<header class="wrap explore-head">
+  <p class="eyebrow">{{ ui.home_eyebrow }}</p>
+  <h1>{{ ui.index_title }}</h1>
+  <p class="lead">{{ ui.index_lead }}</p>
+</header>
+<div class="wrap">
+  <div class="icards">
+    {% for it in itins %}{{ itin_card(it, root, lang, ui, reveal=loop.index) }}{% endfor %}
+  </div>
+  <div style="margin:48px 0 72px">{{ credits(credit_list, t) }}</div>
+</div>
+{% endblock %}

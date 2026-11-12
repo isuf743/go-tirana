@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block main %}
+<div class="wrap">
+  <div class="nf">
+    <h1>404</h1>
+    <p>{{ t.nf_title }}</p>
+    <p class="lead">{{ t.nf_text }}</p>
+    <div class="links">
+      <a class="btn" href="{{ root }}{{ lang }}/">GO TIRANA</a>
+      <a class="btn btn--outline" href="{{ root }}{{ lang }}/explore/">{{ t.nav_explore }}</a>
+      <a class="btn btn--outline" href="{{ root }}planner/?lang={{ lang }}">{{ t.nav_planner }}</a>
+    </div>
+    <p style="margin-top:32px;color:var(--muted)">
+      {% for l in langs %}{% if l != lang %}<a href="{{ root }}{{ l }}/" lang="{{ l }}" style="margin-right:16px">{{ lang_names[l] }}</a>{% endif %}{% endfor %}
+    </p>
+  </div>
+</div>
+{% endblock %}

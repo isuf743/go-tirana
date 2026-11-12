@@ -1,0 +1,285 @@
+{
+ "_burimi": "Bashkia e Tiranës, lista e linjave qytetëse dhe rrethqytetëse 2025 (dërguar me email, nëntor 2026)",
+ "_shpjegim": [
+  "qytetese: çdo degëzim me emrin zyrtar dhe operatorin. Planifikuesi i shfaq këto emra te skeda Linjat.",
+  "rrethqytetese: vetëm për informacion; OpenStreetMap nuk ka stacionet e tyre, ndaj nuk përdoren për planifikim.",
+  "jashte_listes: linja që ekzistojnë në OpenStreetMap por jo në listën e Bashkisë.",
+  "  perdoret=false i heq nga planifikimi (por mbeten të dukshme te skeda Linjat me shënim)."
+ ],
+ "qytetese": {
+  "L1A": {
+   "linja": "1",
+   "emri": "Selitë – Kristal – Qendër – Ish Stacioni i Trenit – Allias",
+   "operatori": "Diamond Society"
+  },
+  "L1B": {
+   "linja": "1",
+   "emri": "Kodra e Diellit – Kristal – Qendër – Ish Stacioni i Trenit – Allias",
+   "operatori": "Diamond Society"
+  },
+  "L2": {
+   "linja": "2",
+   "emri": "Teg – Sauk i Vjetër – Kopshti Zoologjik – Ish Stacioni i Trenit",
+   "operatori": "Mag Utilities"
+  },
+  "L3A": {
+   "linja": "3",
+   "emri": "Kashar",
+   "operatori": "Green Line"
+  },
+  "L3B": {
+   "linja": "3",
+   "emri": "Kashar",
+   "operatori": "Green Line"
+  },
+  "L3C": {
+   "linja": "3",
+   "emri": "Kashar",
+   "operatori": "Green Line"
+  },
+  "L4": {
+   "linja": "4",
+   "emri": "Qendër – QTU – Megatek – City Park",
+   "operatori": "Remi Trans"
+  },
+  "L5A": {
+   "linja": "5",
+   "emri": "Ish Kombinati i Autotraktorëve – Qendër",
+   "operatori": "Alba Trans"
+  },
+  "L5B": {
+   "linja": "5",
+   "emri": "Instituti – Qendër",
+   "operatori": "Shpresa AL"
+  },
+  "L6": {
+   "linja": "6",
+   "emri": "Laprakë",
+   "operatori": "Tirana Lines"
+  },
+  "L8A": {
+   "linja": "8",
+   "emri": "Qendër – Sauk i Ri – TEG / Sauk i Vjetër / Sanatorium",
+   "operatori": "Tirana Bus"
+  },
+  "L8B": {
+   "linja": "8",
+   "emri": "Qendër – Sauk i Ri – TEG / Sauk i Vjetër / Sanatorium",
+   "operatori": "Tirana Bus"
+  },
+  "L8C": {
+   "linja": "8",
+   "emri": "Qendër – Sauk i Ri – TEG / Sauk i Vjetër / Sanatorium",
+   "operatori": "Tirana Bus"
+  },
+  "L9A": {
+   "linja": "9",
+   "emri": "Qyteti Studenti – Jordan Misja",
+   "operatori": "Gerard A"
+  },
+  "L9B": {
+   "linja": "9",
+   "emri": "Qyteti Studenti – Jordan Misja",
+   "operatori": "Gerard A"
+  },
+  "L10A": {
+   "linja": "10",
+   "emri": "Materniteti i Ri – Qendër",
+   "operatori": "Gerard A"
+  },
+  "L10B": {
+   "linja": "10",
+   "emri": "Mihal Grameno – Qendër",
+   "operatori": "Gerard A"
+  },
+  "L10C": {
+   "linja": "10",
+   "emri": "Rrethrrotullimi Shkozë – Ish Fusha e Aviacionit",
+   "operatori": "Gerard A"
+  },
+  "L11": {
+   "linja": "11",
+   "emri": "Porcelan",
+   "operatori": "Tirana Urban Trans"
+  },
+  "L12A": {
+   "linja": "12",
+   "emri": "Uzina Dinamo – Sharrë",
+   "operatori": "Tirana Travel"
+  },
+  "L12B": {
+   "linja": "12",
+   "emri": "5 Maji – Sharrë",
+   "operatori": "Tirana Travel"
+  },
+  "L13A": {
+   "linja": "13",
+   "emri": "Tirana e Re",
+   "operatori": "Alba Trans"
+  },
+  "L13B": {
+   "linja": "13",
+   "emri": "Tirana e Re",
+   "operatori": "Alba Trans"
+  },
+  "L15A": {
+   "linja": "15",
+   "emri": "Kombinat – Kinostudio / Tufinë",
+   "operatori": "Shega Trans"
+  },
+  "L15B": {
+   "linja": "15",
+   "emri": "Kombinat – Kinostudio / Tufinë",
+   "operatori": "Shega Trans"
+  },
+  "L16A": {
+   "linja": "16",
+   "emri": "Linja e Gjelbër",
+   "operatori": "Green Line"
+  },
+  "L16B": {
+   "linja": "16",
+   "emri": "Linja e Gjelbër",
+   "operatori": "Green Line"
+  }
+ },
+ "rrethqytetese": [
+  {
+   "ref": "L11R",
+   "emri": "Tiranë – Krrabë",
+   "operatori": "",
+   "degezimet": [
+    "11/A",
+    "11/B",
+    "11/C"
+   ]
+  },
+  {
+   "ref": "L13R",
+   "emri": "Tiranë – Baldushk (Vrap)",
+   "operatori": "",
+   "degezimet": []
+  },
+  {
+   "ref": "L9R",
+   "emri": "Tiranë – Bërzhitë",
+   "operatori": "Klindi sh.p.k.",
+   "degezimet": []
+  },
+  {
+   "ref": "L1R",
+   "emri": "Tiranë – Petrelë",
+   "operatori": "",
+   "degezimet": [
+    "1/A",
+    "1/B",
+    "1/C"
+   ]
+  },
+  {
+   "ref": "L21R",
+   "emri": "Tiranë – Ndroq",
+   "operatori": "Ermir-Ed sh.p.k.",
+   "degezimet": []
+  },
+  {
+   "ref": "L19R",
+   "emri": "Tiranë – Pezë (Gjysylkonje)",
+   "operatori": "",
+   "degezimet": []
+  },
+  {
+   "ref": "L17R",
+   "emri": "Tiranë – Vaqarr (Allgjatë, Gropaj)",
+   "operatori": "",
+   "degezimet": []
+  },
+  {
+   "ref": "L10/7R",
+   "emri": "Kllojkë",
+   "operatori": "Xhe@ku sh.p.k.",
+   "degezimet": []
+  },
+  {
+   "ref": "L5R",
+   "emri": "Tiranë – Dajt",
+   "operatori": "Iris-Trans",
+   "degezimet": [
+    "5/A",
+    "5/B",
+    "5/C",
+    "5/D",
+    "5/E"
+   ]
+  },
+  {
+   "ref": "L6/7R",
+   "emri": "Lanabregas",
+   "operatori": "",
+   "degezimet": []
+  },
+  {
+   "ref": "L15R",
+   "emri": "Tiranë – Shëngjergj",
+   "operatori": "",
+   "degezimet": []
+  },
+  {
+   "ref": "L6/2R",
+   "emri": "Tujan",
+   "operatori": "",
+   "degezimet": []
+  },
+  {
+   "ref": "L26R",
+   "emri": "Kus",
+   "operatori": "Sula AL Trans sh.p.k.",
+   "degezimet": [
+    "26/A",
+    "26/B"
+   ]
+  },
+  {
+   "ref": "L3R",
+   "emri": "Tiranë – Farkë",
+   "operatori": "Plaku Ardian sh.p.k.",
+   "degezimet": [
+    "3/A",
+    "3/B"
+   ]
+  },
+  {
+   "ref": "L18/1",
+   "emri": "Arbanë",
+   "operatori": "Mema 07 sh.p.k.",
+   "degezimet": []
+  },
+  {
+   "ref": "L7AR",
+   "emri": "Zall Bastar",
+   "operatori": "Luna sh.p.k.",
+   "degezimet": []
+  },
+  {
+   "ref": "L23R",
+   "emri": "Zall Herr",
+   "operatori": "Sh&Sh sh.p.k.",
+   "degezimet": [
+    "23/A",
+    "23/B",
+    "23/C",
+    "23/D"
+   ]
+  }
+ ],
+ "jashte_listes": {
+  "Q": {
+   "perdoret": false,
+   "shenim": "not_listed"
+  },
+  "Kamëz": {
+   "perdoret": true,
+   "shenim": "kamez"
+  }
+ }
+}

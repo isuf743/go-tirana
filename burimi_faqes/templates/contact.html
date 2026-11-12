@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block main %}
+<div class="wrap">
+  <div class="contact">
+    <div>
+      <p class="eyebrow">{{ t.nav_contact }}</p>
+      <h1>{{ t.contact_title }}</h1>
+      <p class="lead">{{ t.contact_lead }}</p>
+
+      <form class="form" id="contact-form" action="{{ root }}api/contact.php" method="post" novalidate
+            data-msg='{{ form_msgs | safe }}'>
+        <input type="hidden" name="lang" value="{{ lang }}">
+        <input type="hidden" name="token" value="">
+        <div class="hp" aria-hidden="true">
+          <label for="f-website">{{ t.f_hp }}</label>
+          <input id="f-website" name="website" type="text" tabindex="-1" autocomplete="off">
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="f-name">{{ t.f_name }}</label>
+            <input id="f-name" name="name" type="text" autocomplete="name" required maxlength="80" aria-describedby="e-name">
+            <div class="err" id="e-name" aria-live="polite"></div>
+          </div>
+          <div class="field">
+            <label for="f-email">{{ t.f_email }}</label>
+            <input id="f-email" name="email" type="email" autocomplete="email" required maxlength="120" inputmode="email" aria-describedby="e-email">
+            <div class="err" id="e-email" aria-live="polite"></div>
+          </div>
+        </div>
+        <div class="field">
+          <label for="f-topic">{{ t.f_topic }}</label>
+          <select id="f-topic" name="topic">
+            <option value="suggest">{{ t.f_topic_suggest }}</option>
+            <option value="fix">{{ t.f_topic_fix }}</option>
+            <option value="other">{{ t.f_topic_other }}</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="f-message">{{ t.f_message }}</label>
+          <textarea id="f-message" name="message" required minlength="10" maxlength="2000" aria-describedby="e-message"></textarea>
+          <div class="err" id="e-message" aria-live="polite"></div>
+        </div>
+        <div class="field">
+          <div class="field--check">
+            <input id="f-consent" name="consent" type="checkbox" value="1" required aria-describedby="e-consent">
+            <label for="f-consent">{{ t.f_consent }} <a href="{{ root }}{{ lang }}/privacy/">{{ t.privacy }}</a></label>
+          </div>
+          <div class="err" id="e-consent" aria-live="polite"></div>
+        </div>
+        <div class="form-status" id="form-status" role="status" hidden></div>
+        <div><button class="btn btn--accent" type="submit">{{ t.f_send }}</button></div>
+      </form>
+    </div>
+
+    <aside class="contact__side">
+      {% if cfg.email and not cfg.email.startswith("[") %}
+      <div class="info-card"><h2>{{ t.contact_email_label }}</h2><a href="mailto:{{ cfg.email }}">{{ cfg.email }}</a></div>
+      {% endif %}
+      {% if cfg.instagram_url or cfg.facebook_url %}
+      <div class="info-card"><h2>{{ t.contact_social }}</h2>
+        <div class="socials">
+          {% if cfg.instagram_url %}<a href="{{ cfg.instagram_url }}" rel="noopener me" target="_blank">Instagram</a>{% endif %}
+          {% if cfg.facebook_url %}<a href="{{ cfg.facebook_url }}" rel="noopener me" target="_blank">Facebook</a>{% endif %}
+        </div>
+      </div>
+      {% endif %}
+      <div class="info-card"><h2>GO TIRANA</h2><p>{{ t.footer_disclaimer }}</p></div>
+    </aside>
+  </div>
+
+  <section class="faq section" style="padding-top:0" aria-labelledby="faq-h">
+    <h2 id="faq-h">{{ t.faq_title }}</h2>
+    {% for q, a in t.faq %}
+    <details{% if loop.first %} open{% endif %}><summary>{{ q }}</summary><p>{{ a }}</p></details>
+    {% endfor %}
+  </section>
+</div>
+{% endblock %}
+{% block scripts %}<script src="{{ root }}assets/js/contact.js?v={{ v }}" defer></script>{% endblock %}

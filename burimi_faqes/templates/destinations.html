@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% from "_macros.html" import card, icon, credits %}
+{% block main %}
+<header class="wrap explore-head">
+  <p class="eyebrow">{{ t.dest_title }}</p>
+  <h1>{{ t.dest_heading }}</h1>
+  <p class="lead">{{ t.dest_lead.format(n=total) }}</p>
+</header>
+<div class="wrap">
+  {% for g in groups %}
+  <section class="dest-group" aria-labelledby="g-{{ g.cat.slug }}">
+    <div class="dest-group__head" data-reveal>
+      <div>
+        <h2 id="g-{{ g.cat.slug }}" style="--c:{{ g.cat.color }}"><i aria-hidden="true"></i>{{ g.cat.name }}</h2>
+        <p>{{ g.cat.desc }}</p>
+      </div>
+      <a class="link-arrow" href="{{ root }}{{ lang }}/explore/{{ g.cat.slug }}/">{{ t.dest_see.format(n=g.cat.count) }} {{ icon("arrow", 15) }}</a>
+    </div>
+    <div class="cards">
+      {% for p in g.places %}{{ card(p, root, lang, t, compact=true, reveal=(loop.index0 % 3) + 1) }}{% endfor %}
+    </div>
+  </section>
+  {% endfor %}
+  {{ credits(all_places, t) }}
+  <div style="height:72px"></div>
+</div>
+{% endblock %}

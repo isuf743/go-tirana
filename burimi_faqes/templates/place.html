@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% from "_macros.html" import photo, tags, card, icon %}
+{% block head %}<link rel="stylesheet" href="{{ root }}assets/vendor/maplibre-gl.css">{% endblock %}
+{% block main %}
+<div class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="{{ root }}{{ lang }}/">{{ t.breadcrumb_home }}</a></li>
+      <li><a href="{{ root }}{{ lang }}/explore/">{{ t.nav_explore }}</a></li>
+      <li><a href="{{ root }}{{ lang }}/explore/{{ p.cat_objs[0].slug }}/">{{ p.cat_objs[0].name }}</a></li>
+    </ol>
+  </nav>
+  <header class="place-head">
+    {{ tags(p, root, lang) }}
+    <h1>{{ p.name }}</h1>
+    {% if p.local != p.name %}<p class="place-head__local" lang="sq">{{ p.local }}</p>{% endif %}
+  </header>
+
+  {% if p.gallery %}
+  <figure class="gallery" style="margin:0">
+    <div class="mosaic mosaic--{{ [p.gallery|length, 3]|min }}">
+      {% for g in p.gallery[:3] %}
+      <button type="button" class="mosaic__tile" data-index="{{ loop.index0 }}" aria-label="{{ t.lb_label }}: {{ loop.index }} / {{ p.gallery|length }}">
+        <img src="{{ g.full if loop.first else g.src500 }}" {% if loop.first %}srcset="{{ g.src500 }} 500w, {{ g.full }} {{ g.w }}w" sizes="(max-width: 720px) 100vw, 740px" fetchpriority="high"{% else %}loading="lazy"{% endif %}
+             width="{{ g.w }}" height="{{ g.h }}" alt="{{ p.alt }}{% if not loop.first %} ({{ loop.index }}){% endif %}" decoding="async">
+      </button>
+      {% endfor %}
+      {% if p.gallery|length > 1 %}
+      <button type="button" class="mosaic__all" data-index="0">
+        <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 1.5h5v5h-5zM9.5 1.5h5v5h-5zM1.5 9.5h5v5h-5zM9.5 9.5h5v5h-5z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        {{ t.gallery_all.format(n=p.gallery|length) }}</button>
+      {% endif %}
+    </div>
+    <figcaption class="credit">{{ t.photo_by }}: {{ p.local }}, {{ t.photo_venue }}</figcaption>
+  </figure>
+  <dialog class="lightbox" id="lightbox" aria-label="{{ t.lb_label }}">
+    <figure class="lightbox__fig"><img alt="{{ p.alt }}" id="lb-img"><figcaption class="lightbox__count" id="lb-count" aria-live="polite"></figcaption></figure>
+    <button type="button" class="lightbox__btn lightbox__close" id="lb-close" aria-label="{{ t.lb_close }}"><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><path d="M5 5l12 12M17 5L5 17" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+    <button type="button" class="lightbox__btn lightbox__prev" id="lb-prev" aria-label="{{ t.lb_prev }}"><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><path d="M14 4l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <button type="button" class="lightbox__btn lightbox__next" id="lb-next" aria-label="{{ t.lb_next }}"><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><path d="M8 4l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  </dialog>
+  <script type="application/json" id="gallery-data">{{ p.gallery | map(attribute='full') | list | tojson }}</script>
+  {% else %}
+  <figure style="margin:0">
+    <div class="place-hero">{{ photo(p, "(max-width: 1180px) 100vw, 1120px", eager=true) }}</div>
+    <figcaption class="credit">
+      {% if p.img %}{{ t.photo_by }}: <a href="{{ p.img.page }}" rel="noopener" target="_blank">{{ p.img.artist }}</a>,
+      {% if p.img.licenseUrl %}<a href="{{ p.img.licenseUrl }}" rel="noopener license" target="_blank">{{ p.img.license }}</a>{% else %}{{ p.img.license }}{% endif %}, Wikimedia Commons
+      {% else %}{{ t.no_photo }}{% endif %}
+    </figcaption>
+  </figure>
+  {% endif %}
+
+  <div class="place-grid">
+    <article class="prose" style="--c:{{ p.cat_objs[0].color }}">
+      <p class="lead-text">{{ p.summary }}</p>
+      <h2>{{ t.about }}</h2>
+      <p>{{ p.about }}</p>
+      <h2>{{ t.tips }}</h2>
+      <ul class="tips">{% for tip in p.tips %}<li>{{ tip }}</li>{% endfor %}</ul>
+      {% if 'nightlife' in p.cats %}<p class="note">{{ t.venue_note }}</p>{% endif %}
+    </article>
+
+    <aside class="aside">
+      <section class="facts" aria-labelledby="facts-h">
+        <h2 id="facts-h">{{ t.facts }}</h2>
+        <dl>
+          <div><dt>{{ t.location }}</dt><dd>{{ p.area }}, Tirana</dd></div>
+          <div><dt>{{ t.fact_hours }}</dt><dd>{{ p.hours or t.hours_unknown }}</dd></div>
+          {% if p.fee %}<div><dt>{{ t.fact_entry }}</dt><dd>{{ t.entry_free if p.fee == 'free' else t.entry_paid }}</dd></div>{% endif %}
+          <div><dt>{{ t.fact_time }}</dt><dd>{{ p.duration_text }}</dd></div>
+          {% if p.website %}<div><dt>{{ t.fact_website }}</dt><dd><a href="{{ p.website }}" rel="noopener" target="_blank">{{ p.website_label }}</a></dd></div>{% endif %}
+        </dl>
+        <a class="btn btn--accent" href="{{ root }}planner/?to={{ p.lat }},{{ p.lon }}&amp;name={{ p.name | urlencode }}&amp;lang={{ lang }}">
+          {{ icon("bus", 18) }}{{ t.get_bus }}</a>
+        <a class="btn btn--outline" href="https://www.openstreetmap.org/?mlat={{ p.lat }}&amp;mlon={{ p.lon }}#map=17/{{ p.lat }}/{{ p.lon }}" rel="noopener" target="_blank">{{ t.open_maps }}</a>
+      </section>
+      <div class="mini-map" id="mini-map" data-lat="{{ p.lat }}" data-lon="{{ p.lon }}" data-color="{{ p.cat_objs[0].color }}" role="img" aria-label="{{ p.name }}"></div>
+    </aside>
+  </div>
+
+  {% if nearby %}
+  <section class="section" style="padding-top:40px" aria-labelledby="nearby-h">
+    <div class="section__head"><div><p class="eyebrow">{{ t.nav_explore }}</p><h2 id="nearby-h">{{ t.nearby }}</h2></div></div>
+    <div class="cards">{% for n in nearby %}{{ card(n, root, lang, t, compact=true, reveal=loop.index) }}{% endfor %}</div>
+  </section>
+  {% endif %}
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="{{ root }}assets/vendor/maplibre-gl.js" defer></script>
+<script src="{{ root }}assets/js/place.js?v={{ v }}" defer></script>
+{% if p.gallery %}<script src="{{ root }}assets/js/gallery.js?v={{ v }}" defer></script>{% endif %}
+{% endblock %}

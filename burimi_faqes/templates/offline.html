@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block main %}
+<div class="wrap">
+  <div class="nf offline">
+    <p class="eyebrow">Offline · Pa internet · Offline</p>
+    <h1 class="offline__h">{{ T.en.off_title }}</h1>
+    {% for l in langs %}
+    <section class="offline__lang" lang="{{ l }}">
+      <p>{{ T[l].off_text }}</p>
+      <div class="links">
+        <a class="btn btn--outline" href="{{ root }}{{ l }}/info/">{{ T[l].info_title }}</a>
+        <a class="btn btn--outline" href="{{ root }}{{ l }}/explore/">{{ T[l].nav_explore }}</a>
+        <a class="btn btn--outline" href="{{ root }}{{ l }}/">GO TIRANA ({{ l | upper }})</a>
+      </div>
+    </section>
+    {% endfor %}
+    <button class="btn" type="button" data-retry>{{ T.en.off_retry }} · {{ T.sq.off_retry }} · {{ T.it.off_retry }}</button>
+  </div>
+</div>
+<script>document.querySelector("[data-retry]").addEventListener("click", () => location.reload());</script>
+{% endblock %}
