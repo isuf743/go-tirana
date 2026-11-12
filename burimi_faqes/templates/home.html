@@ -3,7 +3,7 @@
 {% block bodyclass %}has-hero{% endblock %}
 {% block head %}
 <link rel="preload" as="image" imagesrcset="{{ root }}assets/img/hero/hero-1280.webp?v={{ v }} 1280w, {{ root }}assets/img/hero/hero-1811.webp?v={{ v }} 1811w" imagesizes="(max-aspect-ratio: 2/1) 210vh, 100vw" fetchpriority="high">
-{% if not cfg.google_maps_key %}<link rel="stylesheet" href="{{ root }}assets/vendor/maplibre-gl.css">{% endif %}
+
 {% endblock %}
 {% block main %}
 
@@ -254,7 +254,7 @@
 <script type="application/json" id="places-data">{{ places_json | safe }}</script>
 {% endblock %}
 {% block scripts %}
-{% if cfg.google_maps_key %}<script src="{{ root }}assets/js/gmaps-shim.js?v={{ v }}" data-key="{{ cfg.google_maps_key }}" defer></script>{% else %}<script src="{{ root }}assets/vendor/maplibre-gl.js" defer></script>{% endif %}
+<script src="{{ root }}assets/js/gmaps-shim.js?v={{ v }}" data-key="{{ cfg.google_maps_key }}" defer></script>
 <script src="{{ root }}assets/js/placesmap.js?v={{ v }}" defer></script>
 <script src="{{ root }}assets/js/routeform.js?v={{ v }}" defer></script>
 <script src="{{ root }}assets/js/newsletter.js?v={{ v }}" defer></script>

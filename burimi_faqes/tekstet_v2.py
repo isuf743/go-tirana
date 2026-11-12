@@ -6,7 +6,7 @@ Asnjë fakt këtu nuk është i shpikur: oraret, çmimet dhe adresat që s'i dim
 
 SHTESA = {
     "en": {
-        "footer_data_short": "Map data © OpenStreetMap contributors.", "photo_credits": "Photo credits",
+        "footer_data_short": "Maps © Google. Bus data © OpenStreetMap contributors.", "photo_credits": "Photo credits",
         "bus_card_title": "Plan a trip", "explore_city": "Explore the city",
         "site_title_home": "Go Tirana | Discover Tirana, Albania",
         "site_desc": "Discover the best places in Tirana, Albania. Explore cultural landmarks, local food, beautiful views and find your way around with our city bus planner.",
@@ -87,7 +87,7 @@ SHTESA = {
               "When the city needs to breathe, it heads to the Grand Park and its lake, or takes the cable car up Mount Dajti for the view."]),
         ],
         "about_us_title": "About Go Tirana",
-        "about_us_text": "Go Tirana is an independent guide made to help visitors discover the city and get around by bus. Place information is written by us; maps and bus routes come from OpenStreetMap contributors, and photos from Wikimedia Commons or from the venues themselves. If something is wrong or missing, tell us.",
+        "about_us_text": "Go Tirana is an independent guide made to help visitors discover the city and get around by bus. Place information is written by us; maps come from Google Maps and bus routes from OpenStreetMap contributors, and photos from Wikimedia Commons or from the venues themselves. If something is wrong or missing, tell us.",
         "contact_email_label": "Email us directly", "contact_social": "Follow us",
         "faq_title": "Frequently asked questions",
         "faq": [("Is Go Tirana free to use?", "Yes. The guide and the bus planner are free, and you don't need an account."),
@@ -97,7 +97,7 @@ SHTESA = {
         "location": "Location",
     },
     "it": {
-        "footer_data_short": "Dati cartografici © contributori di OpenStreetMap.", "photo_credits": "Crediti fotografici",
+        "footer_data_short": "Mappe © Google. Dati delle linee © contributori di OpenStreetMap.", "photo_credits": "Crediti fotografici",
         "bus_card_title": "Pianifica un viaggio", "explore_city": "Esplora la città",
         "site_title_home": "Go Tirana | Scopri Tirana, Albania",
         "site_desc": "Scopri i luoghi migliori di Tirana, in Albania: monumenti, cucina locale, panorami e un pianificatore di autobus per muoverti in città.",
@@ -178,7 +178,7 @@ SHTESA = {
               "Quando la città ha bisogno di respirare, va al Parco Grande e al suo lago, o sale in funivia sul monte Dajti per il panorama."]),
         ],
         "about_us_title": "Chi siamo",
-        "about_us_text": "Go Tirana è una guida indipendente nata per aiutare i visitatori a scoprire la città e a muoversi in autobus. Le schede dei luoghi sono scritte da noi; mappe e linee provengono dai contributori di OpenStreetMap, le foto da Wikimedia Commons o dai locali stessi. Se qualcosa è sbagliato o manca, scrivici.",
+        "about_us_text": "Go Tirana è una guida indipendente nata per aiutare i visitatori a scoprire la città e a muoversi in autobus. Le schede dei luoghi sono scritte da noi; le mappe vengono da Google Maps e le linee dai contributori di OpenStreetMap, le foto da Wikimedia Commons o dai locali stessi. Se qualcosa è sbagliato o manca, scrivici.",
         "contact_email_label": "Scrivici direttamente", "contact_social": "Seguici",
         "faq_title": "Domande frequenti",
         "faq": [("Go Tirana è gratuito?", "Sì. La guida e il pianificatore di autobus sono gratuiti e non serve un account."),
@@ -188,7 +188,7 @@ SHTESA = {
         "location": "Zona",
     },
     "sq": {
-        "footer_data_short": "Të dhënat e hartës © kontribuuesit e OpenStreetMap.", "photo_credits": "Autorët e fotove",
+        "footer_data_short": "Hartat © Google. Të dhënat e linjave © kontribuuesit e OpenStreetMap.", "photo_credits": "Autorët e fotove",
         "bus_card_title": "Planifiko një udhëtim", "explore_city": "Eksploro qytetin",
         "site_title_home": "Go Tirana | Zbulo Tiranën",
         "site_desc": "Zbulo vendet më të mira të Tiranës: monumente, ushqim vendas, pamje të bukura dhe një planifikues autobusësh për të lëvizur në qytet.",
@@ -269,7 +269,7 @@ SHTESA = {
               "Kur qyteti ka nevojë të marrë frymë, shkon te Parku i Madh dhe liqeni, ose ngjitet me teleferik në Dajt për pamjen."]),
         ],
         "about_us_title": "Rreth Go Tirana",
-        "about_us_text": "Go Tirana është një udhëzues i pavarur, i krijuar për t'i ndihmuar vizitorët ta zbulojnë qytetin dhe të lëvizin me autobus. Informacioni për vendet shkruhet nga ne; hartat dhe linjat vijnë nga kontribuuesit e OpenStreetMap, fotot nga Wikimedia Commons ose nga vetë lokalet. Nëse diçka është gabim ose mungon, na shkruaj.",
+        "about_us_text": "Go Tirana është një udhëzues i pavarur, i krijuar për t'i ndihmuar vizitorët ta zbulojnë qytetin dhe të lëvizin me autobus. Informacioni për vendet shkruhet nga ne; hartat vijnë nga Google Maps dhe linjat nga kontribuuesit e OpenStreetMap, fotot nga Wikimedia Commons ose nga vetë lokalet. Nëse diçka është gabim ose mungon, na shkruaj.",
         "contact_email_label": "Na shkruaj direkt", "contact_social": "Na ndiq",
         "faq_title": "Pyetje të shpeshta",
         "faq": [("A është Go Tirana falas?", "Po. Udhëzuesi dhe planifikuesi i autobusëve janë falas dhe nuk të duhet llogari."),

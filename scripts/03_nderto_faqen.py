@@ -48,7 +48,7 @@ from tekstet_info import INFO, URGJENCA, BURIMET, KONTROLLUAR
 from tekstet_itinerare import ITINERARET, UI as IT_UI, KUFIRI_ECJES
 from tekstet import GJUHET, EMRAT_E_GJUHEVE, LOCALE, KATEGORITE, KATEGORITE_PERSHKRIM, T, PRIVATESIA, KUSHTET
 
-VERSIONI = "19"   # rrit këtë numër kur ndryshon CSS/JS, që shfletuesit të marrin versionin e ri
+VERSIONI = "20"   # rrit këtë numër kur ndryshon CSS/JS, që shfletuesit të marrin versionin e ri
 
 
 def lexo_json(emri):
@@ -164,6 +164,12 @@ def main():
     shutil.copytree(os.path.join(BURIMI, "api"), os.path.join(PROJEKTI, "api"), dirs_exist_ok=True)
     # Planifikuesi i autobusëve (hapat 1-4) jeton te planner/ dhe lexon ../data dhe ../js
     shutil.copytree(os.path.join(BURIMI, "planner"), os.path.join(PROJEKTI, "planner"), dirs_exist_ok=True)
+    # Çelësi i Google Maps për hartën e planifikuesit (nga konfigurimi.json)
+    pl = os.path.join(PROJEKTI, "planner", "index.html")
+    with open(pl, encoding="utf-8") as f:
+        html_pl = f.read()
+    with open(pl, "w", encoding="utf-8") as f:
+        f.write(html_pl.replace("__GMAPS_KEY__", cfg.get("google_maps_key", "")))
     # Lista zyrtare e linjave nga Bashkia (emrat, operatorët) që lexon planifikuesi
     os.makedirs(os.path.join(PROJEKTI, "data"), exist_ok=True)
     shutil.copy2(os.path.join(BURIMI, "linjat_zyrtare.json"), os.path.join(PROJEKTI, "data", "linjat_zyrtare.json"))

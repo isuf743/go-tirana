@@ -13,8 +13,7 @@
     const kufijte = new maplibregl.LngLatBounds();
     pikat.forEach(p => kufijte.extend([p.lon, p.lat]));
     const map = new maplibregl.Map({
-      container: el, style: "https://tiles.openfreemap.org/styles/positron",
-      bounds: kufijte, fitBoundsOptions: { padding: 50, maxZoom: 16 },
+      container: el, bounds: kufijte, fitBoundsOptions: { padding: 50, maxZoom: 16 },
       attributionControl: { compact: true }, cooperativeGestures: true,
     });
     map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");

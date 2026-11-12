@@ -1,8 +1,8 @@
 /* GO TIRANA: hartat me Google Maps.
-   Ky skedar krijon një "maplibregl" të vogël mbi Google Maps, që skriptet ekzistuese
+   Ky skedar krijon një përshtatës të vogël me emrin "maplibregl" mbi Google Maps, që skriptet
    (place.js, placesmap.js, itinerary.js) të punojnë pa ndryshime. Google ngarkohet vetëm
    kur harta e parë del në ekran. Çelësi vjen nga <script data-key="..."> (konfigurimi.json).
-   Planifikuesi i autobusëve nuk e përdor këtë skedar: mbetet me MapLibre. */
+   Planifikuesi i autobusëve ka kodin e vet për Google Maps (planner/index.html). */
 (function () {
   "use strict";
   const me = document.currentScript;
@@ -163,6 +163,5 @@
     remove() { if (this._ov) this._ov.setMap(null); if (this._popup) this._popup._hide(); return this; }
   }
 
-  if (!KEY) return;   // pa çelës: faqja përdor MapLibre si më parë
   window.maplibregl = { Map, Marker, Popup, LngLatBounds, NavigationControl: function () {} };
 })();

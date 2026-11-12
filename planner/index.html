@@ -19,13 +19,11 @@
   Faqja duhet hapur përmes http://localhost/tirana-transit/ (XAMPP), jo me dopio-klik,
   sepse shfletuesi nuk lejon leximin e skedarëve JSON nga file://.
 
-  HARTA: MapLibre GL JS + stili "Liberty" nga OpenFreeMap (falas, pa API key).
+  HARTA: Google Maps (çelësi vjen nga konfigurimi.json, i vendosur gjatë ndërtimit).
   MapLibre e vizaton hartën me kartën grafike (WebGL), prandaj mund ta anojë, ta rrotullojë
   dhe të tregojë relievin (malet) në 3D.
 -->
 
-<link rel="stylesheet" href="../assets/vendor/maplibre-gl.css">
-<script src="../assets/vendor/maplibre-gl.js"></script>
 <script src="../js/dijkstra.js?v=8"></script>
 <script src="../js/ecja.js?v=2"></script>
 <link rel="preload" href="../assets/fonts/manrope-var.woff2" as="font" type="font/woff2" crossorigin>
@@ -210,11 +208,14 @@
   .stops li:hover { color: var(--accent); }
 
   /* ---------- Kontrollet e hartës ---------- */
-  .btn-3d { font-weight: 800; font-size: 13px; font-family: inherit; }
-  .maplibregl-ctrl-group { border-radius: var(--radius) !important; box-shadow: var(--shadow) !important; }
-  .maplibregl-ctrl-group.pamjet button { width: auto; padding: 0 12px; font-size: 12.5px; font-weight: 600; text-align: left; }
-  .maplibregl-ctrl-group button.aktiv { background: var(--ink); color: #fff; }
-  .maplibregl-popup-content { padding: 8px 11px 6px; font-family: "Manrope", system-ui, sans-serif; font-size: 13px; border-radius: 8px; box-shadow: var(--shadow); }
+  .gm-grup { display: flex; flex-direction: column; margin: 10px 10px 0 0; background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+  .gm-grup button { border: 0; background: #fff; font: 600 12.5px/1 inherit; font-family: inherit; color: var(--ink); padding: 9px 12px; cursor: pointer; text-align: left; }
+  .gm-grup button + button { border-top: 1px solid #e6e8ea; }
+  .gm-grup button:hover { background: #f2f4f5; }
+  .gm-grup button.aktiv { background: var(--ink); color: #fff; }
+  .gm-grup.gjeo button { width: 40px; height: 40px; padding: 0; display: grid; place-items: center; color: #1a73e8; }
+  .etiketa-hartes { position: fixed; z-index: 50; pointer-events: none; max-width: 260px; padding: 8px 11px 6px; background: #fff; border-radius: 8px; box-shadow: var(--shadow); font-family: "Manrope", system-ui, sans-serif; font-size: 13px; color: var(--ink); }
+  .emri-stacionit, .emri-skajit { text-shadow: 0 0 2px #fff, 0 0 2px #fff, 0 0 3px #fff, 0 0 4px #fff; }
 
   /* ---------- Telefon: paneli si fletë nga poshtë ---------- */
   @media (max-width: 760px) {
@@ -329,247 +330,291 @@ let NISJA_URL = null;
 </script>
 <script>
 // ===========================================================================
-// HARTA
+// HARTA: Google Maps
 // ===========================================================================
-// KUJDES: MapLibre i shkruan koordinatat [gjatësia, gjerësia] = [lon, lat],
-// e kundërta e Leaflet-it. Gabim shumë i zakonshëm kur kalon nga njëri te tjetri!
+// Të dhënat tona janë GeoJSON, me koordinatat [gjatësia, gjerësia] = [lon, lat].
+// Google Maps përdor {lat, lng}: kujdes kur kalon nga njëri te tjetri!
+// Linjat dhe stacionet vizatohen si shtresa "Data" të Google; rruga e planifikuar me vija dhe shenja.
+// "map" më poshtë është një përshtatës i vogël, që pjesa tjetër e kodit (klikimet, fitBounds, flyTo,
+// setFeatureState) të mbetet e njëjtë si kur planifikuesi përdorte MapLibre.
 const QENDRA = [19.8187, 41.3275];
-const STILET = {
-  harta:  "https://tiles.openfreemap.org/styles/liberty",
-  celet:  "https://tiles.openfreemap.org/styles/positron",   // e zbehtë: linjat me ngjyra dallohen më shumë
-  satelit: "https://tiles.openfreemap.org/styles/liberty",   // liberty + imazhet satelitore sipër
-};
-let pamja = "harta";        // harta | celet | satelit
-let ne3D = false;
-
-const map = new maplibregl.Map({
-  container: "map",
-  style: STILET.harta,
-  center: QENDRA,
-  zoom: 13,
-  maxPitch: 75,
-});
-map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), "top-right");
-// "Ku jam unë?": shfletuesi jep vendndodhjen (GPS në telefon; Wi-Fi ose IP në kompjuter, shpesh e përafërt)
-const kGjeo = new maplibregl.GeolocateControl({
-  positionOptions: { enableHighAccuracy: true, timeout: 15000 }, trackUserLocation: true, showAccuracyCircle: true,
-});
-map.addControl(kGjeo, "top-right");
-let vendndodhjaIme = null;
-kGjeo.on("geolocate", e => {
-  const saktesia = Math.round(e.coords.accuracy);                    // rrezja e pasigurisë në metra
-  vendndodhjaIme = { lat: e.coords.latitude, lng: e.coords.longitude, saktesia };
-  const tekst = saktesia >= 1000 ? `${(saktesia / 1000).toFixed(1)} km` : `${saktesia} m`;
-  const hint = document.getElementById("hint");
-  if (skeda !== "udhetim" || nisja) return;
-  if (saktesia > 300) {
-    hint.textContent = tr("geo_rough", { d: tekst });
-  } else {
-    hint.innerHTML = `${esc(tr("geo_ok", { d: tekst }))} <button class="link-btn" id="nisKetu">${esc(tr("start_here"))}</button>`;
-    document.getElementById("nisKetu").onclick = () => {
-      if (!vendndodhjaIme) return;
-      pastro(false);
-      nisja = { lat: vendndodhjaIme.lat, lng: vendndodhjaIme.lng };
-      shenjaA = shenje(nisja, "#13865a");
-      if (destinacioni) kerko();
-      azhornoUI();
-    };
-  }
-});
-kGjeo.on("error", e => {
-  document.getElementById("hint").textContent = e.code === 1
-    ? tr("geo_denied") : tr("geo_fail");
-});
-map.addControl(new maplibregl.ScaleControl({ unit: "metric" }), "bottom-right");
-// Respektojmë "lëvizje të reduktuara" në sistemin operativ: kamera kërcen pa animacion
+const GMAPS_KEY = "AIzaSyAYMoBOJ0g9Ta6YLo-ImkOnYemub1O2byA";               // vendoset nga scripts/03_nderto_faqen.py (konfigurimi.json)
 const LEVIZJE = matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 1;
+let pamja = "harta";        // harta | celet | satelit
+
+// MapLibre kishte pllaka 512px, Google 256px: i njëjti zoom del +1 te Google
+const gz = z => Math.round(z + 1);
+const gl = c => Array.isArray(c) ? { lat: c[1], lng: c[0] } : { lat: c.lat, lng: c.lng != null ? c.lng : c.lon };
+const brenda = (z, a, b, va, vb) => va + (vb - va) * Math.max(0, Math.min(1, (z - a) / (b - a)));   // interpolim linear
+
+const STIL_HARTA = [
+  { featureType: "poi.business", stylers: [{ visibility: "off" }] },
+  { featureType: "transit", elementType: "labels.icon", stylers: [{ visibility: "off" }] },
+];
+const STIL_CELET = [   // e zbehtë: linjat me ngjyra dallohen më shumë
+  { stylers: [{ saturation: -100 }, { lightness: 35 }] },
+  { featureType: "poi", stylers: [{ visibility: "off" }] },
+  { featureType: "transit", stylers: [{ visibility: "off" }] },
+  { featureType: "water", elementType: "geometry", stylers: [{ color: "#dfe7ec" }] },
+  { elementType: "labels.text.fill", stylers: [{ color: "#6b7177" }] },
+];
+
+const elHarta = document.getElementById("map");
+let gm = null;                                   // google.maps.Map
+let kursori = "";
+const klikimet = [], klikimetLinje = [];
+const gjendja = new Map();                       // linja.id -> { zgjedhur, zbehur }
+const shtresa = {};                              // linjat, te-gjitha, stacionet (google.maps.Data)
+let gatiHerenEPare;
+const hartaGati = new Promise(r => { gatiHerenEPare = r; });
+
+const map = {
+  on(ngjarja, a, b) {
+    if (ngjarja !== "click") return;
+    if (typeof a === "function") klikimet.push(a);
+    else if (a === "linjat-vija") klikimetLinje.push(b);
+  },
+  getCanvas: () => ({ style: { set cursor(v) { kursori = v; if (gm) gm.setOptions({ draggableCursor: v || null }); } } }),
+  flyTo({ center, zoom }) {
+    hartaGati.then(() => { if (zoom != null) gm.setZoom(gz(zoom)); if (center) gm.panTo(gl(center)); });
+  },
+  fitBounds(b, o = {}) {
+    hartaGati.then(() => {
+      const k = new google.maps.LatLngBounds();
+      k.extend(gl(b[0])); k.extend(gl(b[1]));
+      gm.fitBounds(k, o.padding != null ? o.padding : 50);
+      if (o.maxZoom != null) google.maps.event.addListenerOnce(gm, "idle", () => { if (gm.getZoom() > gz(o.maxZoom)) gm.setZoom(gz(o.maxZoom)); });
+    });
+  },
+  setFeatureState({ id }, st) {
+    gjendja.set(id, st);
+    if (!rifreskimi) { rifreskimi = true; queueMicrotask(() => { rifreskimi = false; if (shtresa.linjat) shtresa.linjat.setStyle(stilLinje); }); }
+  },
+};
+let rifreskimi = false;
+
+// Etiketa kur kalon miun mbi një linjë, stacion ose pikë të rrugës
+const etiketaMiut = document.createElement("div");
+etiketaMiut.className = "etiketa-hartes"; etiketaMiut.hidden = true;
+document.body.appendChild(etiketaMiut);
+function shfaqEtiketen(html, ev) {
+  if (!html || !ev || !ev.domEvent) return;
+  etiketaMiut.innerHTML = html; etiketaMiut.hidden = false;
+  const x = ev.domEvent.clientX, y = ev.domEvent.clientY;
+  etiketaMiut.style.left = Math.min(x + 12, innerWidth - etiketaMiut.offsetWidth - 8) + "px";
+  etiketaMiut.style.top = Math.max(8, y - etiketaMiut.offsetHeight - 12) + "px";
+}
+const fshihEtiketen = () => { etiketaMiut.hidden = true; };
+const ngaGoogle = e => ({ lngLat: { lat: e.latLng.lat(), lng: e.latLng.lng() } });
+const klikoHarten = e => { const x = ngaGoogle(e); klikimet.forEach(f => f(x)); };
 
 // ---------------------------------------------------------------------------
-// Kontrolle të vetat: një grup butonash si në Google Maps
+// Stilet e shtresave (rillogariten kur ndryshon zoom-i ose linja e zgjedhur)
 // ---------------------------------------------------------------------------
+let linjatDuken = true;
+function stilLinje(f) {
+  const st = gjendja.get(f.getId()) || {}, z = gm.getZoom() - 1;
+  return {
+    visible: linjatDuken, clickable: true, zIndex: st.zgjedhur ? 5 : 1,
+    strokeColor: f.getProperty("ngjyra"),
+    strokeWeight: st.zgjedhur ? brenda(z, 11, 16, 4, 9) : brenda(z, 11, 16, 1.5, 4),
+    strokeOpacity: st.zgjedhur ? 1 : st.zbehur ? 0.12 : 0.55,
+  };
+}
+function stilStacioni(f) {
+  const z = gm.getZoom() - 1, r = brenda(z, 13.5, 17, 2, 5.5);
+  return {
+    visible: z >= 13.5, zIndex: 3,
+    icon: { path: google.maps.SymbolPath.CIRCLE, scale: r, fillColor: "#fff", fillOpacity: 1,
+            strokeColor: "#5b636b", strokeWeight: brenda(z, 13.5, 17, 1, 2),
+            labelOrigin: new google.maps.Point(0, 2.4 + 9 / r) },
+    label: z >= 16 ? { text: f.getProperty("emri") || " ", fontSize: "11.5px", color: "#2b2b30", className: "emri-stacionit" } : null,
+  };
+}
+const stilStacioniLinjes = f => ({
+  zIndex: 10,
+  icon: { path: google.maps.SymbolPath.CIRCLE, scale: 5.5, fillColor: f.getProperty("ngjyra"), fillOpacity: 1, strokeColor: "#fff", strokeWeight: 2 },
+});
+
+// ---------------------------------------------------------------------------
+// Rruga e planifikuar: vija dhe shenja të vetat (Data nuk vizaton vija me pika)
+// ---------------------------------------------------------------------------
+let objektetRruga = [], objektetSkajet = [];
+function lidhEtiketen(obj, html) {
+  obj.addListener("mouseover", e => shfaqEtiketen(html, e));
+  obj.addListener("mouseout", fshihEtiketen);
+  obj.addListener("click", klikoHarten);
+}
+function vizatoRrugen(fc) {
+  objektetRruga.forEach(o => o.setMap(null)); objektetRruga = [];
+  for (const f of fc.features) {
+    const p = f.properties, g = f.geometry;
+    if (g.type === "LineString") {
+      const path = g.coordinates.map(gl);
+      if (p.lloji === "autobus") {
+        objektetRruga.push(new google.maps.Polyline({ map: gm, path, strokeColor: "#fff", strokeWeight: 11, strokeOpacity: 1, zIndex: 20, clickable: false }));
+        objektetRruga.push(new google.maps.Polyline({ map: gm, path, strokeColor: p.ngjyra, strokeWeight: 6, strokeOpacity: 1, zIndex: 21, clickable: false }));
+      } else if (p.lloji === "ecje") {
+        const ngj = pamja === "satelit" ? "#fff" : "#3a3a3f";
+        objektetRruga.push(new google.maps.Polyline({ map: gm, path, strokeOpacity: 0, zIndex: 22, clickable: false,
+          icons: [{ icon: { path: google.maps.SymbolPath.CIRCLE, scale: 2.4, fillColor: ngj, fillOpacity: 1, strokeOpacity: 0 }, offset: "0", repeat: "9px" }] }));
+      }
+    } else if (g.type === "Point") {
+      const m = new google.maps.Marker({ map: gm, position: gl(g.coordinates), zIndex: 30,
+        icon: { path: google.maps.SymbolPath.CIRCLE, scale: p.r || 5, fillColor: p.ngjyra, fillOpacity: 1, strokeColor: "#fff", strokeWeight: 2 } });
+      lidhEtiketen(m, p.titulli);
+      objektetRruga.push(m);
+    }
+  }
+}
+function vizatoSkajet(fc) {   // emrat e stacioneve ku hipën dhe zbret
+  objektetSkajet.forEach(o => o.setMap(null)); objektetSkajet = [];
+  for (const f of fc.features) {
+    if (f.geometry.type !== "Point" || !f.properties.titulli) continue;
+    const tekst = String(f.properties.titulli).replace(/<[^>]*>/g, "");
+    objektetSkajet.push(new google.maps.Marker({ map: gm, position: gl(f.geometry.coordinates), clickable: false, zIndex: 31,
+      icon: { path: "M0 0", scale: 1, strokeOpacity: 0, labelOrigin: new google.maps.Point(0, 24) },
+      label: { text: tekst, fontSize: "12px", fontWeight: "800", color: "#1d1d1f", className: "emri-skajit" } }));
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Krijimi i hartës, pasi ngarkohet skripti i Google
+// ---------------------------------------------------------------------------
+function ndertoHarten() {
+  gm = new google.maps.Map(elHarta, {
+    center: gl(QENDRA), zoom: gz(13), styles: STIL_HARTA, clickableIcons: false,
+    mapTypeControl: false, streetViewControl: false, fullscreenControl: false, rotateControl: false,
+    scaleControl: true, gestureHandling: "greedy",
+    zoomControlOptions: { position: google.maps.ControlPosition.RIGHT_TOP },
+    draggableCursor: kursori || null,
+  });
+  gm.addListener("click", klikoHarten);
+  for (const [k, stili, z] of [["linjat", stilLinje, 1], ["te-gjitha", stilStacioni, 3], ["stacionet", stilStacioniLinjes, 10]]) {
+    const d = shtresa[k] = new google.maps.Data({ map: gm });
+    d.setStyle(stili);
+    d.addListener("mouseover", e => shfaqEtiketen(e.feature.getProperty("titulli"), e));
+    d.addListener("mouseout", fshihEtiketen);
+    d.addListener("click", e => {
+      if (k === "linjat") { const x = Object.assign(ngaGoogle(e), { features: [{ id: e.feature.getId() }] }); klikimetLinje.forEach(f => f(x)); }
+      klikoHarten(e);
+    });
+  }
+  gm.addListener("zoom_changed", () => { shtresa.linjat.setStyle(stilLinje); shtresa["te-gjitha"].setStyle(stilStacioni); fshihEtiketen(); });
+  gm.addListener("dragstart", fshihEtiketen);
+  shtoKontrollet();
+  for (const k in kopja) vendos(k, kopja[k].features);
+  gatiHerenEPare();
+}
+window.__gtPlanifikuesi = ndertoHarten;
+(() => {
+  const s = document.createElement("script");
+  s.src = "https://maps.googleapis.com/maps/api/js?key=" + encodeURIComponent(GMAPS_KEY) +
+    "&v=weekly&loading=async&callback=__gtPlanifikuesi&region=AL&language=" + (document.documentElement.lang || "en");
+  s.async = true;
+  s.onerror = () => { document.getElementById("stats").innerHTML = `<b style="color:#c8102e">${tr("error")}:</b> Google Maps`; };
+  document.head.appendChild(s);
+})();
+
+// ---------------------------------------------------------------------------
+// Kontrollet: pamjet e hartës dhe "Ku jam unë?"
+// ---------------------------------------------------------------------------
+let vendndodhjaIme = null, shenjaIme = null, rrethiIm = null;
+let kPamja = null;
 function grupButonash(butonat, klasa = "") {
   const div = document.createElement("div");
-  div.className = "maplibregl-ctrl maplibregl-ctrl-group " + klasa;
+  div.className = "gm-grup " + klasa;
   for (const { tekst, titull, kur } of butonat) {
     const b = document.createElement("button");
-    b.type = "button"; b.className = "btn-3d"; b.innerHTML = tekst; b.title = titull;
+    b.type = "button"; b.innerHTML = tekst; b.title = titull; b.setAttribute("aria-label", titull);
     b.onclick = () => kur(b);
     div.appendChild(b);
   }
-  return { onAdd: () => div, onRemove: () => div.remove(), div };
+  return div;
 }
-
-// 3D: anon kamerën dhe ngre relievin (malet)
-const k3D = grupButonash([{ tekst: "3D", titull: tr("t3d"), kur: () => vendos3D(!ne3D) }]);
-map.addControl(k3D, "top-right");
-
-// Pamjet e hartës
-const kPamja = grupButonash([
-  { tekst: tr("map"), titull: tr("map"), kur: () => ndryshoPamjen("harta") },
-  { tekst: tr("light"), titull: tr("light_t"), kur: () => ndryshoPamjen("celet") },
-  { tekst: tr("sat"), titull: tr("sat"), kur: () => ndryshoPamjen("satelit") },
-], "pamjet");
-map.addControl(kPamja, "top-right");
+function shtoKontrollet() {
+  kPamja = grupButonash([
+    { tekst: tr("map"), titull: tr("map"), kur: () => ndryshoPamjen("harta") },
+    { tekst: tr("light"), titull: tr("light_t"), kur: () => ndryshoPamjen("celet") },
+    { tekst: tr("sat"), titull: tr("sat"), kur: () => ndryshoPamjen("satelit") },
+  ], "pamjet");
+  const ikonaGjeo = `<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="currentColor"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="7.5" fill="none" stroke="currentColor" stroke-width="2"/></svg>`;
+  const kGjeo = grupButonash([{ tekst: ikonaGjeo, titull: tr("my_loc"), kur: gjejVendndodhjen }], "gjeo");
+  gm.controls[google.maps.ControlPosition.RIGHT_TOP].push(kGjeo);
+  gm.controls[google.maps.ControlPosition.RIGHT_TOP].push(kPamja);
+  shenjoButonat();
+}
 function shenjoButonat() {
+  if (!kPamja) return;
   const rendi = ["harta", "celet", "satelit"];
-  kPamja.div.querySelectorAll("button").forEach((b, i) => b.classList.toggle("aktiv", rendi[i] === pamja));
-  k3D.div.querySelector("button").classList.toggle("aktiv", ne3D);
-  k3D.div.querySelector("button").textContent = ne3D ? "2D" : "3D";
+  kPamja.querySelectorAll("button").forEach((b, i) => { b.classList.toggle("aktiv", rendi[i] === pamja); b.setAttribute("aria-pressed", String(rendi[i] === pamja)); });
 }
-
 function ndryshoPamjen(e_re) {
-  const stiliIVjeter = STILET[pamja];
   pamja = e_re;
   shenjoButonat();
-  if (STILET[e_re] !== stiliIVjeter) {
-    // Ndërrimi i stilit i fshin të gjitha shtresat tona; i rishtojmë te "style.load" më poshtë
-    // diff: false = ringarkim i plotë, që MapLibre të lëshojë sinjalin "style.load"
-    map.setStyle(STILET[e_re], { diff: false });
-  } else {
-    aplikoPamjen();
-  }
-}
-function aplikoPamjen() {
-  if (map.getLayer("satelit")) map.setLayoutProperty("satelit", "visibility", pamja === "satelit" ? "visible" : "none");
+  if (!gm) return;
+  if (e_re === "satelit") gm.setOptions({ mapTypeId: "hybrid", styles: [] });
+  else gm.setOptions({ mapTypeId: "roadmap", styles: e_re === "celet" ? STIL_CELET : STIL_HARTA });
+  vizatoRrugen(kopja.rruga);   // vija e ecjes ndërron ngjyrë mbi satelit
 }
 
-function vendos3D(po) {
-  ne3D = po;
-  shenjoButonat();
-  aplikoRelievin();
-  if (po) map.easeTo({ pitch: 60, bearing: -20, duration: 1200 * LEVIZJE });
-  else map.easeTo({ pitch: 0, bearing: 0, duration: 800 * LEVIZJE });
+// "Ku jam unë?": shfletuesi jep vendndodhjen (GPS në telefon; Wi-Fi ose IP në kompjuter, shpesh e përafërt)
+function gjejVendndodhjen() {
+  const hint = document.getElementById("hint");
+  if (!navigator.geolocation) { hint.textContent = tr("geo_fail"); return; }
+  navigator.geolocation.getCurrentPosition(pos => {
+    const saktesia = Math.round(pos.coords.accuracy);
+    vendndodhjaIme = { lat: pos.coords.latitude, lng: pos.coords.longitude, saktesia };
+    if (shenjaIme) shenjaIme.setMap(null);
+    if (rrethiIm) rrethiIm.setMap(null);
+    rrethiIm = new google.maps.Circle({ map: gm, center: vendndodhjaIme, radius: saktesia, strokeColor: "#1a73e8", strokeOpacity: .4, strokeWeight: 1, fillColor: "#1a73e8", fillOpacity: .12, clickable: false });
+    shenjaIme = new google.maps.Marker({ map: gm, position: vendndodhjaIme, clickable: false, zIndex: 40,
+      icon: { path: google.maps.SymbolPath.CIRCLE, scale: 7, fillColor: "#1a73e8", fillOpacity: 1, strokeColor: "#fff", strokeWeight: 2.5 } });
+    gm.panTo(vendndodhjaIme);
+    if (gm.getZoom() < 15) gm.setZoom(16);
+    const tekst = saktesia >= 1000 ? `${(saktesia / 1000).toFixed(1)} km` : `${saktesia} m`;
+    if (skeda !== "udhetim" || nisja) return;
+    if (saktesia > 300) {
+      hint.textContent = tr("geo_rough", { d: tekst });
+    } else {
+      hint.innerHTML = `${esc(tr("geo_ok", { d: tekst }))} <button class="link-btn" id="nisKetu">${esc(tr("start_here"))}</button>`;
+      document.getElementById("nisKetu").onclick = () => {
+        if (!vendndodhjaIme) return;
+        pastro(false);
+        nisja = { lat: vendndodhjaIme.lat, lng: vendndodhjaIme.lng };
+        shenjaA = shenje(nisja, "#13865a");
+        if (destinacioni) kerko();
+        azhornoUI();
+      };
+    }
+  }, e => {
+    hint.textContent = e.code === 1 ? tr("geo_denied") : tr("geo_fail");
+  }, { enableHighAccuracy: true, timeout: 15000 });
 }
-function aplikoRelievin() {
-  // Terreni: MapLibre e ngre sipërfaqen e hartës sipas lartësisë së çdo pike (modeli dixhital i terrenit)
-  map.setTerrain(ne3D && map.getSource("terreni") ? { source: "terreni", exaggeration: 1.3 } : null);
-  if (map.getLayer("hijet")) map.setLayoutProperty("hijet", "visibility", ne3D ? "visible" : "none");
+
+// Kunjat e nisjes dhe destinacionit
+class Kunj {
+  constructor(ngjyra) { this.ngjyra = ngjyra; this.poz = null; this.m = null; this.hequr = false; }
+  setLngLat(p) {
+    this.poz = gl(p);
+    hartaGati.then(() => {
+      if (this.hequr) return;
+      if (!this.m) this.m = new google.maps.Marker({ map: gm, position: this.poz, zIndex: 50, clickable: false,
+        icon: { path: "M12 0C5.4 0 0 5.3 0 11.9 0 20.8 12 34 12 34s12-13.2 12-22.1C24 5.3 18.6 0 12 0z", fillColor: this.ngjyra, fillOpacity: 1,
+                strokeColor: "#fff", strokeWeight: 2, scale: 1, anchor: new google.maps.Point(12, 34) } });
+      else this.m.setPosition(this.poz);
+    });
+    return this;
+  }
+  addTo() { return this; }
+  remove() { this.hequr = true; if (this.m) this.m.setMap(null); return this; }
 }
 
 // ---------------------------------------------------------------------------
-// Shtresat tona. Mbajmë një kopje të të dhënave, që t'i rivendosim pas çdo ndërrimi stili.
+// Të dhënat tona. Mbajmë një kopje, që të vizatohen edhe nëse vijnë para hartës.
 // ---------------------------------------------------------------------------
 const BOSH = { type: "FeatureCollection", features: [] };
 const kopja = { linjat: BOSH, stacionet: BOSH, rruga: BOSH, "rruga-skajet": BOSH, "te-gjitha": BOSH };
-let linjatDuken = true;
-
-function shtoShtresatTona() {
-  // Pa ndërtesa 3D: i heqim nga stili (stili "Liberty" i ka në shtresën "building-3d")
-  for (const l of map.getStyle().layers)
-    if (l.type === "fill-extrusion") map.removeLayer(l.id);
-
-  const shtresat = map.getStyle().layers;
-  const emratEPare = (shtresat.find(l => l.type === "symbol") || {}).id;   // shtresa e parë me emra
-
-  // 0. Satelit (poshtë emrave të rrugëve, si "Hybrid" në Google Maps)
-  map.addSource("satelit", {
-    type: "raster", tileSize: 256, maxzoom: 19,
-    tiles: ["https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"],
-    attribution: "Imazhet satelitore &copy; Esri, Maxar, Earthstar Geographics",
-  });
-  map.addLayer({ id: "satelit", type: "raster", source: "satelit", layout: { visibility: "none" } }, emratEPare);
-
-  // 0b. Relievi: lartësitë nga "Terrain Tiles" (të dhëna të hapura në AWS, pa API key)
-  const dem = {
-    type: "raster-dem", encoding: "terrarium", tileSize: 256, maxzoom: 15,
-    tiles: ["https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png"],
-    attribution: "Relievi &copy; Mapzen, AWS Terrain Tiles",
-  };
-  map.addSource("terreni", dem);
-  map.addSource("terreni-hije", dem);   // burim i veçantë për hijet (rekomandohet nga MapLibre)
-  map.addLayer({ id: "hijet", type: "hillshade", source: "terreni-hije", layout: { visibility: "none" },
-                 paint: { "hillshade-exaggeration": 0.35, "hillshade-shadow-color": "#3d3a33" } }, emratEPare);
-
-  // 1. Të gjitha linjat + etiketat e tyre mbi vijë
-  map.addSource("linjat", { type: "geojson", data: kopja.linjat });
-  const eZgjedhur = ["boolean", ["feature-state", "zgjedhur"], false];
-  const eZbehur = ["boolean", ["feature-state", "zbehur"], false];
-  map.addLayer({
-    id: "linjat-vija", type: "line", source: "linjat",
-    layout: { "line-join": "round", "line-cap": "round" },
-    paint: {
-      "line-color": ["get", "ngjyra"],
-      // gjerësia rritet me zoom-in: e hollë kur sheh gjithë qytetin, e trashë kur je afër
-      "line-width": ["interpolate", ["linear"], ["zoom"], 11, ["case", eZgjedhur, 4, 1.5], 16, ["case", eZgjedhur, 9, 4]],
-      "line-opacity": ["case", eZgjedhur, 1, eZbehur, 0.12, 0.55],
-    },
-  });
-  map.addLayer({
-    id: "linjat-etiketa", type: "symbol", source: "linjat", minzoom: 14,
-    layout: {
-      "symbol-placement": "line", "symbol-spacing": 280,
-      "text-field": ["get", "ref"], "text-font": ["Noto Sans Bold"], "text-size": 11,
-      "text-keep-upright": true,
-    },
-    paint: { "text-color": "#fff", "text-halo-color": ["get", "ngjyra"], "text-halo-width": 2.5 },
-  });
-
-  // 2. Të gjitha stacionet: pika të vogla nga zoom 13.5, emrat nga zoom 16
-  map.addSource("te-gjitha", { type: "geojson", data: kopja["te-gjitha"] });
-  map.addLayer({
-    id: "te-gjitha-pika", type: "circle", source: "te-gjitha", minzoom: 13.5,
-    paint: {
-      "circle-radius": ["interpolate", ["linear"], ["zoom"], 13.5, 2, 17, 5.5],
-      "circle-color": "#fff", "circle-stroke-color": "#5b636b",
-      "circle-stroke-width": ["interpolate", ["linear"], ["zoom"], 13.5, 1, 17, 2],
-    },
-  });
-  map.addLayer({
-    id: "te-gjitha-emri", type: "symbol", source: "te-gjitha", minzoom: 16,
-    layout: { "text-field": ["get", "emri"], "text-font": ["Noto Sans Regular"], "text-size": 11.5,
-              "text-offset": [0, 1.1], "text-anchor": "top", "text-optional": true },
-    paint: { "text-color": "#2b2b30", "text-halo-color": "#fff", "text-halo-width": 1.6 },
-  });
-
-  // 3. Stacionet e linjës së zgjedhur
-  map.addSource("stacionet", { type: "geojson", data: kopja.stacionet });
-  map.addLayer({
-    id: "stacionet-pika", type: "circle", source: "stacionet",
-    paint: { "circle-radius": 5.5, "circle-color": ["get", "ngjyra"], "circle-stroke-color": "#fff", "circle-stroke-width": 2 },
-  });
-
-  // 4. Rruga e planifikuar: kufi i bardhë poshtë vijës së autobusit, që të dallohet mbi çdo sfond
-  map.addSource("rruga", { type: "geojson", data: kopja.rruga });
-  const vijeAutobusi = ["==", ["get", "lloji"], "autobus"];
-  map.addLayer({
-    id: "rruga-kufi", type: "line", source: "rruga", filter: vijeAutobusi,
-    layout: { "line-cap": "round", "line-join": "round" },
-    paint: { "line-color": "#fff", "line-width": ["interpolate", ["linear"], ["zoom"], 11, 7, 17, 15] },
-  });
-  map.addLayer({
-    id: "rruga-bus", type: "line", source: "rruga", filter: vijeAutobusi,
-    layout: { "line-cap": "round", "line-join": "round" },
-    paint: { "line-color": ["get", "ngjyra"], "line-width": ["interpolate", ["linear"], ["zoom"], 11, 4, 17, 10] },
-  });
-  map.addLayer({
-    id: "rruga-ecje", type: "line", source: "rruga", filter: ["==", ["get", "lloji"], "ecje"],
-    layout: { "line-cap": "round", "line-join": "round" },
-    paint: { "line-color": pamja === "satelit" ? "#fff" : "#3a3a3f", "line-width": 4.5, "line-dasharray": [0.1, 2] },
-  });
-  map.addLayer({
-    id: "rruga-pika", type: "circle", source: "rruga", filter: ["==", ["geometry-type"], "Point"],
-    paint: { "circle-radius": ["get", "r"], "circle-color": ["get", "ngjyra"], "circle-stroke-color": "#fff", "circle-stroke-width": 2 },
-  });
-  // Emrat në burim të veçantë: nëse fontet nuk ngarkohen, vetë rruga vizatohet gjithsesi
-  map.addSource("rruga-skajet", { type: "geojson", data: kopja["rruga-skajet"] });
-  map.addLayer({
-    id: "rruga-emri", type: "symbol", source: "rruga-skajet",
-    layout: { "text-field": ["get", "titulli"], "text-font": ["Noto Sans Bold"], "text-size": 12,
-              "text-offset": [0, 1.2], "text-anchor": "top" },
-    paint: { "text-color": "#1d1d1f", "text-halo-color": "#fff", "text-halo-width": 2 },
-  });
-
-  shfaqLinjat(linjatDuken);
-  aplikoPamjen();
-  aplikoRelievin();
-  // Rivendosim linjën e zgjedhur (feature-state humbet kur ndërron stili)
-  if (typeof zgjedhur !== "undefined" && zgjedhur)
-    for (const x of linjat) map.setFeatureState({ source: "linjat", id: x.id }, { zgjedhur: x === zgjedhur, zbehur: x !== zgjedhur });
-}
-
-let gatiHerenEPare;
-const hartaGati = new Promise(r => { gatiHerenEPare = r; });
-map.on("style.load", () => { shtoShtresatTona(); gatiHerenEPare(); });
 
 // Gjurma e rrugës së një linje nga pozicioni i në j (grafi.json -> "gjurmet")
 function gjurmaELinjes(linja, i, j) {
@@ -582,8 +627,12 @@ function gjurmaELinjes(linja, i, j) {
 // Ndihmës të vegjël
 const vendos = (burimi, features) => {
   kopja[burimi] = { type: "FeatureCollection", features };
-  const b = map.getSource(burimi);
-  if (b) b.setData(kopja[burimi]);
+  if (gm) {
+    const d = shtresa[burimi];
+    if (d) { d.forEach(f => d.remove(f)); d.addGeoJson(kopja[burimi]); }
+    else if (burimi === "rruga") vizatoRrugen(kopja.rruga);
+    else if (burimi === "rruga-skajet") vizatoSkajet(kopja["rruga-skajet"]);
+  }
   if (burimi === "rruga")   // stacionet e hipjes dhe zbritjes, për emrat
     vendos("rruga-skajet", features.filter(f => f.properties.skaj));
 };
@@ -591,30 +640,21 @@ const vije = (koordinatat, props) => ({ type: "Feature", properties: props, geom
 const pike = (lon, lat, props) => ({ type: "Feature", properties: props, geometry: { type: "Point", coordinates: [lon, lat] } });
 function shfaqLinjat(po) {
   linjatDuken = po;
-  for (const id of ["linjat-vija", "linjat-etiketa"])
-    if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", po ? "visible" : "none");
+  if (shtresa.linjat) shtresa.linjat.setStyle(stilLinje);
 }
 function pershtatPamjen(koordinatat, padding = 50) {
   if (!koordinatat.length) return;
-  const k = new maplibregl.LngLatBounds(koordinatat[0], koordinatat[0]);
-  koordinatat.forEach(c => k.extend(c));
-  // Në kompjuter paneli mbulon pjesën e majtë të hartës, prandaj lëmë më shumë hapësirë majtas
-  const telefon = innerWidth <= 760;
-  const p = telefon ? { top: padding, bottom: innerHeight * 0.56 + 20, left: padding, right: padding }
-                    : { top: padding, bottom: padding, left: 384 + 16 + padding, right: padding + 50 };
-  map.fitBounds(k, { padding: p, maxZoom: 16, duration: 700 * LEVIZJE });
-}
-
-// Etiketa kur kalon miun mbi një linjë ose stacion
-const etiketaMiut = new maplibregl.Popup({ closeButton: false, closeOnClick: false, offset: 10, maxWidth: "260px" });
-for (const shtresa of ["linjat-vija", "te-gjitha-pika", "stacionet-pika", "rruga-pika"]) {
-  map.on("mousemove", shtresa, e => {
-    map.getCanvas().style.cursor = "pointer";
-    etiketaMiut.setLngLat(e.lngLat).setHTML(e.features[0].properties.titulli).addTo(map);
+  hartaGati.then(() => {
+    const k = new google.maps.LatLngBounds();
+    koordinatat.forEach(c => k.extend(gl(c)));
+    // Në kompjuter paneli mbulon pjesën e majtë të hartës, prandaj lëmë më shumë hapësirë majtas
+    const telefon = innerWidth <= 760;
+    const p = telefon ? { top: padding, bottom: innerHeight * 0.56 + 20, left: padding, right: padding }
+                      : { top: padding, bottom: padding, left: 384 + 16 + padding, right: padding + 50 };
+    gm.fitBounds(k, p);
+    google.maps.event.addListenerOnce(gm, "idle", () => { if (gm.getZoom() > gz(16)) gm.setZoom(gz(16)); });
   });
-  map.on("mouseleave", shtresa, () => { etiketaMiut.remove(); azhornoKursorin(); });
 }
-shenjoButonat();
 
 const NGJYRAT = ["#c8102e", "#1f6feb", "#1a7f37", "#bf8700", "#8250df", "#d1242f", "#0969da", "#cf222e",
                  "#116329", "#953800", "#6639ba", "#0550ae", "#e16f24", "#2da44e", "#a40e26", "#3e63dd"];
@@ -755,7 +795,7 @@ let nisja = null, destinacioni = null, rezultati = null, opsioniZgjedhur = 0;
 let shenjaA = null, shenjaB = null;
 
 // Shenjat e nisjes dhe destinacionit (kunjat klasike të hartës)
-const shenje = (pika, ngjyra) => new maplibregl.Marker({ color: ngjyra }).setLngLat(pika).addTo(map);
+const shenje = (pika, ngjyra) => new Kunj(ngjyra).setLngLat(pika);
 function azhornoKursorin() {
   map.getCanvas().style.cursor = skeda === "udhetim" && !(nisja && destinacioni) ? "crosshair" : "";
 }

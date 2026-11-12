@@ -68,8 +68,7 @@
   function init() {
     if (map || !window.maplibregl || !mapEl) return;
     map = new maplibregl.Map({
-      container: mapEl, style: "https://tiles.openfreemap.org/styles/positron",
-      center: [19.8187, 41.3275], zoom: 12.6, attributionControl: { compact: true },
+      container: mapEl, center: [19.8187, 41.3275], zoom: 12.6, attributionControl: { compact: true },
       cooperativeGestures: !explore,
     });
     map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
