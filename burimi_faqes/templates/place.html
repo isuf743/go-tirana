@@ -73,7 +73,8 @@
         </dl>
         <a class="btn btn--accent" href="{{ root }}planner/?to={{ p.lat }},{{ p.lon }}&amp;name={{ p.name | urlencode }}&amp;lang={{ lang }}">
           {{ icon("bus", 18) }}{{ t.get_bus }}</a>
-        <a class="btn btn--outline" href="https://www.openstreetmap.org/?mlat={{ p.lat }}&amp;mlon={{ p.lon }}#map=17/{{ p.lat }}/{{ p.lon }}" rel="noopener" target="_blank">{{ t.open_maps }}</a>
+        <a class="btn btn--outline" href="https://www.google.com/maps/search/?api=1&amp;query={{ (p.name ~ ', ' ~ p.area ~ ', Tirana, Albania') | urlencode }}" rel="noopener" target="_blank">{{ icon("pin", 17) }}{{ t.gmaps_open }}</a>
+        <a class="link-arrow gmaps-dir" href="https://www.google.com/maps/dir/?api=1&amp;destination={{ p.lat }},{{ p.lon }}" rel="noopener" target="_blank">{{ t.gmaps_dir }} {{ icon("arrow", 14) }}</a>
       </section>
       <div class="mini-map" id="mini-map" data-lat="{{ p.lat }}" data-lon="{{ p.lon }}" data-color="{{ p.cat_objs[0].color }}" role="img" aria-label="{{ p.name }}"></div>
     </aside>

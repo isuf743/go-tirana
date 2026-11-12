@@ -338,3 +338,12 @@ for _l, _k in (("en", "Explore Tirana"), ("it", "Esplora Tirana"), ("sq", "Ekspl
 from tekstet_itinerare import UI as _IT_UI
 for _l in T:
     T[_l]["nav_itins"] = _IT_UI[_l]["nav"]
+
+# ---- Google Maps (lidhje, pa çelës API) ----
+_GMAPS = {
+    "en": {"gmaps_open": "Open in Google Maps", "gmaps_dir": "Directions in Google Maps"},
+    "it": {"gmaps_open": "Apri in Google Maps", "gmaps_dir": "Indicazioni su Google Maps"},
+    "sq": {"gmaps_open": "Hape në Google Maps", "gmaps_dir": "Udhëzime në Google Maps"},
+}
+for _l in T:
+    T[_l].update(_GMAPS[_l])

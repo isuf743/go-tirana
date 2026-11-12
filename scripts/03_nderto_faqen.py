@@ -103,8 +103,8 @@ def pergatit_itinerar(it, lang, sipas_slug, root):
         else:
             seg["type"] = "walk"
             seg["text"] = ui["walk"].format(m=max(2, int(round(m / 80 + 0.5))))
-            seg["href"] = ("https://www.openstreetmap.org/directions?engine=fossgis_osrm_foot&route="
-                           f"{a['lat']}%2C{a['lon']}%3B{b['lat']}%2C{b['lon']}")
+            seg["href"] = ("https://www.google.com/maps/dir/?api=1&travelmode=walking"
+                           f"&origin={a['lat']},{a['lon']}&destination={b['lat']},{b['lon']}")
         return seg
 
     hyrja = segment(nisja, ndalesat[0]["p"]) if nisja else None
@@ -116,7 +116,13 @@ def pergatit_itinerar(it, lang, sipas_slug, root):
     harta = {"stops": [{"n": nd["n"], "name": nd["p"]["name"], "lat": nd["p"]["lat"], "lon": nd["p"]["lon"]} for nd in ndalesat],
              "start": {"name": nisja["name"], "lat": nisja["lat"], "lon": nisja["lon"]} if nisja else None,
              "legs": [s["type"] for s in segmentet]}
-    return {"slug": it["slug"], "title": it["title"][lang], "summary": it["summary"][lang], "lead": it["lead"][lang],
+    # E gjithë rruga në Google Maps: nisja, ndalesat e ndërmjetme (maks. 9) dhe ndalesa e fundit
+    pikat = ([nisja] if nisja else []) + [nd["p"] for nd in ndalesat]
+    gm = (f"https://www.google.com/maps/dir/?api=1&origin={pikat[0]['lat']},{pikat[0]['lon']}"
+          f"&destination={pikat[-1]['lat']},{pikat[-1]['lon']}"
+          + ("&waypoints=" + urllib.parse.quote("|".join(f"{q['lat']},{q['lon']}" for q in pikat[1:-1][:9])) if len(pikat) > 2 else "")
+          + ("&travelmode=walking" if autobus == 0 else ""))
+    return {"gmaps_route": gm, "slug": it["slug"], "title": it["title"][lang], "summary": it["summary"][lang], "lead": it["lead"][lang],
             "when": it["when"][lang], "hero": sipas_slug[it["hero"]], "stops": ndalesat, "start": nisja, "intro": hyrja,
             "walk_text": distanca_tekst(ecja, lang), "bus_n": autobus, "n": len(ndalesat),
             "span": f"{ndalesat[0]['time']}–{ndalesat[-1]['time']}",

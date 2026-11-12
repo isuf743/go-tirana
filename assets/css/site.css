@@ -807,3 +807,6 @@ a.tag:hover { border-color: var(--dark); color: var(--dark); }
   .tl__img { aspect-ratio: 16 / 9; }
   .itin__main > .leg { margin-left: 0; }
 }
+
+.gmaps-dir { display: inline-flex; margin-top: 14px; font-size: 14px; }
+.itin__gmaps { width: 100%; justify-content: center; margin-top: 14px; }
