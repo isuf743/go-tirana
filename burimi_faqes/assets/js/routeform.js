@@ -3,6 +3,13 @@
    me të dyja pikat (?from=lat,lon&to=lat,lon), ku llogaritet rruga e vërtetë. */
 (function () {
   "use strict";
+  // GPS i saktë; nëse skadon ose s'ka GPS (shpesh në kompjuter), provo sërish me vendndodhjen e rrjetit
+  function geoMeRiprovim(ok, gabim) {
+    navigator.geolocation.getCurrentPosition(ok, e => {
+      if (e.code === 1) return gabim(e);
+      navigator.geolocation.getCurrentPosition(ok, gabim, { enableHighAccuracy: false, timeout: 20000, maximumAge: 300000 });
+    }, { enableHighAccuracy: true, timeout: 10000, maximumAge: 60000 });
+  }
   const form = document.getElementById("route-form");
   if (!form) return;
   const M = JSON.parse(form.dataset.msg);
@@ -16,7 +23,7 @@
   function locate() {
     if (!navigator.geolocation) { from.value = ""; say(M.loc_unavailable); return; }
     geo.setAttribute("aria-busy", "true"); say(M.locating, true);
-    navigator.geolocation.getCurrentPosition(pos => {
+    geoMeRiprovim(pos => {
       geo.removeAttribute("aria-busy");
       const { latitude: lat, longitude: lon } = pos.coords;
       if (!inTirana(lat, lon)) { geoLL = null; from.value = ""; say(M.loc_outside); return; }
@@ -26,7 +33,7 @@
       geo.removeAttribute("aria-busy");
       geoLL = null; from.value = "";
       say(err.code === 1 ? M.loc_denied : M.loc_unavailable);
-    }, { enableHighAccuracy: true, timeout: 12000, maximumAge: 60000 });
+    });
   }
 
   geo.addEventListener("click", locate);

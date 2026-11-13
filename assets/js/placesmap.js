@@ -2,6 +2,13 @@
    Kërkim me emër, filtra sipas kategorisë, lista/kartat dhe pikat në hartë mbahen të sinkronizuara. */
 (function () {
   "use strict";
+  // GPS i saktë; nëse skadon ose s'ka GPS (shpesh në kompjuter), provo sërish me vendndodhjen e rrjetit
+  function geoMeRiprovim(ok, gabim) {
+    navigator.geolocation.getCurrentPosition(ok, e => {
+      if (e.code === 1) return gabim(e);
+      navigator.geolocation.getCurrentPosition(ok, gabim, { enableHighAccuracy: false, timeout: 20000, maximumAge: 300000 });
+    }, { enableHighAccuracy: true, timeout: 10000, maximumAge: 60000 });
+  }
   const box = document.querySelector("[data-places-map]");
   const dataEl = document.getElementById("places-data");
   if (!box || !dataEl) return;
@@ -141,7 +148,7 @@
     nearBtn.addEventListener("click", () => {
       if (nearBtn.getAttribute("aria-pressed") === "true") return reset();
       nearBtn.disabled = true; say(M.loading);
-      navigator.geolocation.getCurrentPosition(pos => {
+      geoMeRiprovim(pos => {
         nearBtn.disabled = false;
         const lat = pos.coords.latitude, lon = pos.coords.longitude, acc = Math.round(pos.coords.accuracy);
         if (!(lat > 41.1 && lat < 41.6 && lon > 19.5 && lon < 20.1)) return say(M.far);
@@ -166,7 +173,7 @@
       }, err => {
         nearBtn.disabled = false;
         say(err.code === 1 ? M.denied : M.fail);
-      }, { enableHighAccuracy: true, timeout: 12000, maximumAge: 60000 });
+      });
     });
   } else if (nearBtn) nearBtn.hidden = true;
 

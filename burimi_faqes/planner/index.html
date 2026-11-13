@@ -567,11 +567,30 @@ function ndryshoPamjen(e_re) {
   vizatoRrugen(kopja.rruga);   // vija e ecjes ndërron ngjyrë mbi satelit
 }
 
+// Merr vendndodhjen: provon me GPS të saktë; nëse skadon ose s'ka GPS (shpesh në kompjuter),
+// provon sërish me vendndodhjen e zakonshme (Wi-Fi/rrjeti), që është më e shpejtë.
+function merrVendndodhjen(ok, gabim) {
+  navigator.geolocation.getCurrentPosition(ok, e => {
+    if (e.code === 1) return gabim(e);
+    navigator.geolocation.getCurrentPosition(ok, gabim, { enableHighAccuracy: false, timeout: 20000, maximumAge: 300000 });
+  }, { enableHighAccuracy: true, timeout: 10000, maximumAge: 30000 });
+}
+// Pika blu me rrethin e saktësisë (si te Google Maps)
+function shfaqPikenBlu(lat, lng, saktesia) {
+  if (!gm) return;
+  vendndodhjaIme = { lat, lng, saktesia };
+  if (shenjaIme) shenjaIme.setMap(null);
+  if (rrethiIm) rrethiIm.setMap(null);
+  rrethiIm = new google.maps.Circle({ map: gm, center: { lat, lng }, radius: saktesia, strokeColor: "#1a73e8", strokeOpacity: .4, strokeWeight: 1, fillColor: "#1a73e8", fillOpacity: .12, clickable: false });
+  shenjaIme = new google.maps.Marker({ map: gm, position: { lat, lng }, clickable: false, zIndex: 40,
+    icon: { path: google.maps.SymbolPath.CIRCLE, scale: 7, fillColor: "#1a73e8", fillOpacity: 1, strokeColor: "#fff", strokeWeight: 2.5 } });
+}
+
 // "Ku jam unë?": shfletuesi jep vendndodhjen (GPS në telefon; Wi-Fi ose IP në kompjuter, shpesh e përafërt)
 function gjejVendndodhjen() {
   const hint = document.getElementById("hint");
   if (!navigator.geolocation) { hint.textContent = tr("geo_fail"); return; }
-  navigator.geolocation.getCurrentPosition(pos => {
+  merrVendndodhjen(pos => {
     const saktesia = Math.round(pos.coords.accuracy);
     vendndodhjaIme = { lat: pos.coords.latitude, lng: pos.coords.longitude, saktesia };
     if (shenjaIme) shenjaIme.setMap(null);
@@ -598,7 +617,7 @@ function gjejVendndodhjen() {
     }
   }, e => {
     hint.textContent = e.code === 1 ? tr("geo_denied") : tr("geo_fail");
-  }, { enableHighAccuracy: true, timeout: 15000 });
+  });
 }
 
 // Kunjat e nisjes dhe destinacionit
@@ -882,7 +901,7 @@ function nisNgaVendndodhja() {
   if (!navigator.geolocation || nisja) return;
   const hint = document.getElementById("hint");
   hint.textContent = tr("geo_auto");
-  navigator.geolocation.getCurrentPosition(pos => {
+  merrVendndodhjen(pos => {
     if (nisja) return;                              // personi ka klikuar vetë në hartë ndërkohë
     const lat = pos.coords.latitude, lng = pos.coords.longitude, saktesia = Math.round(pos.coords.accuracy);
     if (!(lat > 41.1 && lat < 41.6 && lng > 19.5 && lng < 20.1)) { hint.textContent = tr("geo_far"); return; }
@@ -905,7 +924,7 @@ function nisNgaVendndodhja() {
     document.getElementById("nisPrape").onclick = vendos;
   }, err => {
     if (!nisja) hint.textContent = err.code === 1 ? tr("geo_denied") : tr("geo_fail");
-  }, { enableHighAccuracy: true, timeout: 12000, maximumAge: 60000 });
+  });
 }
 
 function pastro(azhorno = true) {
@@ -1241,10 +1260,11 @@ document.getElementById("ngaKetu").onclick = () => {
   if (skeda !== "udhetim") document.querySelector('.tab[data-view="udhetim"]').click();
   btn.setAttribute("aria-busy", "true");
   hint.textContent = tr("geo_auto");
-  navigator.geolocation.getCurrentPosition(pos => {
+  merrVendndodhjen(pos => {
     btn.removeAttribute("aria-busy");
     const lat = pos.coords.latitude, lng = pos.coords.longitude, saktesia = Math.round(pos.coords.accuracy);
     if (!(lat > 41.1 && lat < 41.6 && lng > 19.5 && lng < 20.1)) { hint.textContent = tr("geo_far"); return; }
+    shfaqPikenBlu(lat, lng, saktesia);
     const dest = destinacioni;
     pastro(false);
     nisja = NISJA_GJEO = { lat, lng };
@@ -1263,7 +1283,7 @@ document.getElementById("ngaKetu").onclick = () => {
   }, err => {
     btn.removeAttribute("aria-busy");
     hint.textContent = err.code === 1 ? tr("geo_denied") : tr("geo_fail");
-  }, { enableHighAccuracy: true, timeout: 15000, maximumAge: 30000 });
+  });
 };
 
 azhornoKursorin();
