@@ -46,9 +46,10 @@ except ImportError:
 import arti
 from tekstet_info import INFO, URGJENCA, BURIMET, KONTROLLUAR
 from tekstet_itinerare import ITINERARET, UI as IT_UI, KUFIRI_ECJES
+import tekstet_udhetime as UDH
 from tekstet import GJUHET, EMRAT_E_GJUHEVE, LOCALE, KATEGORITE, KATEGORITE_PERSHKRIM, T, PRIVATESIA, KUSHTET
 
-VERSIONI = "24"   # rrit këtë numër kur ndryshon CSS/JS, që shfletuesit të marrin versionin e ri
+VERSIONI = "25"   # rrit këtë numër kur ndryshon CSS/JS, që shfletuesit të marrin versionin e ri
 
 
 def lexo_json(emri):
@@ -299,11 +300,26 @@ def main():
                checked=KONTROLLUAR[lang], hero_place=sipas_slug[FOTO_INFO])
         faqet_sitemap.append(("info/", "0.7"))
 
+        # ---- Udhëtime ditore jashtë Tiranës ----
+        uu = UDH.UI[lang]
+        udhetimet = []
+        for d in UDH.UDHETIMET:
+            x = {k: (v[lang] if isinstance(v, dict) and lang in v else v) for k, v in d.items()}
+            x["see"] = [(a[lang], b[lang]) for a, b in d["see"]]
+            x["img"] = foto_wikimedia(UDH.FOTOT[d["foto"]])
+            x["alt"] = f'{x["name"]}, Albania'
+            udhetimet.append(x)
+        render("daytrips.html", "day-trips/", {"title": f"{uu['title']} | {emri}", "desc": uu["lead"],
+                                               "og_image": udhetimet[2]["img"]["src1280"]},
+               2, active="daytrips", ui=uu, trips=udhetimet, terminal=UDH.TERMINALI,
+               terminal_name=UDH.TERMINALI["name"][lang], sources=UDH.BURIMET, checked=UDH.KONTROLLUAR[lang])
+        faqet_sitemap.append(("day-trips/", "0.8"))
+
         # ---- Itineraret: lista dhe një faqe për secilin ----
         ui = IT_UI[lang]
         render("itineraries.html", "itineraries/", {"title": f"{ui['index_title']} | {emri}", "desc": ui["index_lead"],
                                                     "og_image": itineraret[2][0]["hero"]["img"]["src1280"]},
-               2, active="itineraries", ui=ui, itins=itineraret[2], credit_list=[i["hero"] for i in itineraret[2]])
+               2, active="itineraries", ui=ui, itins=itineraret[2], credit_list=[i["hero"] for i in itineraret[2]], dt_ui=UDH.UI[lang])
         faqet_sitemap.append(("itineraries/", "0.8"))
         for it in itineraret[3]:
             jsonld = {"@context": "https://schema.org", "@type": "TouristTrip", "name": it["title"], "description": it["summary"],

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% from "_macros.html" import photo, icon, credits %}
+{% block main %}
+<header class="page-hero">
+  <div class="page-hero__img" aria-hidden="true">{{ photo(trips[2], "100vw", eager=true) }}</div>
+  <div class="wrap">
+    <p class="eyebrow eyebrow--light">{{ ui.eyebrow }}</p>
+    <h1>{{ ui.title }}</h1>
+    <p class="lead">{{ ui.lead }}</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <section class="dt-terminal" aria-labelledby="dt-term-h">
+    <span class="dt-terminal__ic" aria-hidden="true">{{ icon("bus", 26) }}</span>
+    <div>
+      <h2 id="dt-term-h">{{ ui.terminal_title }}</h2>
+      <p>{{ ui.terminal_text.format(t=terminal_name) }}</p>
+      <p class="dt-terminal__note">{{ ui.pay }}</p>
+    </div>
+    <a class="btn btn--accent" href="{{ root }}planner/?to={{ terminal.lat }},{{ terminal.lon }}&amp;name={{ terminal_name | urlencode }}&amp;lang={{ lang }}">{{ icon("bus", 16) }}{{ ui.terminal_btn }}</a>
+  </section>
+
+  <nav class="dt-jump" aria-label="{{ ui.jump }}">
+    {% for d in trips %}<a href="#{{ d.slug }}"><strong>{{ d.name }}</strong><span>{{ d.time.split(' (')[0] }}</span></a>{% endfor %}
+  </nav>
+
+  {% for d in trips %}
+  <section class="dt" id="{{ d.slug }}" aria-labelledby="dt-{{ d.slug }}" data-reveal>
+    <div class="dt__media">{{ photo(d, "(max-width: 900px) 100vw, 560px") }}</div>
+    <div class="dt__body">
+      <p class="eyebrow">{{ d.tagline }}</p>
+      <h2 id="dt-{{ d.slug }}">{{ d.name }}</h2>
+      <p class="dt__summary">{{ d.summary }}</p>
+      <dl class="dt__facts">
+        <div><dt>{{ ui.time }}</dt><dd>{{ d.time }}</dd></div>
+        <div><dt>{{ ui.price }}</dt><dd>{{ d.price }}</dd></div>
+        <div><dt>{{ ui.freq }}</dt><dd>{{ d.freq }}</dd></div>
+      </dl>
+      <h3>{{ ui.see }}</h3>
+      <ul class="dt__see">
+        {% for title, text in d.see %}<li><strong>{{ title }}</strong><span>{{ text }}</span></li>{% endfor %}
+      </ul>
+      <p class="dt__arrive"><strong>{{ ui.arrive }}:</strong> {{ d.arrive }}</p>
+      <p class="dt__tip"><strong>{{ ui.tip }}:</strong> {{ d.tip }}</p>
+      <a class="link-arrow" href="https://www.google.com/maps/search/?api=1&amp;query={{ (d.name ~ ', Albania') | urlencode }}" rel="noopener" target="_blank">{{ ui.gmaps }} {{ icon("arrow", 15) }}</a>
+    </div>
+  </section>
+  {% endfor %}
+
+  <section class="info-sources" aria-labelledby="dt-src">
+    <h2 id="dt-src">{{ ui.sources }}</h2>
+    <p class="info-note">{{ checked }}</p>
+    <ul>{% for name, href in sources %}<li><a href="{{ href }}" rel="noopener" target="_blank">{{ name }}</a></li>{% endfor %}</ul>
+    {{ credits(trips, t) }}
+  </section>
+</div>
+{% endblock %}

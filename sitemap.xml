@@ -180,6 +180,24 @@
     <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/info/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/info/"/>
   </url>
+  <url><loc>https://isuf743.github.io/go-tirana/en/day-trips/</loc><lastmod>2026-10-10</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/day-trips/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/day-trips/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/day-trips/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/day-trips/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/it/day-trips/</loc><lastmod>2026-10-10</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/day-trips/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/day-trips/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/day-trips/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/day-trips/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/sq/day-trips/</loc><lastmod>2026-10-10</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/day-trips/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/day-trips/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/day-trips/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/day-trips/"/>
+  </url>
   <url><loc>https://isuf743.github.io/go-tirana/en/itineraries/</loc><lastmod>2026-10-10</lastmod><priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/itineraries/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/itineraries/"/>

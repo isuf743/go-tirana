@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% from "_macros.html" import itin_card, credits %}
+{% from "_macros.html" import itin_card, credits, icon %}
 {% block main %}
 <header class="wrap explore-head">
   <p class="eyebrow">{{ ui.home_eyebrow }}</p>
@@ -10,6 +10,10 @@
   <div class="icards">
     {% for it in itins %}{{ itin_card(it, root, lang, ui, reveal=loop.index) }}{% endfor %}
   </div>
+  <a class="dt-promo" href="{{ root }}{{ lang }}/day-trips/">
+    <span><strong>{{ dt_ui.title }}</strong><span>{{ dt_ui.lead }}</span></span>
+    <span class="more">{{ dt_ui.nav }} {{ icon("arrow", 15) }}</span>
+  </a>
   <div style="margin:48px 0 72px">{{ credits(credit_list, t) }}</div>
 </div>
 {% endblock %}

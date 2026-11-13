@@ -362,3 +362,8 @@ _ORARI = {
 }
 for _l in T:
     T[_l]["orari_js"] = _ORARI[_l]
+
+# ---- Udhëtime ditore: emri në fund të faqes ----
+from tekstet_udhetime import UI as _UDH_UI
+for _l in T:
+    T[_l]["nav_daytrips"] = _UDH_UI[_l]["nav"]
