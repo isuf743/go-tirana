@@ -873,3 +873,36 @@ a.tag:hover { border-color: var(--dark); color: var(--dark); }
 .dt-promo .more { color: #fff; font-weight: 700; white-space: nowrap; display: inline-flex; align-items: center; gap: 6px; }
 .dt-promo:hover { background: #000; }
 @media (max-width: 640px) { .dt-promo { flex-direction: column; align-items: flex-start; } }
+
+/* ===================== Hero: slider me foto ===================== */
+.hero__slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1.4s var(--ease); overflow: hidden; }
+.hero__slide.is-on { opacity: 1; }
+.hero__slide .hero__img { transform: scale(1.06); transition: transform 9s linear; }
+.hero__slide.is-on .hero__img { transform: scale(1); }
+.hero__slide:first-child .hero__img { transform: none; transition: none; }
+.hero__ctl { display: flex; align-items: center; gap: 6px; min-width: 0; }
+.hero__ctl[hidden] { display: none; }
+.hero__dot { width: 34px; height: 30px; padding: 0; border: 0; background: none; cursor: pointer; position: relative; }
+.hero__dot::before { content: ""; position: absolute; left: 4px; right: 4px; top: 50%; height: 3px; margin-top: -1.5px; border-radius: 2px;
+  background: rgba(255,255,255,.42); transition: background .3s; }
+.hero__dot[aria-pressed="true"]::before { background: #fff; }
+.hero__dot:hover::before { background: rgba(255,255,255,.8); }
+.hero__dot:focus-visible { outline: 2px solid #fff; outline-offset: 0; border-radius: 4px; }
+.hero__ctl .hero__toggle { width: 36px; height: 36px; margin-left: 8px; }
+.hero__label { transition: opacity .4s; }
+.hero__credit { font: 400 12px/1 var(--sans); color: rgba(255,255,255,.7); text-decoration: none; }
+.hero__credit:hover { color: #fff; text-decoration: underline; }
+.hero__credit[hidden] { display: none; }
+@media (max-width: 720px) {
+  .hero__meta { bottom: 16px; }
+  .hero__meta .wrap { align-items: flex-end; }
+  .hero__place { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .hero__place svg { display: none; }
+  .hero__credit { display: inline; font-size: 11px; }
+  .hero__place i.cr { display: none; }
+  .hero__dot { width: 26px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero__slide .hero__img { transform: none !important; }
+}
+@media (max-width: 720px) { .hero__coords { display: none; } }

@@ -115,6 +115,65 @@
     setInterval(rifresko, 60000);
   }
 
+  // ---- Hero: slider me foto (fotot e Wikimedia ngarkohen pasi faqja hapet plotësisht) ----
+  (function () {
+    const media = document.querySelector(".hero__media"), ctl = document.querySelector(".hero__ctl");
+    if (!media || !ctl) return;
+    const slides = [...media.querySelectorAll(".hero__slide")], dots = [...ctl.querySelectorAll(".hero__dot")];
+    const btn = ctl.querySelector(".hero__toggle"), label = document.querySelector(".hero__label");
+    const credit = document.querySelector(".hero__credit"), coords = document.querySelector(".hero__coords");
+    const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const KOHA = 7000;
+    let cur = 0, timer = null, paused = calm, loaded = false;
+
+    function load(sl) {
+      const img = sl.querySelector("img[data-src]");
+      if (!img) return Promise.resolve(true);
+      return new Promise(res => {
+        img.onload = () => { sl.dataset.ok = "1"; res(true); };
+        img.onerror = () => { sl.dataset.bad = "1"; res(false); };
+        img.srcset = img.dataset.srcset; img.src = img.dataset.src;
+        img.removeAttribute("data-src");
+      });
+    }
+    function show(i) {
+      if (i === cur) return;
+      const sl = slides[i];
+      if (sl.dataset.bad) return;
+      const go = () => {
+        slides[cur].classList.remove("is-on"); sl.classList.add("is-on"); cur = i;
+        dots.forEach((d, k) => d.setAttribute("aria-pressed", k === i ? "true" : "false"));
+        if (label) label.textContent = sl.dataset.label;
+        if (credit) {
+          if (sl.dataset.artist) {
+            credit.textContent = ctl.dataset.photo + ": " + sl.dataset.artist + ", " + sl.dataset.license;
+            credit.href = sl.dataset.page; credit.hidden = false; if (coords) coords.hidden = true;
+          } else { credit.hidden = true; if (coords) coords.hidden = false; }
+        }
+      };
+      sl.dataset.ok || !sl.querySelector("img[data-src]") ? go() : load(sl).then(ok => ok && go());
+    }
+    function next() {
+      for (let k = 1; k <= slides.length; k++) { const j = (cur + k) % slides.length; if (!slides[j].dataset.bad) return show(j); }
+    }
+    function plan() { clearTimeout(timer); if (!paused && !document.hidden && loaded) timer = setTimeout(() => { next(); plan(); }, KOHA); }
+    function setPaused(p) {
+      paused = p; btn.classList.toggle("is-paused", p);
+      btn.setAttribute("aria-label", p ? ctl.dataset.play : ctl.dataset.pause); plan();
+    }
+    dots.forEach((d, k) => d.addEventListener("click", () => { show(k); plan(); }));
+    btn.addEventListener("click", () => setPaused(!paused));
+    document.addEventListener("visibilitychange", plan);
+    ctl.hidden = false; setPaused(paused);
+    // Fotot e tjera vetëm pasi faqja të ketë mbaruar (që të mos vonojnë foton e parë)
+    const start = () => setTimeout(() => {
+      const ngarko = slides.slice(1).reduce((p, sl) => p.then(() => load(sl)), Promise.resolve());
+      loaded = true; plan();
+      ngarko.then(() => slides.forEach((sl, k) => { if (sl.dataset.bad && dots[k]) dots[k].hidden = true; }));
+    }, 1200);
+    document.readyState === "complete" ? start() : window.addEventListener("load", start);
+  })();
+
   // ---- Faqja pa internet: service worker (vetëm në HTTPS ose localhost, siç kërkojnë shfletuesit) ----
   if ("serviceWorker" in navigator && (location.protocol === "https:" || ["localhost", "127.0.0.1"].includes(location.hostname))) {
     window.addEventListener("load", () => navigator.serviceWorker.register(document.body.dataset.root + "sw.js").catch(() => {}));

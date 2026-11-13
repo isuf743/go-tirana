@@ -47,9 +47,10 @@ import arti
 from tekstet_info import INFO, URGJENCA, BURIMET, KONTROLLUAR
 from tekstet_itinerare import ITINERARET, UI as IT_UI, KUFIRI_ECJES
 import tekstet_udhetime as UDH
+import tekstet_hero as HERO
 from tekstet import GJUHET, EMRAT_E_GJUHEVE, LOCALE, KATEGORITE, KATEGORITE_PERSHKRIM, T, PRIVATESIA, KUSHTET
 
-VERSIONI = "25"   # rrit këtë numër kur ndryshon CSS/JS, që shfletuesit të marrin versionin e ri
+VERSIONI = "26"   # rrit këtë numër kur ndryshon CSS/JS, që shfletuesit të marrin versionin e ri
 
 
 def lexo_json(emri):
@@ -146,6 +147,16 @@ def foto_wikimedia(f):
     baza = "https://upload.wikimedia.org/wikipedia/commons/thumb/" + f["path"]
     emri = f["name"] + (".png" if f["name"].lower().endswith(".svg") else "")
     return {**f, **{f"src{w}": f"{baza}/{w}px-{emri}" for w in (500, 960, 1280)}}
+
+
+def slidet_hero(lang):
+    """Fotot e slider-it me URL-të e Wikimedia (960/1280/1920 px janë madhësi standarde)."""
+    dalja = []
+    for f in HERO.SLIDET:
+        baza = "https://upload.wikimedia.org/wikipedia/commons/thumb/" + f["path"] + "/"
+        dalja.append({**f, "label": f["label"][lang], "src": baza + "1280px-" + f["name"],
+                      "srcset": ", ".join(f"{baza}{w}px-{f['name']} {w}w" for w in (960, 1280, 1920))})
+    return dalja
 
 
 def main():
@@ -254,6 +265,7 @@ def main():
            cat_img={k: sipas_slug[s]["img"] for k, s in FOTO_KATEGORIE.items() if sipas_slug.get(s, {}).get("img")},
            places=vendet, places_json=te_dhenat_harte(vendet), places_by_cat=sipas_kat,
            story_imgs=[sipas_slug[s] for s in FOTO_HISTORIA], credit_list=vendet, itins=itineraret[1], it_ui=IT_UI[lang],
+           hero_slides=slidet_hero(lang), hero_ui=HERO.UI[lang],
            bus_msgs=json_attr({k: t[k] for k in ("locating", "loc_denied", "loc_outside", "loc_unavailable",
                                                  "form_err_to", "form_err_same", "my_location")}),
            nl_msgs=json_attr({k: t[k] for k in ("nl_ok", "nl_sending", "nl_err_email", "nl_err_consent",
