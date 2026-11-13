@@ -17,7 +17,9 @@
     const fd = new FormData(form);
     if (!ext) return fetch(api, { method: "POST", body: fd, credentials: "same-origin" });
     fd.delete("token");
-    fd.set("_gotcha", fd.get("website") || ""); fd.delete("website");   // fusha kurth kundër spam-it
+    // Fusha kurth nuk i dërgohet Formspree-së: Chrome mund ta plotësojë vetë dhe mesazhi do të hidhej si spam.
+    // Formspree ka filtrin e vet kundër spam-it.
+    fd.delete("website");
     fd.set("_subject", form.dataset.subject || "Go Tirana");
     fd.set("page", location.href);
     return fetch(api, { method: "POST", body: fd, headers: { Accept: "application/json" } });

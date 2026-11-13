@@ -48,7 +48,7 @@ from tekstet_info import INFO, URGJENCA, BURIMET, KONTROLLUAR
 from tekstet_itinerare import ITINERARET, UI as IT_UI, KUFIRI_ECJES
 from tekstet import GJUHET, EMRAT_E_GJUHEVE, LOCALE, KATEGORITE, KATEGORITE_PERSHKRIM, T, PRIVATESIA, KUSHTET
 
-VERSIONI = "21"   # rrit këtë numër kur ndryshon CSS/JS, që shfletuesit të marrin versionin e ri
+VERSIONI = "22"   # rrit këtë numër kur ndryshon CSS/JS, që shfletuesit të marrin versionin e ri
 
 
 def lexo_json(emri):
