@@ -126,6 +126,24 @@
     <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/explore/nightlife/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/explore/nightlife/"/>
   </url>
+  <url><loc>https://isuf743.github.io/go-tirana/en/explore/shopping/</loc><lastmod>2026-10-10</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/explore/shopping/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/explore/shopping/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/explore/shopping/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/explore/shopping/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/it/explore/shopping/</loc><lastmod>2026-10-10</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/explore/shopping/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/explore/shopping/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/explore/shopping/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/explore/shopping/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/sq/explore/shopping/</loc><lastmod>2026-10-10</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/explore/shopping/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/explore/shopping/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/explore/shopping/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/explore/shopping/"/>
+  </url>
   <url><loc>https://isuf743.github.io/go-tirana/en/destinations/</loc><lastmod>2026-10-10</lastmod><priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/destinations/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/destinations/"/>
@@ -917,6 +935,96 @@
     <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/places/zgara-korcare/"/>
     <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/places/zgara-korcare/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/places/zgara-korcare/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/en/places/tirana-east-gate/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/places/tirana-east-gate/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/places/tirana-east-gate/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/places/tirana-east-gate/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/places/tirana-east-gate/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/it/places/tirana-east-gate/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/places/tirana-east-gate/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/places/tirana-east-gate/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/places/tirana-east-gate/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/places/tirana-east-gate/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/sq/places/tirana-east-gate/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/places/tirana-east-gate/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/places/tirana-east-gate/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/places/tirana-east-gate/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/places/tirana-east-gate/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/en/places/toptani-shopping-center/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/places/toptani-shopping-center/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/places/toptani-shopping-center/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/places/toptani-shopping-center/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/places/toptani-shopping-center/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/it/places/toptani-shopping-center/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/places/toptani-shopping-center/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/places/toptani-shopping-center/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/places/toptani-shopping-center/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/places/toptani-shopping-center/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/sq/places/toptani-shopping-center/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/places/toptani-shopping-center/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/places/toptani-shopping-center/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/places/toptani-shopping-center/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/places/toptani-shopping-center/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/en/places/qtu/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/places/qtu/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/places/qtu/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/places/qtu/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/places/qtu/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/it/places/qtu/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/places/qtu/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/places/qtu/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/places/qtu/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/places/qtu/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/sq/places/qtu/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/places/qtu/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/places/qtu/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/places/qtu/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/places/qtu/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/en/places/ring-center/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/places/ring-center/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/places/ring-center/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/places/ring-center/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/places/ring-center/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/it/places/ring-center/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/places/ring-center/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/places/ring-center/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/places/ring-center/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/places/ring-center/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/sq/places/ring-center/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/places/ring-center/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/places/ring-center/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/places/ring-center/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/places/ring-center/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/en/places/casa-italia/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/places/casa-italia/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/places/casa-italia/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/places/casa-italia/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/places/casa-italia/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/it/places/casa-italia/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/places/casa-italia/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/places/casa-italia/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/places/casa-italia/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/places/casa-italia/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/sq/places/casa-italia/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/places/casa-italia/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/places/casa-italia/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/places/casa-italia/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/places/casa-italia/"/>
   </url>
   <url><loc>https://isuf743.github.io/go-tirana/en/contact/</loc><lastmod>2026-10-10</lastmod><priority>0.4</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/contact/"/>

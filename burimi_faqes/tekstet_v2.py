@@ -297,6 +297,9 @@ KAT_PERSHKRIM = {
     "nightlife": {"en": "Experience Tirana after dark, from stylish cocktail bars to lively clubs.",
                   "it": "Vivi Tirana dopo il tramonto, dai cocktail bar eleganti ai club più vivaci.",
                   "sq": "Përjeto Tiranën pas errësirës, nga baret elegante të kokteileve te klubet plot energji."},
+    "shopping": {"en": "Malls in the centre and on the edge of town, with the city bus that takes you to each one.",
+                 "it": "Centri commerciali in centro e in periferia, con l'autobus urbano che ti porta a ognuno.",
+                 "sq": "Qendra tregtare në qendër dhe në periferi, me autobusin e qytetit që të çon te secila."},
 }
 
 # Seksion i ri te politika e privatësisë: lista e emaileve

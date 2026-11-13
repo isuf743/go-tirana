@@ -50,7 +50,7 @@ import tekstet_udhetime as UDH
 import tekstet_hero as HERO
 from tekstet import GJUHET, EMRAT_E_GJUHEVE, LOCALE, KATEGORITE, KATEGORITE_PERSHKRIM, T, PRIVATESIA, KUSHTET
 
-VERSIONI = "31"   # rrit këtë numër kur ndryshon CSS/JS, që shfletuesit të marrin versionin e ri
+VERSIONI = "32"   # rrit këtë numër kur ndryshon CSS/JS, që shfletuesit të marrin versionin e ri
 
 
 def lexo_json(emri):
@@ -133,7 +133,7 @@ def pergatit_itinerar(it, lang, sipas_slug, root):
 
 # Fotoja që përfaqëson çdo kategori në faqen kryesore, dhe tri ndalesat e seksionit "Një ditë në Tiranë"
 FOTO_KATEGORIE = {"history": "national-historical-museum", "photo": "pyramid", "nature": "mount-dajti",
-                  "food": "new-bazaar", "nightlife": "komiteti"}
+                  "food": "new-bazaar", "nightlife": "komiteti", "shopping": "toptani-shopping-center"}
 DITA = ["skanderbeg-square", "dajti-ekspres", "sky-tower"]
 # Vendet e zgjedhura në faqen kryesore (sipas brief-it) dhe fotot e seksionit "Rreth Tiranës"
 TE_ZGJEDHURA = ["skanderbeg-square", "pyramid", "bunkart-2", "grand-park", "new-bazaar", "mount-dajti"]

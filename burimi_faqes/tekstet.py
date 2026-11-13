@@ -13,6 +13,7 @@ KATEGORITE = {
     "nature":    {"color": "#2d6a31", "en": "Nature & views", "it": "Natura e panorami", "sq": "Natyrë dhe pamje"},
     "food":      {"color": "#8f5a0a", "en": "Food & markets", "it": "Cibo e mercati", "sq": "Ushqim dhe pazare"},
     "nightlife": {"color": "#5b3fa6", "en": "Nightlife", "it": "Vita notturna", "sq": "Jeta e natës"},
+    "shopping":  {"color": "#a8326e", "en": "Shopping malls", "it": "Centri commerciali", "sq": "Qendra tregtare"},
 }
 
 KATEGORITE_PERSHKRIM = {
@@ -40,6 +41,11 @@ KATEGORITE_PERSHKRIM = {
         "en": "From a quiet raki to a late DJ set.",
         "it": "Da una raki tranquilla a un DJ set a notte fonda.",
         "sq": "Nga një raki e qetë deri te një DJ set vonë natën.",
+    },
+    "shopping": {
+        "en": "From the mall next to the castle to Albania's biggest, all by city bus.",
+        "it": "Dal centro commerciale accanto al castello al più grande d'Albania, tutti in autobus urbano.",
+        "sq": "Nga qendra tregtare pranë kalasë te më e madhja në Shqipëri, të gjitha me autobusin e qytetit.",
     },
 }
 

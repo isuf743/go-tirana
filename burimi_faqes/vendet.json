@@ -1952,5 +1952,405 @@
    "it": "Tutti i giorni 11:00–00:00",
    "sq": "Çdo ditë 11:00–00:00"
   }
+ },
+ {
+  "slug": "tirana-east-gate",
+  "cats": [
+   "shopping"
+  ],
+  "featured": false,
+  "lat": 41.28313,
+  "lon": 19.85709,
+  "local": "TEG – Tirana East Gate",
+  "area": "Lundër",
+  "fee": "free",
+  "duration": [
+   90,
+   240
+  ],
+  "name": {
+   "en": "TEG – Tirana East Gate",
+   "it": "TEG – Tirana East Gate",
+   "sq": "TEG – Tirana East Gate"
+  },
+  "summary": {
+   "en": "Albania's biggest mall: around 180 shops, a cinema and a big food court, on the road to Elbasan.",
+   "it": "Il centro commerciale più grande d'Albania: circa 180 negozi, un cinema e una grande area ristorazione, sulla strada per Elbasan.",
+   "sq": "Qendra tregtare më e madhe në Shqipëri: rreth 180 dyqane, kinema dhe zonë e madhe ushqimi, në rrugën për Elbasan."
+  },
+  "about": {
+   "en": "Opened in 2011 about 4 km south-east of the centre, TEG spreads over two long floors with international fashion chains, electronics, a hypermarket, a Cineplexx multiplex and plenty of cafés and restaurants. Right next to it is the Eastern Bus Terminal, where coaches leave for the south-east of the country and abroad, so it is also a handy stop before or after a trip.",
+   "it": "Aperto nel 2011 a circa 4 km a sud-est del centro, il TEG si sviluppa su due lunghi piani con catene di moda internazionali, elettronica, un ipermercato, un multisala Cineplexx e tanti bar e ristoranti. Accanto c'è il Terminal Est degli autobus, da cui partono i pullman per il sud-est del paese e per l'estero: comodo anche prima o dopo un viaggio.",
+   "sq": "I hapur në vitin 2011, rreth 4 km në juglindje të qendrës, TEG shtrihet në dy kate të gjata me marka ndërkombëtare veshjesh, elektronikë, një hipermarket, kinemanë Cineplexx dhe shumë kafene e restorante. Ngjitur është Terminali Lindor i autobusëve, nga ku nisen autobusët për juglindjen e vendit dhe jashtë shtetit, ndaj është ndalesë e përshtatshme para ose pas një udhëtimi."
+  },
+  "tips": {
+   "en": [
+    "City buses L2 and L8/A stop right outside; the ride from the centre takes about 25 minutes.",
+    "Weekends get crowded in the afternoon; weekday mornings are calmest."
+   ],
+   "it": [
+    "Gli autobus urbani L2 e L8/A fermano proprio davanti; da centro ci vogliono circa 25 minuti.",
+    "Nel weekend il pomeriggio è affollato; le mattine dei giorni feriali sono le più tranquille."
+   ],
+   "sq": [
+    "Autobusët e qytetit L2 dhe L8/A ndalojnë te dera; nga qendra duhen rreth 25 minuta.",
+    "Në fundjavë pasditja është plot; mëngjeset e ditëve të javës janë më të qeta."
+   ]
+  },
+  "hours": {
+   "en": "Mon–Fri 10:00–22:00, Sat–Sun 09:00–22:00",
+   "it": "lun–ven 10:00–22:00, sab–dom 09:00–22:00",
+   "sq": "Hën–Pre 10:00–22:00, Sht–Die 09:00–22:00"
+  },
+  "orari": [
+   [
+    "10:00",
+    "22:00"
+   ],
+   [
+    "10:00",
+    "22:00"
+   ],
+   [
+    "10:00",
+    "22:00"
+   ],
+   [
+    "10:00",
+    "22:00"
+   ],
+   [
+    "10:00",
+    "22:00"
+   ],
+   [
+    "09:00",
+    "22:00"
+   ],
+   [
+    "09:00",
+    "22:00"
+   ]
+  ]
+ },
+ {
+  "slug": "toptani-shopping-center",
+  "cats": [
+   "shopping"
+  ],
+  "featured": false,
+  "lat": 41.32702,
+  "lon": 19.82275,
+  "local": "Toptani Shopping Center",
+  "area": "Qendra",
+  "fee": "free",
+  "duration": [
+   45,
+   120
+  ],
+  "name": {
+   "en": "Toptani Shopping Center",
+   "it": "Toptani Shopping Center",
+   "sq": "Qendra Tregtare Toptani"
+  },
+  "summary": {
+   "en": "The mall in the middle of town, a few minutes' walk from Skanderbeg Square, with views from the top floor.",
+   "it": "Il centro commerciale in pieno centro, a pochi minuti a piedi da piazza Scanderbeg, con vista dall'ultimo piano.",
+   "sq": "Qendra tregtare në mes të qytetit, disa minuta në këmbë nga Sheshi Skënderbej, me pamje nga kati i fundit."
+  },
+  "about": {
+   "en": "Opened in 2017 next to the walls of Tirana Castle, Toptani stacks around 80 shops over several floors: fashion and sports chains, cosmetics, home goods and a supermarket downstairs. It is the easiest mall to fit into a day of sightseeing, and the upper floors look out over the rooftops of the centre.",
+   "it": "Aperto nel 2017 accanto alle mura del Castello di Tirana, il Toptani raccoglie circa 80 negozi su più piani: catene di moda e sport, cosmetica, casa e un supermercato al piano inferiore. È il centro commerciale più facile da inserire in una giornata di visite, e dai piani alti si vedono i tetti del centro.",
+   "sq": "I hapur në vitin 2017 pranë mureve të Kalasë së Tiranës, Toptani ka rreth 80 dyqane në disa kate: marka veshjesh dhe sporti, kozmetikë, artikuj shtëpie dhe një supermarket poshtë. Është qendra tregtare më e lehtë për t'u futur në një ditë vizitash, dhe nga katet e sipërme duken çatitë e qendrës."
+  },
+  "tips": {
+   "en": [
+    "Combine it with Tirana Castle and the New Bazaar, both a short walk away.",
+    "Handy for cash machines and a quick supermarket stop in the centre."
+   ],
+   "it": [
+    "Abbinalo al Castello di Tirana e al Pazari i Ri, entrambi a pochi passi.",
+    "Comodo per bancomat e una spesa veloce in centro."
+   ],
+   "sq": [
+    "Bashkoje me Kalanë e Tiranës dhe Pazarin e Ri, që janë fare pranë.",
+    "I dobishëm për bankomat dhe një blerje të shpejtë në qendër."
+   ]
+  },
+  "hours": {
+   "en": "Daily 09:00–22:00",
+   "it": "Tutti i giorni 09:00–22:00",
+   "sq": "Çdo ditë 09:00–22:00"
+  },
+  "orari": [
+   [
+    "09:00",
+    "22:00"
+   ],
+   [
+    "09:00",
+    "22:00"
+   ],
+   [
+    "09:00",
+    "22:00"
+   ],
+   [
+    "09:00",
+    "22:00"
+   ],
+   [
+    "09:00",
+    "22:00"
+   ],
+   [
+    "09:00",
+    "22:00"
+   ],
+   [
+    "09:00",
+    "22:00"
+   ]
+  ]
+ },
+ {
+  "slug": "qtu",
+  "cats": [
+   "shopping"
+  ],
+  "featured": false,
+  "lat": 41.3541,
+  "lon": 19.74924,
+  "local": "QTU – Qendra Tregtare Univers",
+  "area": "Kashar",
+  "fee": "free",
+  "duration": [
+   60,
+   180
+  ],
+  "name": {
+   "en": "QTU (Universe Shopping Centre)",
+   "it": "QTU (Centro commerciale Univers)",
+   "sq": "QTU – Qendra Tregtare Univers"
+  },
+  "summary": {
+   "en": "One of Tirana's oldest big malls, on the Durrës highway, with a hypermarket and a cinema.",
+   "it": "Uno dei primi grandi centri commerciali di Tirana, sull'autostrada per Durazzo, con ipermercato e cinema.",
+   "sq": "Një nga qendrat e para të mëdha tregtare të Tiranës, në autostradën për Durrës, me hipermarket dhe kinema."
+  },
+  "about": {
+   "en": "Open since 2005 at kilometre 6 of the Tirana–Durrës highway, QTU is where many locals do their big weekly shop. Besides the large Carrefour hypermarket there are fashion and electronics stores, a food court and a Cineplexx cinema. It is a practical stop if you are heading to or from Durrës or the airport side of the city.",
+   "it": "Aperto dal 2005 al chilometro 6 dell'autostrada Tirana–Durazzo, il QTU è dove molti abitanti fanno la spesa grande della settimana. Oltre al grande ipermercato Carrefour ci sono negozi di moda ed elettronica, un'area ristorazione e un cinema Cineplexx. È una tappa pratica se vai o torni da Durazzo o dalla zona dell'aeroporto.",
+   "sq": "I hapur që nga viti 2005 në kilometrin e 6-të të autostradës Tiranë–Durrës, QTU është vendi ku shumë banorë bëjnë blerjet e mëdha të javës. Përveç hipermarketit të madh Carrefour ka dyqane veshjesh dhe elektronike, zonë ushqimi dhe kinemanë Cineplexx. Është ndalesë praktike kur shkon ose kthehesh nga Durrësi ose nga ana e aeroportit."
+  },
+  "tips": {
+   "en": [
+    "City bus L4 (Centre – Vorë) has a stop called QTU right by the entrance.",
+    "Cross the highway only at the footbridge or traffic lights."
+   ],
+   "it": [
+    "L'autobus urbano L4 (Centro – Vorë) ha una fermata chiamata QTU proprio all'ingresso.",
+    "Attraversa l'autostrada solo dalla passerella o ai semafori."
+   ],
+   "sq": [
+    "Autobusi i qytetit L4 (Qendër – Vorë) ka stacion me emrin QTU fare pranë hyrjes.",
+    "Kaloje autostradën vetëm te ura e këmbësorëve ose te semafori."
+   ]
+  },
+  "hours": {
+   "en": "Daily 09:00–22:00",
+   "it": "Tutti i giorni 09:00–22:00",
+   "sq": "Çdo ditë 09:00–22:00"
+  },
+  "orari": [
+   [
+    "09:00",
+    "22:00"
+   ],
+   [
+    "09:00",
+    "22:00"
+   ],
+   [
+    "09:00",
+    "22:00"
+   ],
+   [
+    "09:00",
+    "22:00"
+   ],
+   [
+    "09:00",
+    "22:00"
+   ],
+   [
+    "09:00",
+    "22:00"
+   ],
+   [
+    "09:00",
+    "22:00"
+   ]
+  ]
+ },
+ {
+  "slug": "ring-center",
+  "cats": [
+   "shopping"
+  ],
+  "featured": false,
+  "lat": 41.33256,
+  "lon": 19.80362,
+  "local": "Ring Center",
+  "area": "Rruga e Kavajës",
+  "fee": "free",
+  "duration": [
+   45,
+   120
+  ],
+  "name": {
+   "en": "Ring Center",
+   "it": "Ring Center",
+   "sq": "Ring Center"
+  },
+  "summary": {
+   "en": "A mid-sized mall just west of the centre, with three floors of shops, restaurants and a kids' area.",
+   "it": "Un centro commerciale di medie dimensioni appena a ovest del centro, con tre piani di negozi, ristoranti e un'area per bambini.",
+   "sq": "Qendër tregtare e mesme pak në perëndim të qendrës, me tre kate dyqanesh, restorante dhe kënd lojërash për fëmijë."
+  },
+  "about": {
+   "en": "Ring Center sits on the city's ring road, within walking distance of the centre, and gathers around 60 shops on three levels: clothing and shoe chains, cosmetics, electronics and home goods, plus places to eat. It is less hectic than the big malls on the edge of town and easy to reach on foot or by the green circular line.",
+   "it": "Il Ring Center si trova sulla circonvallazione della città, a distanza pedonale dal centro, e riunisce circa 60 negozi su tre livelli: catene di abbigliamento e scarpe, cosmetica, elettronica e casa, oltre a posti dove mangiare. È meno caotico dei grandi centri in periferia e si raggiunge facilmente a piedi o con la linea circolare verde.",
+   "sq": "Ring Center ndodhet në Unazën e qytetit, në distancë ecjeje nga qendra, dhe ka rreth 60 dyqane në tre nivele: marka veshjesh e këpucësh, kozmetikë, elektronikë dhe artikuj shtëpie, si edhe vende për të ngrënë. Është më i qetë se qendrat e mëdha në periferi dhe arrihet lehtë në këmbë ose me linjën rrethore të gjelbër."
+  },
+  "tips": {
+   "en": [
+    "The green circular line L16 stops at Karl Topia, a minute away.",
+    "About 20 minutes on foot from Skanderbeg Square."
+   ],
+   "it": [
+    "La linea circolare verde L16 ferma a Karl Topia, a un minuto.",
+    "Circa 20 minuti a piedi da piazza Scanderbeg."
+   ],
+   "sq": [
+    "Linja rrethore e gjelbër L16 ndalon te Karl Topia, një minutë larg.",
+    "Rreth 20 minuta në këmbë nga Sheshi Skënderbej."
+   ]
+  },
+  "hours": {
+   "en": "Daily 09:00–22:00",
+   "it": "Tutti i giorni 09:00–22:00",
+   "sq": "Çdo ditë 09:00–22:00"
+  },
+  "orari": [
+   [
+    "09:00",
+    "22:00"
+   ],
+   [
+    "09:00",
+    "22:00"
+   ],
+   [
+    "09:00",
+    "22:00"
+   ],
+   [
+    "09:00",
+    "22:00"
+   ],
+   [
+    "09:00",
+    "22:00"
+   ],
+   [
+    "09:00",
+    "22:00"
+   ],
+   [
+    "09:00",
+    "22:00"
+   ]
+  ]
+ },
+ {
+  "slug": "casa-italia",
+  "cats": [
+   "shopping"
+  ],
+  "featured": false,
+  "lat": 41.34191,
+  "lon": 19.77583,
+  "local": "Casa Italia",
+  "area": "Terminali i autobusëve",
+  "fee": "free",
+  "duration": [
+   45,
+   120
+  ],
+  "name": {
+   "en": "Casa Italia",
+   "it": "Casa Italia",
+   "sq": "Casa Italia"
+  },
+  "summary": {
+   "en": "An outlet complex beside the main bus terminal, mostly mid-range clothing at lower prices.",
+   "it": "Un complesso outlet accanto al terminal principale degli autobus, soprattutto abbigliamento di fascia media a prezzi ridotti.",
+   "sq": "Kompleks outlet pranë terminalit kryesor të autobusëve, kryesisht veshje të nivelit të mesëm me çmime më të ulëta."
+  },
+  "about": {
+   "en": "Casa Italia is a large single-level complex on the Tirana–Durrës road, a couple of minutes' walk from the North–South Bus Terminal. Its outlet shops focus on clothing, shoes and home goods at discounted prices. If you arrive early for an intercity bus, it is the most useful way to pass the time nearby.",
+   "it": "Casa Italia è un grande complesso su un solo livello sulla strada Tirana–Durazzo, a un paio di minuti a piedi dal Terminal Nord–Sud degli autobus. I negozi outlet puntano su abbigliamento, scarpe e casa a prezzi scontati. Se arrivi presto per un autobus interurbano, è il modo più utile per passare il tempo lì vicino.",
+   "sq": "Casa Italia është kompleks i madh njëkatësh në rrugën Tiranë–Durrës, disa minuta në këmbë nga Terminali Veri–Jug i autobusëve. Dyqanet outlet merren kryesisht me veshje, këpucë dhe artikuj shtëpie me çmime të ulura. Nëse mbërrin herët për një autobus ndërqytetës, është mënyra më e dobishme për të kaluar kohën aty pranë."
+  },
+  "tips": {
+   "en": [
+    "City buses L4 and L5B stop at the bus terminal next door.",
+    "Good for a quick look if you are catching a bus to Durrës, Shkodër or the south."
+   ],
+   "it": [
+    "Gli autobus urbani L4 e L5B fermano al terminal accanto.",
+    "Utile per un giro veloce se prendi un autobus per Durazzo, Scutari o il sud."
+   ],
+   "sq": [
+    "Autobusët e qytetit L4 dhe L5B ndalojnë te terminali ngjitur.",
+    "E mirë për një xhiro të shpejtë kur pret autobusin për Durrës, Shkodër ose jugun."
+   ]
+  },
+  "hours": {
+   "en": "Daily 09:00–21:00",
+   "it": "Tutti i giorni 09:00–21:00",
+   "sq": "Çdo ditë 09:00–21:00"
+  },
+  "orari": [
+   [
+    "09:00",
+    "21:00"
+   ],
+   [
+    "09:00",
+    "21:00"
+   ],
+   [
+    "09:00",
+    "21:00"
+   ],
+   [
+    "09:00",
+    "21:00"
+   ],
+   [
+    "09:00",
+    "21:00"
+   ],
+   [
+    "09:00",
+    "21:00"
+   ],
+   [
+    "09:00",
+    "21:00"
+   ]
+  ]
  }
 ]

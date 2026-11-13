@@ -202,6 +202,7 @@ body:not(.has-hero) main { padding-top: var(--hdr); }
 .cat:nth-child(2) { grid-column: span 5; }
 .cat:nth-child(3) { grid-column: span 5; }
 .cat:nth-child(4), .cat:nth-child(5) { grid-column: span 6; }
+@media (min-width: 1021px) { .cats:has(.cat:nth-child(6)) .cat:nth-child(n+4) { grid-column: span 4; } }
 .cat__img { position: absolute; inset: 0; z-index: -2; }
 .cat__img img, .cat__img svg { width: 100%; height: 100%; object-fit: cover; transition: transform 1.1s var(--ease); }
 .cat::after { content: ""; position: absolute; inset: 0; z-index: -1;
@@ -223,6 +224,7 @@ body:not(.has-hero) main { padding-top: var(--hdr); }
   .cats { grid-auto-rows: 260px; }
   .cat, .cat:nth-child(n) { grid-column: span 6; grid-row: auto; }
   .cat:nth-child(1) { grid-column: span 12; }
+  .cats:has(.cat:nth-child(6)) .cat:nth-child(6) { grid-column: span 12; }
   .cat:not(:first-child) .cat__desc { display: none; }
 }
 @media (max-width: 680px) {   /* telefoni: karusel horizontal me "snap" */

@@ -196,5 +196,32 @@
   "license": "CC BY-SA 4.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
   "ratio": 0.75
+ },
+ "tirana-east-gate": {
+  "path": "0/0d/TEG_Tirana_2016.jpg",
+  "name": "TEG_Tirana_2016.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:TEG_Tirana_2016.jpg",
+  "artist": "Kj1595",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "ratio": 0.75
+ },
+ "toptani-shopping-center": {
+  "path": "3/35/Toptani_Shopping_Mall_Tirana_2016.jpg",
+  "name": "Toptani_Shopping_Mall_Tirana_2016.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Toptani_Shopping_Mall_Tirana_2016.jpg",
+  "artist": "Chris Walts",
+  "license": "CC BY-SA 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+  "ratio": 0.6667
+ },
+ "qtu": {
+  "path": "d/d6/Kashar%2C_Tirana_County%2C_Albania%2C_31_December_2022_-_QTU_shopping_mall.jpg",
+  "name": "Kashar%2C_Tirana_County%2C_Albania%2C_31_December_2022_-_QTU_shopping_mall.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Kashar,_Tirana_County,_Albania,_31_December_2022_-_QTU_shopping_mall.jpg",
+  "artist": "Sharon Hahn Darlin",
+  "license": "CC BY 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+  "ratio": 0.75
  }
 }
