@@ -24,8 +24,8 @@
   dhe të tregojë relievin (malet) në 3D.
 -->
 
-<script src="../js/dijkstra.js?v=8"></script>
-<script src="../js/ecja.js?v=2"></script>
+<link rel="preconnect" href="https://maps.googleapis.com">
+<link rel="preconnect" href="https://maps.gstatic.com" crossorigin>
 <link rel="preload" href="../assets/fonts/manrope-var.woff2" as="font" type="font/woff2" crossorigin>
 <style>
   @font-face { font-family: "Manrope"; font-weight: 200 800; font-display: swap; src: url(../assets/fonts/manrope-var.woff2) format("woff2"); }
@@ -292,6 +292,9 @@
   </aside>
 </div>
 
+<!-- Algoritmi i rrugës: ngarkohet pas panelit, që faqja të shfaqet më shpejt -->
+<script src="../js/dijkstra.js?v=8"></script>
+<script src="../js/ecja.js?v=2"></script>
 <script>
 // ===========================================================================
 // GJUHA (en / it / sq): nga ?lang=, ose nga zgjedhja e ruajtur në Go Tirana

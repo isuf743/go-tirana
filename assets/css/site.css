@@ -185,7 +185,7 @@ body:not(.has-hero) main { padding-top: var(--hdr); }
 .hero__toggle.is-paused .i-play { display: block; }
 .hero__ctl { display: flex; justify-content: flex-end; min-width: 42px; }
 /* hyrja e animuar e tekstit */
-.hero [data-enter] { opacity: 0; transform: translateY(22px); animation: enter 1s var(--ease) forwards; animation-delay: calc(var(--d, 0) * 120ms + 150ms); }
+.hero [data-enter] { opacity: .01; transform: translateY(22px); animation: enter 1s var(--ease) forwards; animation-delay: calc(var(--d, 0) * 120ms + 150ms); }
 @keyframes enter { to { opacity: 1; transform: none; } }
 @media (max-width: 720px) {
   .hero__inner { padding-bottom: 120px; }
@@ -810,3 +810,7 @@ a.tag:hover { border-color: var(--dark); color: var(--dark); }
 
 .gmaps-dir { display: inline-flex; margin-top: 14px; font-size: 14px; }
 .itin__gmaps { width: 100%; justify-content: center; margin-top: 14px; }
+
+/* Telefon vertikal: foto e prerë vetëm me pjesën që shihet (hero-mobile.webp), e qendërzuar */
+.hero__media picture { display: contents; }
+@media (max-width: 760px) and (orientation: portrait) { .hero__img { object-position: 50% 50%; } }

@@ -88,7 +88,7 @@
           {% if cfg.facebook_url %}<li><a href="{{ cfg.facebook_url }}" rel="noopener me" target="_blank">Facebook</a></li>{% endif %}
           {% if cfg.email and not cfg.email.startswith("[") %}<li><a href="mailto:{{ cfg.email }}">{{ cfg.email }}</a></li>{% endif %}
           <li><a href="{{ root }}{{ lang }}/contact/">{{ t.contact_title }}</a></li>
-          <li><button class="ftr__btn" type="button" data-open-consent>{{ t.cookie_settings }}</button></li>
+{% if cfg.goatcounter_code %}<li><button class="ftr__btn" type="button" data-open-consent>{{ t.cookie_settings }}</button></li>{% endif %}
         </ul>
       </div>
     </div>
@@ -99,7 +99,7 @@
   </div>
 </footer>
 
-<div class="consent" role="dialog" aria-labelledby="consent-title" aria-describedby="consent-text" hidden>
+{% if cfg.goatcounter_code %}<div class="consent" role="dialog" aria-labelledby="consent-title" aria-describedby="consent-text" hidden>
   <h2 id="consent-title">{{ t.cookie_title }}</h2>
   <p id="consent-text">{{ t.cookie_text }}</p>
   <div class="consent__actions">
@@ -107,7 +107,7 @@
     <button class="btn btn--outline" type="button" data-consent="no">{{ t.cookie_decline }}</button>
     <a href="{{ root }}{{ lang }}/privacy/">{{ t.cookie_more }}</a>
   </div>
-</div>
+</div>{% endif %}
 
 <script src="{{ root }}assets/js/site.js?v={{ v }}" defer></script>
 {% block scripts %}{% endblock %}

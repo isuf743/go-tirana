@@ -2,7 +2,8 @@
 {% from "_macros.html" import itin_card, card, photo, icon, credits %}
 {% block bodyclass %}has-hero{% endblock %}
 {% block head %}
-<link rel="preload" as="image" imagesrcset="{{ root }}assets/img/hero/hero-1280.webp?v={{ v }} 1280w, {{ root }}assets/img/hero/hero-1811.webp?v={{ v }} 1811w" imagesizes="(max-aspect-ratio: 2/1) 210vh, 100vw" fetchpriority="high">
+<link rel="preload" as="image" href="{{ root }}assets/img/hero/hero-mobile.webp?v={{ v }}" media="(max-width: 760px) and (orientation: portrait)" fetchpriority="high">
+<link rel="preload" as="image" imagesrcset="{{ root }}assets/img/hero/hero-1280.webp?v={{ v }} 1280w, {{ root }}assets/img/hero/hero-1811.webp?v={{ v }} 1811w" imagesizes="(max-aspect-ratio: 2/1) 210vh, 100vw" media="not all and (max-width: 760px) and (orientation: portrait)" fetchpriority="high">
 
 {% endblock %}
 {% block main %}
@@ -10,9 +11,12 @@
 {# ===================== 1. HERO ===================== #}
 <section class="hero" aria-labelledby="hero-title">
   <div class="hero__media" aria-hidden="true">
+    <picture>
+    <source media="(max-width: 760px) and (orientation: portrait)" srcset="{{ root }}assets/img/hero/hero-mobile.webp?v={{ v }}" width="651" height="868">
     <img class="hero__img" src="{{ root }}assets/img/hero/hero-1811.webp?v={{ v }}"
          srcset="{{ root }}assets/img/hero/hero-1280.webp?v={{ v }} 1280w, {{ root }}assets/img/hero/hero-1811.webp?v={{ v }} 1811w"
          sizes="(max-aspect-ratio: 2/1) 210vh, 100vw" width="1811" height="868" alt="" fetchpriority="high" decoding="async">
+    </picture>
   </div>
   <div class="wrap hero__inner">
     <p class="hero__eyebrow" data-enter style="--d:0">{{ t.hero_kicker }}</p>
