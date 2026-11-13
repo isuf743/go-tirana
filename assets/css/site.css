@@ -877,7 +877,7 @@ a.tag:hover { border-color: var(--dark); color: var(--dark); }
 /* ===================== Hero: slider me foto ===================== */
 .hero__slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1.4s var(--ease); overflow: hidden; }
 .hero__slide.is-on { opacity: 1; }
-.hero__slide .hero__img { transform: scale(1.06); transition: transform 9s linear; }
+.hero__slide .hero__img { transform: scale(1.06); transition: transform 4.5s linear; }
 .hero__slide.is-on .hero__img { transform: scale(1); }
 .hero__slide:first-child .hero__img { transform: none; transition: none; }
 .hero__ctl { display: flex; align-items: center; gap: 6px; min-width: 0; }

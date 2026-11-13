@@ -50,7 +50,7 @@ import tekstet_udhetime as UDH
 import tekstet_hero as HERO
 from tekstet import GJUHET, EMRAT_E_GJUHEVE, LOCALE, KATEGORITE, KATEGORITE_PERSHKRIM, T, PRIVATESIA, KUSHTET
 
-VERSIONI = "26"   # rrit këtë numër kur ndryshon CSS/JS, që shfletuesit të marrin versionin e ri
+VERSIONI = "27"   # rrit këtë numër kur ndryshon CSS/JS, që shfletuesit të marrin versionin e ri
 
 
 def lexo_json(emri):

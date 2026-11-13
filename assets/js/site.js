@@ -123,7 +123,7 @@
     const btn = ctl.querySelector(".hero__toggle"), label = document.querySelector(".hero__label");
     const credit = document.querySelector(".hero__credit"), coords = document.querySelector(".hero__coords");
     const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const KOHA = 7000;
+    const KOHA = 3000;
     let cur = 0, timer = null, paused = calm, loaded = false;
 
     function load(sl) {
