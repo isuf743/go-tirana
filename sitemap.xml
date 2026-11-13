@@ -216,6 +216,510 @@
     <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/day-trips/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/day-trips/"/>
   </url>
+  <url><loc>https://isuf743.github.io/go-tirana/en/lines/</loc><lastmod>2026-10-10</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/it/lines/</loc><lastmod>2026-10-10</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/sq/lines/</loc><lastmod>2026-10-10</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/en/lines/l1a/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l1a/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l1a/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l1a/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l1a/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/it/lines/l1a/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l1a/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l1a/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l1a/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l1a/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/sq/lines/l1a/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l1a/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l1a/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l1a/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l1a/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/en/lines/l1b/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l1b/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l1b/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l1b/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l1b/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/it/lines/l1b/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l1b/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l1b/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l1b/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l1b/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/sq/lines/l1b/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l1b/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l1b/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l1b/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l1b/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/en/lines/l2/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l2/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l2/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l2/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l2/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/it/lines/l2/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l2/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l2/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l2/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l2/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/sq/lines/l2/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l2/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l2/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l2/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l2/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/en/lines/l3a/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l3a/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l3a/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l3a/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l3a/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/it/lines/l3a/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l3a/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l3a/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l3a/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l3a/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/sq/lines/l3a/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l3a/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l3a/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l3a/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l3a/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/en/lines/l3b/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l3b/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l3b/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l3b/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l3b/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/it/lines/l3b/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l3b/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l3b/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l3b/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l3b/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/sq/lines/l3b/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l3b/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l3b/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l3b/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l3b/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/en/lines/l3c/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l3c/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l3c/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l3c/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l3c/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/it/lines/l3c/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l3c/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l3c/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l3c/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l3c/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/sq/lines/l3c/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l3c/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l3c/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l3c/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l3c/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/en/lines/l4/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l4/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l4/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l4/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l4/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/it/lines/l4/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l4/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l4/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l4/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l4/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/sq/lines/l4/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l4/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l4/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l4/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l4/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/en/lines/l5a/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l5a/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l5a/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l5a/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l5a/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/it/lines/l5a/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l5a/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l5a/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l5a/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l5a/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/sq/lines/l5a/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l5a/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l5a/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l5a/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l5a/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/en/lines/l5b/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l5b/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l5b/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l5b/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l5b/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/it/lines/l5b/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l5b/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l5b/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l5b/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l5b/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/sq/lines/l5b/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l5b/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l5b/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l5b/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l5b/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/en/lines/l6/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l6/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l6/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l6/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l6/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/it/lines/l6/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l6/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l6/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l6/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l6/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/sq/lines/l6/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l6/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l6/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l6/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l6/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/en/lines/l8a/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l8a/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l8a/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l8a/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l8a/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/it/lines/l8a/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l8a/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l8a/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l8a/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l8a/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/sq/lines/l8a/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l8a/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l8a/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l8a/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l8a/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/en/lines/l8b/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l8b/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l8b/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l8b/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l8b/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/it/lines/l8b/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l8b/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l8b/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l8b/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l8b/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/sq/lines/l8b/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l8b/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l8b/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l8b/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l8b/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/en/lines/l8c/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l8c/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l8c/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l8c/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l8c/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/it/lines/l8c/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l8c/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l8c/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l8c/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l8c/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/sq/lines/l8c/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l8c/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l8c/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l8c/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l8c/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/en/lines/l9a/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l9a/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l9a/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l9a/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l9a/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/it/lines/l9a/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l9a/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l9a/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l9a/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l9a/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/sq/lines/l9a/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l9a/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l9a/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l9a/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l9a/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/en/lines/l9b/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l9b/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l9b/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l9b/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l9b/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/it/lines/l9b/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l9b/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l9b/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l9b/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l9b/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/sq/lines/l9b/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l9b/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l9b/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l9b/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l9b/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/en/lines/l10a/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l10a/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l10a/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l10a/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l10a/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/it/lines/l10a/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l10a/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l10a/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l10a/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l10a/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/sq/lines/l10a/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l10a/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l10a/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l10a/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l10a/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/en/lines/l10b/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l10b/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l10b/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l10b/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l10b/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/it/lines/l10b/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l10b/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l10b/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l10b/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l10b/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/sq/lines/l10b/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l10b/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l10b/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l10b/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l10b/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/en/lines/l10c/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l10c/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l10c/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l10c/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l10c/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/it/lines/l10c/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l10c/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l10c/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l10c/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l10c/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/sq/lines/l10c/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l10c/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l10c/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l10c/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l10c/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/en/lines/l11/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l11/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l11/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l11/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l11/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/it/lines/l11/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l11/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l11/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l11/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l11/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/sq/lines/l11/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l11/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l11/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l11/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l11/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/en/lines/l12a/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l12a/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l12a/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l12a/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l12a/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/it/lines/l12a/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l12a/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l12a/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l12a/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l12a/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/sq/lines/l12a/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l12a/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l12a/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l12a/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l12a/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/en/lines/l12b/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l12b/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l12b/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l12b/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l12b/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/it/lines/l12b/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l12b/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l12b/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l12b/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l12b/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/sq/lines/l12b/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l12b/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l12b/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l12b/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l12b/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/en/lines/l13a/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l13a/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l13a/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l13a/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l13a/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/it/lines/l13a/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l13a/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l13a/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l13a/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l13a/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/sq/lines/l13a/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l13a/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l13a/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l13a/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l13a/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/en/lines/l13b/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l13b/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l13b/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l13b/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l13b/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/it/lines/l13b/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l13b/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l13b/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l13b/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l13b/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/sq/lines/l13b/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l13b/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l13b/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l13b/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l13b/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/en/lines/l15a/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l15a/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l15a/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l15a/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l15a/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/it/lines/l15a/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l15a/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l15a/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l15a/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l15a/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/sq/lines/l15a/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l15a/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l15a/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l15a/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l15a/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/en/lines/l15b/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l15b/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l15b/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l15b/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l15b/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/it/lines/l15b/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l15b/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l15b/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l15b/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l15b/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/sq/lines/l15b/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l15b/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l15b/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l15b/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l15b/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/en/lines/l16a/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l16a/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l16a/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l16a/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l16a/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/it/lines/l16a/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l16a/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l16a/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l16a/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l16a/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/sq/lines/l16a/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l16a/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l16a/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l16a/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l16a/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/en/lines/l16b/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l16b/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l16b/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l16b/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l16b/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/it/lines/l16b/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l16b/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l16b/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l16b/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l16b/"/>
+  </url>
+  <url><loc>https://isuf743.github.io/go-tirana/sq/lines/l16b/</loc><lastmod>2026-10-10</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/lines/l16b/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/lines/l16b/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://isuf743.github.io/go-tirana/sq/lines/l16b/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://isuf743.github.io/go-tirana/en/lines/l16b/"/>
+  </url>
   <url><loc>https://isuf743.github.io/go-tirana/en/itineraries/</loc><lastmod>2026-10-10</lastmod><priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://isuf743.github.io/go-tirana/en/itineraries/"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://isuf743.github.io/go-tirana/it/itineraries/"/>

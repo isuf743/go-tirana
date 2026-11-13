@@ -373,3 +373,7 @@ for _l in T:
 from tekstet_udhetime import UI as _UDH_UI
 for _l in T:
     T[_l]["nav_daytrips"] = _UDH_UI[_l]["nav"]
+
+# Faqet e linjave të autobusëve (lidhja në fund të faqes)
+for _l, _v in {"en": "Bus lines", "it": "Linee di autobus", "sq": "Linjat e autobusëve"}.items():
+    T[_l]["nav_lines"] = _v

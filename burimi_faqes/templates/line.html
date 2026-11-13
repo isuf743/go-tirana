@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% from "_macros.html" import icon, card %}
+{% block main %}
+<header class="lhead" style="--lc:{{ l.ngjyra }}">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="{{ root }}{{ lang }}/">{{ t.breadcrumb_home }}</a></li><li><a href="{{ root }}{{ lang }}/lines/">{{ ui.nav }}</a></li><li aria-current="page">{{ l.ref }}</li></ol></nav>
+    <p class="eyebrow">{{ ui.eyebrow }}</p>
+    <h1 class="lhead__h"><span class="lbadge lbadge--xl" style="background:{{ l.ngjyra }};color:{{ l.ngjyra_t }}">{{ l.ref }}</span><span>{{ l.emri }}{% if l.nen %}<small class="lhead__nen">{{ l.nen }}</small>{% endif %}</span></h1>
+    <dl class="lfacts">
+      <div><dt>{{ ui.every }}</dt><dd>{{ ui.every_v.format(n=l.intervali) }}{% if l.vleresim %} <small>({{ ui.estimate }})</small>{% endif %}</dd></div>
+      <div><dt>{{ ui.stops_n }}</dt><dd>{{ l.n }}</dd></div>
+      <div><dt>{{ ui.length }}</dt><dd>{{ km }} km</dd></div>
+      <div><dt>{{ ui.fare }}</dt><dd>{{ ui.fare_v }}</dd></div>
+      {% if l.operatori %}<div><dt>{{ ui.operator }}</dt><dd>{{ l.operatori }}</dd></div>{% endif %}
+    </dl>
+    <div class="lhead__actions">
+      <a class="btn btn--accent" href="{{ root }}planner/?line={{ l.ref | urlencode }}&amp;lang={{ lang }}">{{ icon("bus", 17) }}{{ ui.open_planner }}</a>
+      <span class="lhead__fare">{{ ui.fare_note }}</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="lline">
+    <div class="lline__stops">
+      <h2>{{ ui.stops_h }}</h2>
+      {% for d in l.drejtimet %}
+      {% set named = d.stacionet | rejectattr("emri", "equalto", "(pa emer)") | list %}
+      <section class="ldir" aria-label="{{ ui.direction }}: {{ d.emri }}">
+        <h3>{% if d.per %}{{ ui.towards.format(s=d.per) }}{% else %}{{ d.emri }}{% endif %}{% if not d.per %} <small>· {{ ui.loop }}</small>{% endif %}</h3>
+        <ol class="lstops" style="--lc:{{ l.ngjyra }}">
+          {% for s in named %}<li>{{ s.emri }}</li>{% endfor %}
+        </ol>
+        {% set un = d.stacionet | length - named | length %}
+        {% if un > 0 %}<p class="lstops__more">{{ ui.unnamed.format(n=un) }}</p>{% endif %}
+      </section>
+      {% endfor %}
+    </div>
+    <aside class="lline__map">
+      <div class="itin__map" id="line-map" role="region" aria-label="{{ ui.map }}: {{ l.ref }}"></div>
+    </aside>
+  </div>
+
+  {% if near %}
+  <section class="section" style="padding-top:24px" aria-labelledby="near-h">
+    <div class="section__head"><div><h2 id="near-h">{{ ui.near_h }}</h2><p class="lead">{{ ui.near_lead }}</p></div></div>
+    <ul class="lnear">
+      {% for x in near %}<li><a href="{{ root }}{{ lang }}/places/{{ x.p.slug }}/"><span class="lnear__dot" style="background:{{ x.p.cat_objs[0].color }}"></span><strong>{{ x.p.name }}</strong><span>{{ ui.near_stop.format(d=x.d, s=x.stacioni) }}</span></a></li>{% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+
+  <section class="section" style="padding-top:8px" aria-labelledby="oth-h">
+    <h2 id="oth-h" class="lother__h">{{ ui.other_h }}</h2>
+    <div class="lother">{% for o in others %}<a class="lbadge lbadge--lg" href="{{ root }}{{ lang }}/lines/{{ o.slug }}/" style="background:{{ o.ngjyra }};color:{{ o.ngjyra_t }}" title="{{ o.emri }}">{{ o.ref }}</a>{% endfor %}</div>
+    <p class="info-note">{{ ui.source }} {{ ui.checked }}</p>
+  </section>
+</div>
+<script type="application/json" id="line-data">{{ map_json | safe }}</script>
+{% endblock %}
+{% block scripts %}
+<script src="{{ root }}assets/js/gmaps-shim.js?v={{ v }}" data-key="{{ cfg.google_maps_key }}" defer></script>
+<script src="{{ root }}assets/js/line.js?v={{ v }}" defer></script>
+{% endblock %}

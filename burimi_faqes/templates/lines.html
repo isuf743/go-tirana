@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% from "_macros.html" import icon %}
+{% block main %}
+<header class="lhead">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="{{ root }}{{ lang }}/">{{ t.breadcrumb_home }}</a></li><li aria-current="page">{{ ui.nav }}</li></ol></nav>
+    <p class="eyebrow">{{ ui.index_eyebrow }}</p>
+    <h1>{{ ui.index_title }}</h1>
+    <p class="lead">{{ ui.index_lead }}</p>
+    <div class="lhead__actions">
+      <a class="btn btn--accent" href="{{ root }}planner/?lang={{ lang }}">{{ icon("bus", 17) }}{{ ui.plan_trip }}</a>
+      <span class="lhead__fare"><strong>{{ ui.fare_v }}</strong> {{ ui.fare_note }}</span>
+    </div>
+  </div>
+</header>
+<div class="wrap lines-wrap">
+  {% for g in groups %}
+  <section class="lgroup" aria-labelledby="g-{{ g.nr }}">
+    <h2 id="g-{{ g.nr }}">{{ ui.group.format(n=g.nr) }}</h2>
+    <div class="lcards">
+      {% for l in g.linjat %}
+      <a class="lcard" href="{{ root }}{{ lang }}/lines/{{ l.slug }}/" style="--lc:{{ l.ngjyra }}">
+        <span class="lbadge lbadge--lg" style="background:{{ l.ngjyra }};color:{{ l.ngjyra_t }}">{{ l.ref }}</span>
+        <span class="lcard__t"><strong>{{ l.emri }}</strong>{% if l.nen %}<em>{{ l.nen }}</em>{% endif %}
+          <span>{{ ui.stops_short.format(n=l.n) }} · {{ ui.every_v.format(n=l.intervali) }}{% if l.vleresim %}*{% endif %}{% if l.operatori %} · {{ l.operatori }}{% endif %}</span></span>
+        {{ icon("arrow", 16) }}
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+  {% endfor %}
+  <p class="info-note">* {{ ui.estimate }}. {{ ui.source }} {{ ui.checked }}</p>
+</div>
+{% endblock %}

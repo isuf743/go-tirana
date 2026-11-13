@@ -76,6 +76,14 @@
         <a class="btn btn--outline" href="https://www.google.com/maps/search/?api=1&amp;query={{ (p.name ~ ', ' ~ p.area ~ ', Tirana, Albania') | urlencode }}" rel="noopener" target="_blank">{{ icon("pin", 17) }}{{ t.gmaps_open }}</a>
         <a class="link-arrow gmaps-dir" href="https://www.google.com/maps/dir/?api=1&amp;destination={{ p.lat }},{{ p.lon }}" rel="noopener" target="_blank">{{ t.gmaps_dir }} {{ icon("arrow", 14) }}</a>
       </section>
+      {% if bus_near %}
+      <section class="bus-near" aria-labelledby="busnear-h">
+        <h2 id="busnear-h">{{ lu.place_lines }}</h2>
+        <ul>
+          {% for b in bus_near %}<li><a href="{{ root }}{{ lang }}/lines/{{ b.linja.slug }}/"><span class="lbadge" style="background:{{ b.linja.ngjyra }};color:{{ b.linja.ngjyra_t }}">{{ b.linja.ref }}</span><span class="bus-near__t"><strong>{{ b.linja.emri }}</strong><span>{{ lu.place_lines_stop.format(s=b.stacioni, d=b.dt) }}</span></span></a></li>{% endfor %}
+        </ul>
+      </section>
+      {% endif %}
       <div class="mini-map" id="mini-map" data-lat="{{ p.lat }}" data-lon="{{ p.lon }}" data-color="{{ p.cat_objs[0].color }}" role="img" aria-label="{{ p.name }}"></div>
     </aside>
   </div>

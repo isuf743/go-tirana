@@ -63,7 +63,7 @@
         return g;
       });
     }
-    _when(f) { return this._ready.then(f); }
+    _when(f) { return this._ready.then(f).catch(() => {}); }   // pa Google (offline): pa gabime në konsolë
     on(ev, fn) { if (ev === "load") { this._loaded ? fn() : this._loadFns.push(fn); } return this; }
     addControl() { return this; }
     resize() { this._when(g => google.maps.event.trigger(g, "resize")); return this; }

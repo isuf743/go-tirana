@@ -48,9 +48,10 @@ from tekstet_info import INFO, URGJENCA, BURIMET, KONTROLLUAR
 from tekstet_itinerare import ITINERARET, UI as IT_UI, KUFIRI_ECJES
 import tekstet_udhetime as UDH
 import tekstet_hero as HERO
+import tekstet_linjat as LIN
 from tekstet import GJUHET, EMRAT_E_GJUHEVE, LOCALE, KATEGORITE, KATEGORITE_PERSHKRIM, T, PRIVATESIA, KUSHTET
 
-VERSIONI = "32"   # rrit këtë numër kur ndryshon CSS/JS, që shfletuesit të marrin versionin e ri
+VERSIONI = "33"   # rrit këtë numër kur ndryshon CSS/JS, që shfletuesit të marrin versionin e ri
 
 
 def lexo_json(emri):
@@ -85,6 +86,89 @@ def distanca_tekst(m, lang):
         return f"{int(round(m / 50.0) * 50)} m"
     km = f"{m / 1000:.1f}"
     return (km if lang == "en" else km.replace(".", ",")) + " km"
+
+
+def metra_ll(a, b, c, d):
+    """Largësia në metra mes dy pikave (Haversine)."""
+    r = math.pi / 180
+    x = math.sin((c - a) * r / 2) ** 2 + math.cos(a * r) * math.cos(c * r) * math.sin((d - b) * r / 2) ** 2
+    return 12742000 * math.asin(math.sqrt(x))
+
+
+NGJYRAT_LINJA = ["#c8102e", "#1f6feb", "#1a7f37", "#bf8700", "#8250df", "#d1242f", "#0969da", "#cf222e",
+                 "#116329", "#953800", "#6639ba", "#0550ae", "#e16f24", "#2da44e", "#a40e26", "#3e63dd"]
+
+
+def ngjyra_linje(ref, zyrtare):
+    """E njëjta ngjyrë si te planifikuesi: zyrtarja nga OSM, përndryshe nga kodi i linjës."""
+    if zyrtare:
+        return zyrtare
+    h = 0
+    for c in ref:
+        h = (h * 31 + ord(c)) % 9973
+    return NGJYRAT_LINJA[h % len(NGJYRAT_LINJA)]
+
+
+def teksti_mbi(hex_):
+    n = int(hex_[1:], 16)
+    return "#1d1d1f" if (0.299 * (n >> 16) + 0.587 * ((n >> 8) & 255) + 0.114 * (n & 255)) > 160 else "#fff"
+
+
+def pergatit_linjat():
+    """Linjat e qytetit (lista e Bashkisë) me drejtimet, stacionet dhe gjurmën nga data/grafi.json."""
+    with open(os.path.join(PROJEKTI, "data", "grafi.json"), encoding="utf-8") as f:
+        grafi = json.load(f)
+    zyrt = lexo_json("linjat_zyrtare.json")
+    st = grafi["stacionet"]
+    zevendesuara = {l.get("zevendeson") for l in grafi["linjat"] if l.get("zevendeson")}
+    sipas_ref = {}
+    for l in grafi["linjat"]:
+        if l["ref"] in zyrt["qytetese"] and l["emri"] not in zevendesuara:
+            sipas_ref.setdefault(l["ref"], []).append(l)
+    linjat = []
+    for ref, z in zyrt["qytetese"].items():
+        if ref not in sipas_ref:
+            continue
+        drejtimet = []
+        for l in sipas_ref[ref]:
+            emri = l["emri"].split(":", 1)[-1].strip()
+            stacionet = [st[i] for i in l["stacionet"]]
+            gjurma = [pt for seg in (l.get("gjurmet") or []) for pt in seg] or [[s["lon"], s["lat"]] for s in stacionet]
+            km = sum(metra_ll(a[1], a[0], b[1], b[0]) for a, b in zip(gjurma, gjurma[1:])) / 1000
+            pjeset = [x.strip() for x in emri.replace("→", "=>").split("=>")]
+            drejtimet.append({"emri": emri, "nga": pjeset[0], "per": pjeset[-1] if len(pjeset) > 1 else None,
+                              "stacionet": stacionet, "gjurma": [[round(x, 5), round(y, 5)] for x, y in gjurma], "km": km})
+        drejtimet.sort(key=lambda d: d["emri"])
+        l0 = sipas_ref[ref][0]
+        ngj = ngjyra_linje(ref, l0.get("ngjyra"))
+        linjat.append({"ref": ref, "slug": ref.lower().replace("/", "-"), "nr": z["linja"], "emri": z["emri"],
+                       "operatori": z["operatori"], "ngjyra": ngj, "ngjyra_t": teksti_mbi(ngj),
+                       "intervali": l0["intervali_min"], "vleresim": l0["burimi_intervalit"] == "vleresim",
+                       "drejtimet": drejtimet, "km": max(d["km"] for d in drejtimet),
+                       "n": len({s["emri"] for d in drejtimet for s in d["stacionet"] if s["emri"] != "(pa emer)"})})
+    linjat.sort(key=lambda l: (int(l["nr"]), l["ref"]))
+    # Kur disa degëzime kanë të njëjtin emër zyrtar (p.sh. L3A/B/C "Kashar"), tregojmë edhe drejtimin nga OSM
+    emrat = [l["emri"] for l in linjat]
+    for l in linjat:
+        dr = l["drejtimet"]
+        if emrat.count(l["emri"]) < 2:
+            l["nen"] = ""
+        elif len(dr) == 2 and dr[0]["per"] and dr[0]["nga"] == dr[1]["per"] and dr[0]["per"] == dr[1]["nga"]:
+            l["nen"] = f'{dr[0]["nga"]} ⇄ {dr[0]["per"]}'
+        else:
+            l["nen"] = " · ".join(dict.fromkeys(d["emri"].replace("=>", "→") for d in dr))
+    return linjat
+
+
+def linjat_afer(lat, lon, linjat, kufiri=450):
+    """Për një vend: linjat me një stacion brenda kufirit, me stacionin më të afërt."""
+    dalja = []
+    for l in linjat:
+        m = min(((metra_ll(lat, lon, s["lat"], s["lon"]), s["emri"]) for d in l["drejtimet"] for s in d["stacionet"]
+                 if s["emri"] != "(pa emer)"), default=None)
+        if m and m[0] <= kufiri:
+            dalja.append({"linja": l, "d": m[0], "stacioni": m[1]})
+    return sorted(dalja, key=lambda x: (x["d"], x["linja"]["ref"]))
 
 
 def pergatit_itinerar(it, lang, sipas_slug, root):
@@ -188,6 +272,7 @@ def main():
     shkruaj("private/.htaccess", "# Kjo dosje nuk shërbehet kurrë nga Apache (sekrete dhe mesazhe)\nRequire all denied\n")
 
     logo = arti.logo()
+    LINJAT = pergatit_linjat()
     faqet_sitemap = []   # (rruga_relative_pa_gjuhë, prioriteti)
 
     def url(lang, rruga):
@@ -328,6 +413,42 @@ def main():
                terminal_name=UDH.TERMINALI["name"][lang], sources=UDH.BURIMET, checked=UDH.KONTROLLUAR[lang])
         faqet_sitemap.append(("day-trips/", "0.8"))
 
+        # ---- Linjat e autobusëve: lista dhe një faqe për secilën ----
+        lu = LIN.UI[lang]
+        grupet = []
+        for l in LINJAT:
+            if not grupet or grupet[-1]["nr"] != l["nr"]:
+                grupet.append({"nr": l["nr"], "linjat": []})
+            grupet[-1]["linjat"].append(l)
+        render("lines.html", "lines/", {"title": f"{lu['index_title']} | {emri}", "desc": lu["index_lead"]},
+               2, active="planner", ui=lu, groups=grupet)
+        faqet_sitemap.append(("lines/", "0.8"))
+        for l in LINJAT:
+            afer = []
+            for p in vendet:
+                m = min(((metra_ll(p["lat"], p["lon"], s["lat"], s["lon"]), s["emri"]) for d in l["drejtimet"]
+                         for s in d["stacionet"] if s["emri"] != "(pa emer)"), default=None)
+                if m and m[0] <= 500:
+                    afer.append({"p": p, "d": distanca_tekst(m[0], lang), "m": m[0], "stacioni": m[1]})
+            afer.sort(key=lambda x: x["m"])
+            harta = {"color": l["ngjyra"], "dirs": [d["gjurma"] for d in l["drejtimet"]],
+                     "stops": [{"lat": s["lat"], "lon": s["lon"], "name": s["emri"]} for s in
+                               {(s["lat"], s["lon"]): s for d in l["drejtimet"] for s in d["stacionet"]
+                                if s["emri"] != "(pa emer)"}.values()]}
+            km = f"{l['km']:.1f}" if lang == "en" else f"{l['km']:.1f}".replace(".", ",")
+            render("line.html", f"lines/{l['slug']}/", {
+                "title": f"{lu['title'].format(ref=l['ref'], name=l['emri'])} | {emri}",
+                "desc": lu["desc"].format(ref=l["ref"], name=l["emri"], n=l["n"]),
+                "jsonld": json.dumps({"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
+                    {"@type": "ListItem", "position": 1, "name": emri, "item": url(lang, "")},
+                    {"@type": "ListItem", "position": 2, "name": lu["index_title"], "item": url(lang, "lines/")},
+                    {"@type": "ListItem", "position": 3, "name": f"{lu['line_word']} {l['ref']}", "item": url(lang, f"lines/{l['slug']}/")}]},
+                    ensure_ascii=False)},
+                3, active="planner", ui=lu, l=l, km=km, near=afer[:9],
+                others=[x for x in LINJAT if x["ref"] != l["ref"]],
+                map_json=json.dumps(harta, ensure_ascii=False).replace("</", "<\\/"))
+            faqet_sitemap.append((f"lines/{l['slug']}/", "0.7"))
+
         # ---- Itineraret: lista dhe një faqe për secilin ----
         ui = IT_UI[lang]
         render("itineraries.html", "itineraries/", {"title": f"{ui['index_title']} | {emri}", "desc": ui["index_lead"],
@@ -363,7 +484,8 @@ def main():
             render("place.html", f"places/{p['slug']}/", {
                 "title": f"{p['name']}, Tirana | {emri}", "og_title": p["name"], "desc": p["summary"], "og_type": "article",
                 "og_image": p["img"]["src1280"] if p["img"] else None, "jsonld": json.dumps(jsonld, ensure_ascii=False),
-            }, 3, p=p, nearby=afer, active="explore")
+            }, 3, p=p, nearby=afer, active="explore", lu=LIN.UI[lang],
+               bus_near=[{**x, "dt": distanca_tekst(x["d"], lang)} for x in linjat_afer(p["lat"], p["lon"], LINJAT)][:6])
             faqet_sitemap.append((f"places/{p['slug']}/", "0.7"))
 
         # ---- Kontakti dhe faqet ligjore ----
