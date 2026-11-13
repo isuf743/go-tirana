@@ -906,3 +906,18 @@ a.tag:hover { border-color: var(--dark); color: var(--dark); }
   .hero__slide .hero__img { transform: none !important; }
 }
 @media (max-width: 720px) { .hero__coords { display: none; } }
+
+/* ===================== Telefon: faqe e qetë, pa lëvizje ===================== */
+html, body { overflow-x: clip; }                     /* asgjë nuk e shtyn faqen anash */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; touch-action: manipulation; }   /* pa zmadhim me prekje të dyfishtë */
+@media (max-width: 760px) {
+  html { overscroll-behavior-x: none; }
+  /* elementet shfaqen menjëherë, pa rrëshqitje kur lëviz faqen */
+  .js [data-reveal], .js [data-reveal].is-in, .hero [data-enter] {
+    opacity: 1 !important; transform: none !important; transition: none !important; animation: none !important; }
+  /* fotot e hero-it ndërrohen me zbehje, pa zoom */
+  .hero__slide .hero__img, .hero__slide.is-on .hero__img { transform: none !important; transition: none !important; }
+  /* pa efekte zmadhimi/ngritjeje kur prek kartat */
+  .card:hover, .card:hover img, .cat:hover, .cat:hover img, .icard:hover, .icard:hover img, .dt:hover img,
+  .hero__btn--light:hover, .hq__item:hover .hq__arrow { transform: none !important; }
+}
