@@ -25,7 +25,7 @@
 <link rel="apple-touch-icon" href="../../../apple-touch-icon.png">
 <link rel="manifest" href="../../../site.webmanifest">
 <link rel="preload" href="../../../assets/fonts/manrope-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../../../assets/css/site.css?v=23">
+<link rel="stylesheet" href="../../../assets/css/site.css?v=24">
 <script>document.documentElement.classList.add("js")</script>
 </head>
 <body class="" data-lang="en" data-root="../../../" data-goatcounter="">
@@ -94,6 +94,7 @@ fetchpriority="high" decoding="async"></div>
      sizes="(max-width: 600px) 100vw, (max-width: 1020px) 50vw, 400px" width="960" height="718" alt="Grand Park &amp; Artificial Lake, Tirana"
 loading="lazy" decoding="async">
     <span class="card__tag">Nature &amp; views</span>
+    <span class="open-badge open-badge--card" data-orari='"gjithmone"' hidden></span>
   </div>
   <div class="card__body">
     <span class="card__loc"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 14.5s4.8-4.3 4.8-8a4.8 4.8 0 0 0-9.6 0c0 3.7 4.8 8 4.8 8z" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="8" cy="6.4" r="1.7" fill="currentColor"/></svg>Liqeni</span>
@@ -110,6 +111,7 @@ loading="lazy" decoding="async">
      sizes="(max-width: 600px) 100vw, (max-width: 1020px) 50vw, 400px" width="960" height="640" alt="Dajti Ekspres Cable Car, Tirana"
 loading="lazy" decoding="async">
     <span class="card__tag">Nature &amp; views</span>
+    <span class="open-badge open-badge--card" data-orari='[["09:00", "18:00"], null, ["09:00", "18:00"], ["09:00", "18:00"], ["09:00", "18:00"], ["09:00", "18:30"], ["09:00", "18:30"]]' hidden></span>
   </div>
   <div class="card__body">
     <span class="card__loc"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 14.5s4.8-4.3 4.8-8a4.8 4.8 0 0 0-9.6 0c0 3.7 4.8 8 4.8 8z" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="8" cy="6.4" r="1.7" fill="currentColor"/></svg>Linzë</span>
@@ -126,6 +128,7 @@ loading="lazy" decoding="async">
      sizes="(max-width: 600px) 100vw, (max-width: 1020px) 50vw, 400px" width="960" height="720" alt="Mount Dajti, Tirana"
 loading="lazy" decoding="async">
     <span class="card__tag">Nature &amp; views</span>
+    <span class="open-badge open-badge--card" data-orari='"gjithmone"' hidden></span>
   </div>
   <div class="card__body">
     <span class="card__loc"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 14.5s4.8-4.3 4.8-8a4.8 4.8 0 0 0-9.6 0c0 3.7 4.8 8 4.8 8z" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="8" cy="6.4" r="1.7" fill="currentColor"/></svg>Dajt</span>
@@ -142,6 +145,7 @@ loading="lazy" decoding="async">
      sizes="(max-width: 600px) 100vw, (max-width: 1020px) 50vw, 400px" width="960" height="640" alt="Botanical Garden, Tirana"
 loading="lazy" decoding="async">
     <span class="card__tag">Nature &amp; views</span>
+    
   </div>
   <div class="card__body">
     <span class="card__loc"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 14.5s4.8-4.3 4.8-8a4.8 4.8 0 0 0-9.6 0c0 3.7 4.8 8 4.8 8z" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="8" cy="6.4" r="1.7" fill="currentColor"/></svg>Liqeni</span>
@@ -158,6 +162,7 @@ loading="lazy" decoding="async">
      sizes="(max-width: 600px) 100vw, (max-width: 1020px) 50vw, 400px" width="960" height="638" alt="Farka Lake, Tirana"
 loading="lazy" decoding="async">
     <span class="card__tag">Nature &amp; views</span>
+    <span class="open-badge open-badge--card" data-orari='"gjithmone"' hidden></span>
   </div>
   <div class="card__body">
     <span class="card__loc"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 14.5s4.8-4.3 4.8-8a4.8 4.8 0 0 0-9.6 0c0 3.7 4.8 8 4.8 8z" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="8" cy="6.4" r="1.7" fill="currentColor"/></svg>Farkë</span>
@@ -227,8 +232,9 @@ loading="lazy" decoding="async">
 </footer>
 
 
-<script src="../../../assets/js/site.js?v=23" defer></script>
-<script src="../../../assets/js/gmaps-shim.js?v=23" data-key="AIzaSyAYMoBOJ0g9Ta6YLo-ImkOnYemub1O2byA" defer></script>
-<script src="../../../assets/js/placesmap.js?v=23" defer></script>
+<script type="application/json" id="orari-tekste">{"always": "Always open", "closed": "Closed", "closes": "closes {t}", "days": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], "open": "Open now", "opens": "opens {t}", "opens_day": "opens {d} {t}", "opens_tomorrow": "opens tomorrow {t}"}</script>
+<script src="../../../assets/js/site.js?v=24" defer></script>
+<script src="../../../assets/js/gmaps-shim.js?v=24" data-key="AIzaSyAYMoBOJ0g9Ta6YLo-ImkOnYemub1O2byA" defer></script>
+<script src="../../../assets/js/placesmap.js?v=24" defer></script>
 </body>
 </html>

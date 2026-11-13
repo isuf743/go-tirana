@@ -814,3 +814,14 @@ a.tag:hover { border-color: var(--dark); color: var(--dark); }
 /* Telefon vertikal: foto e prerë vetëm me pjesën që shihet (hero-mobile.webp), e qendërzuar */
 .hero__media picture { display: contents; }
 @media (max-width: 760px) and (orientation: portrait) { .hero__img { object-position: 50% 50%; } }
+
+/* "Hapur tani / Mbyllur" */
+.open-badge { display: inline-flex; align-items: center; gap: 7px; font: 700 12.5px/1.2 var(--sans); color: var(--muted); }
+.open-badge::before { content: ""; width: 8px; height: 8px; flex: none; border-radius: 50%; background: currentColor; }
+.open-badge.is-open { color: #12804a; }
+.open-badge.is-closed { color: #b4232f; }
+.open-badge[hidden] { display: none; }
+.open-badge--card { position: absolute; left: 12px; bottom: 12px; padding: 6px 10px; border-radius: 999px; background: rgba(255,255,255,.94);
+  box-shadow: 0 2px 10px rgba(0,0,0,.12); font-size: 12px; max-width: calc(100% - 24px); }
+.open-badge--block { display: flex; justify-content: flex-end; margin-top: 6px; }
+.tl__meta .open-badge { flex-basis: 100%; margin-top: 2px; }

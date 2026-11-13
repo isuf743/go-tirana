@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% from "_macros.html" import photo, tags, card, icon %}
+{% from "_macros.html" import hapur, photo, tags, card, icon %}
 
 {% block main %}
 <div class="wrap">
@@ -66,7 +66,7 @@
         <h2 id="facts-h">{{ t.facts }}</h2>
         <dl>
           <div><dt>{{ t.location }}</dt><dd>{{ p.area }}, Tirana</dd></div>
-          <div><dt>{{ t.fact_hours }}</dt><dd>{{ p.hours or t.hours_unknown }}</dd></div>
+          <div><dt>{{ t.fact_hours }}</dt><dd>{{ p.hours or t.hours_unknown }}{{ hapur(p, "open-badge--block") }}</dd></div>
           {% if p.fee %}<div><dt>{{ t.fact_entry }}</dt><dd>{{ t.entry_free if p.fee == 'free' else t.entry_paid }}</dd></div>{% endif %}
           <div><dt>{{ t.fact_time }}</dt><dd>{{ p.duration_text }}</dd></div>
           {% if p.website %}<div><dt>{{ t.fact_website }}</dt><dd><a href="{{ p.website }}" rel="noopener" target="_blank">{{ p.website_label }}</a></dd></div>{% endif %}

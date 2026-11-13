@@ -347,3 +347,18 @@ _GMAPS = {
 }
 for _l in T:
     T[_l].update(_GMAPS[_l])
+
+# ---- "Hapur tani / Mbyllur" (llogaritet në shfletues sipas orës së Tiranës; shih assets/js/site.js) ----
+_ORARI = {
+    "en": {"open": "Open now", "closed": "Closed", "always": "Always open", "closes": "closes {t}",
+           "opens": "opens {t}", "opens_tomorrow": "opens tomorrow {t}", "opens_day": "opens {d} {t}",
+           "days": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]},
+    "it": {"open": "Aperto ora", "closed": "Chiuso", "always": "Sempre aperto", "closes": "chiude alle {t}",
+           "opens": "apre alle {t}", "opens_tomorrow": "apre domani alle {t}", "opens_day": "apre {d} alle {t}",
+           "days": ["lun", "mar", "mer", "gio", "ven", "sab", "dom"]},
+    "sq": {"open": "Hapur tani", "closed": "Mbyllur", "always": "Gjithmonë e hapur", "closes": "mbyll në {t}",
+           "opens": "hap në {t}", "opens_tomorrow": "hap nesër në {t}", "opens_day": "hap të {d} në {t}",
+           "days": ["hënën", "martën", "mërkurën", "enjten", "premten", "shtunën", "dielën"]},
+}
+for _l in T:
+    T[_l]["orari_js"] = _ORARI[_l]

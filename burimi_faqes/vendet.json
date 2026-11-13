@@ -43,7 +43,8 @@
     "Eja në mbrëmje, kur ndizen dritat e shatërvanëve dhe të mozaikut.",
     "Shiko poshtë: gurët e shtrimit janë sjellë nga qytete dhe fshatra të gjithë vendit."
    ]
-  }
+  },
+  "orari": "gjithmone"
  },
  {
   "slug": "etem-bey-mosque",
@@ -184,7 +185,34 @@
     "Planifiko të paktën 90 minuta; vetëm sallat e antikitetit kërkojnë kohë.",
     "E mbyllur të hënën."
    ]
-  }
+  },
+  "orari": [
+   null,
+   [
+    "09:00",
+    "16:00"
+   ],
+   [
+    "09:00",
+    "16:00"
+   ],
+   [
+    "09:00",
+    "16:00"
+   ],
+   [
+    "09:00",
+    "16:00"
+   ],
+   [
+    "09:00",
+    "16:00"
+   ],
+   [
+    "10:00",
+    "15:00"
+   ]
+  ]
  },
  {
   "slug": "bunkart-1",
@@ -234,7 +262,37 @@
     "Nën tokë është freskët gjithë vitin, ndaj merr diçka të lehtë për t'u veshur edhe në verë.",
     "Bashkoje me teleferikun Dajti Ekspres, stacioni i poshtëm i të cilit është afër."
    ]
-  }
+  },
+  "orari": [
+   [
+    "09:30",
+    "17:00"
+   ],
+   [
+    "09:30",
+    "17:00"
+   ],
+   [
+    "09:30",
+    "17:00"
+   ],
+   [
+    "09:30",
+    "17:00"
+   ],
+   [
+    "09:30",
+    "17:00"
+   ],
+   [
+    "09:30",
+    "17:00"
+   ],
+   [
+    "09:30",
+    "17:00"
+   ]
+  ]
  },
  {
   "slug": "bunkart-2",
@@ -278,6 +336,41 @@
     "Zgjedhje e mirë nëse ke pak kohë: është në qendër dhe zgjat rreth një orë.",
     "Disa dhoma janë të errëta dhe të ngushta."
    ]
+  },
+  "orari": [
+   [
+    "09:30",
+    "18:00"
+   ],
+   [
+    "09:30",
+    "18:00"
+   ],
+   [
+    "09:30",
+    "18:00"
+   ],
+   [
+    "09:30",
+    "18:00"
+   ],
+   [
+    "09:30",
+    "20:00"
+   ],
+   [
+    "09:30",
+    "20:00"
+   ],
+   [
+    "09:30",
+    "18:00"
+   ]
+  ],
+  "hours": {
+   "en": "Sun–Thu 09:30–18:00, Fri–Sat 09:30–20:00",
+   "it": "dom–gio 09:30–18:00, ven–sab 09:30–20:00",
+   "sq": "Die–Enj 09:30–18:00, Pre–Sht 09:30–20:00"
   }
  },
  {
@@ -327,7 +420,37 @@
     "Ka shumë tekst dhe audio, ndaj lër kohë për të lexuar.",
     "E mirë për një ditë me shi, disa minuta nga sheshi."
    ]
-  }
+  },
+  "orari": [
+   [
+    "09:00",
+    "19:00"
+   ],
+   [
+    "09:00",
+    "19:00"
+   ],
+   [
+    "09:00",
+    "19:00"
+   ],
+   [
+    "09:00",
+    "19:00"
+   ],
+   [
+    "09:00",
+    "19:00"
+   ],
+   [
+    "09:00",
+    "19:00"
+   ],
+   [
+    "09:00",
+    "19:00"
+   ]
+  ]
  },
  {
   "slug": "pyramid",
@@ -418,7 +541,8 @@
     "E mirë për drekë ose për një pije në mbrëmje.",
     "Disa hapa nga Sheshi Skënderbej dhe Parlamenti."
    ]
-  }
+  },
+  "orari": "gjithmone"
  },
  {
   "slug": "great-mosque",
@@ -639,7 +763,8 @@
     "Ndalesë e shkurtër: bashkoje me Pazarin e Ri.",
     "Drita e mëngjesit është më e buta për foto."
    ]
-  }
+  },
+  "orari": "gjithmone"
  },
  {
   "slug": "postbllok",
@@ -684,7 +809,8 @@
     "Falas dhe i hapur në çdo orë.",
     "Fillim natyral për një mbrëmje në Bllok."
    ]
-  }
+  },
+  "orari": "gjithmone"
  },
  {
   "slug": "grand-park",
@@ -730,7 +856,8 @@
     "Shko pasdite vonë, kur drita mbi liqen është e artë.",
     "Xhiro e plotë e liqenit zgjat rreth një orë në këmbë."
    ]
-  }
+  },
+  "orari": "gjithmone"
  },
  {
   "slug": "dajti-ekspres",
@@ -776,6 +903,38 @@
     "Mund të ndalojë me erë të fortë ose stuhi; shiko motin para se të shkosh.",
     "Bunk'Art 1 është afër stacionit të poshtëm."
    ]
+  },
+  "orari": [
+   [
+    "09:00",
+    "18:00"
+   ],
+   null,
+   [
+    "09:00",
+    "18:00"
+   ],
+   [
+    "09:00",
+    "18:00"
+   ],
+   [
+    "09:00",
+    "18:00"
+   ],
+   [
+    "09:00",
+    "18:30"
+   ],
+   [
+    "09:00",
+    "18:30"
+   ]
+  ],
+  "hours": {
+   "en": "Mon–Fri 09:00–18:00, Sat–Sun 09:00–18:30; closed Tuesday",
+   "it": "lun–ven 09:00–18:00, sab–dom 09:00–18:30; chiuso il martedì",
+   "sq": "Hën–Pre 09:00–18:00, Sht–Die 09:00–18:30; mbyllur të martën"
   }
  },
  {
@@ -821,7 +980,8 @@
     "Mënyra më e lehtë për t'u ngjitur është teleferiku Dajti Ekspres.",
     "Është dukshëm më freskët se në qytet, ndaj merr një xhaketë."
    ]
-  }
+  },
+  "orari": "gjithmone"
  },
  {
   "slug": "botanical-garden",
@@ -909,7 +1069,8 @@
     "Më i bukur në një pasdite me diell në fundjavë.",
     "Më larg nga qendra: shiko linjën e autobusit para se të nisesh."
    ]
-  }
+  },
+  "orari": "gjithmone"
  },
  {
   "slug": "new-bazaar",
@@ -1001,7 +1162,8 @@
     "Mbrëmjet më të gjalla janë nga e enjtja te e shtuna.",
     "Fillo te memoriali Postbllok, në skaj të lagjes."
    ]
-  }
+  },
+  "orari": "gjithmone"
  },
  {
   "slug": "komiteti",
@@ -1051,7 +1213,37 @@
     "Kërko një provë me disa lloje rakie.",
     "Orari mund të ndryshojë; shiko faqen e tyre para se të shkosh."
    ]
-  }
+  },
+  "orari": [
+   [
+    "07:00",
+    "00:00"
+   ],
+   [
+    "07:00",
+    "00:00"
+   ],
+   [
+    "07:00",
+    "00:00"
+   ],
+   [
+    "07:00",
+    "00:00"
+   ],
+   [
+    "07:00",
+    "00:00"
+   ],
+   [
+    "07:00",
+    "00:00"
+   ],
+   [
+    "07:00",
+    "00:00"
+   ]
+  ]
  },
  {
   "slug": "radio-bar",
@@ -1233,7 +1425,25 @@
     "Rezervo tavolinë për netët e fundjavës.",
     "Mbrëmjet ndryshojnë: shiko rrjetet sociale të lokalit për programin dhe hyrjen."
    ]
-  }
+  },
+  "orari": [
+   null,
+   null,
+   null,
+   [
+    "23:00",
+    "03:00"
+   ],
+   [
+    "23:00",
+    "03:00"
+   ],
+   [
+    "23:00",
+    "03:00"
+   ],
+   null
+  ]
  },
  {
   "slug": "magic-club",
@@ -1375,7 +1585,34 @@
     "Rezervo tavolinë pranë dritares për perëndimin.",
     "Veshje e rregullt: jo pantallona të shkurtra apo tuta."
    ]
-  }
+  },
+  "orari": [
+   null,
+   [
+    "17:30",
+    "00:00"
+   ],
+   [
+    "17:30",
+    "00:00"
+   ],
+   [
+    "17:30",
+    "00:00"
+   ],
+   [
+    "17:30",
+    "00:00"
+   ],
+   [
+    "17:30",
+    "00:00"
+   ],
+   [
+    "17:30",
+    "00:00"
+   ]
+  ]
  },
  {
   "slug": "puls",
@@ -1600,6 +1837,41 @@
     "Kërkoji stafit të të sugjerojë disa meze për t'i ndarë.",
     "Dy minuta në këmbë nga Pazari i Ri, ndaj vizitoji bashkë."
    ]
+  },
+  "orari": [
+   [
+    "12:00",
+    "00:00"
+   ],
+   [
+    "12:00",
+    "00:00"
+   ],
+   [
+    "12:00",
+    "00:00"
+   ],
+   [
+    "12:00",
+    "00:00"
+   ],
+   [
+    "12:00",
+    "00:00"
+   ],
+   [
+    "12:00",
+    "00:00"
+   ],
+   [
+    "13:00",
+    "23:00"
+   ]
+  ],
+  "hours": {
+   "en": "Mon–Sat 12:00–00:00, Sun 13:00–23:00",
+   "it": "lun–sab 12:00–00:00, dom 13:00–23:00",
+   "sq": "Hën–Sht 12:00–00:00, Die 13:00–23:00"
   }
  },
  {
@@ -1644,6 +1916,41 @@
     "Porosit qofte me xaxiki dhe një birrë Korça.",
     "Tavolinat jashtë kanë pamje nga qyteti."
    ]
+  },
+  "orari": [
+   [
+    "11:00",
+    "00:00"
+   ],
+   [
+    "11:00",
+    "00:00"
+   ],
+   [
+    "11:00",
+    "00:00"
+   ],
+   [
+    "11:00",
+    "00:00"
+   ],
+   [
+    "11:00",
+    "00:00"
+   ],
+   [
+    "11:00",
+    "00:00"
+   ],
+   [
+    "11:00",
+    "00:00"
+   ]
+  ],
+  "hours": {
+   "en": "Daily 11:00–00:00",
+   "it": "Tutti i giorni 11:00–00:00",
+   "sq": "Çdo ditë 11:00–00:00"
   }
  }
 ]

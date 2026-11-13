@@ -31,6 +31,7 @@
   <div class="card__media" style="--c:{{ p.cat_objs[0].color }}">
     {{ photo(p, "(max-width: 600px) 100vw, (max-width: 1020px) 50vw, 400px") }}
     <span class="card__tag">{{ p.cat_objs[0].name }}</span>
+    {{ hapur(p, "open-badge--card") }}
   </div>
   <div class="card__body">
     <span class="card__loc">{{ icon("pin", 14) }}{{ p.area }}</span>
@@ -69,4 +70,9 @@
     <span class="more">{{ ui.view }} {{ icon("arrow", 14) }}</span>
   </div>
 </article>
+{%- endmacro %}
+
+{# Shenja "Hapur tani / Mbyllur": e plotëson site.js sipas orës së Tiranës (p.orari te vendet.json) #}
+{% macro hapur(p, cls="") -%}
+{% if p.orari %}<span class="open-badge {{ cls }}" data-orari='{{ p.orari | tojson }}' hidden></span>{% endif %}
 {%- endmacro %}
