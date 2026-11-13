@@ -26,6 +26,7 @@
     {% endfor %}
   </div>
   <div class="wrap hero__inner">
+    <a class="wx" id="wx" hidden data-msg="{{ wx_msgs }}" href="{{ root }}{{ lang }}/itineraries/"><span class="wx__ic" aria-hidden="true"></span><b class="wx__t"></b><span class="wx__d"></span><span class="wx__tip"></span><svg class="wx__go" width="14" height="14" viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9h12m-5-5 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     <p class="hero__eyebrow" data-enter style="--d:0">{{ t.hero_kicker }}</p>
     {% set ht = t.hero_title.split(', ', 1) %}
     <h1 id="hero-title" data-enter style="--d:1">{% if ht|length == 2 %}<span class="hero__t1">{{ ht[0] }},</span> <span class="hero__t2">{{ ht[1] }}</span>{% else %}{{ t.hero_title }}{% endif %}</h1>

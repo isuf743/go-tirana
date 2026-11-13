@@ -921,3 +921,23 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; touch-action: man
   .card:hover, .card:hover img, .cat:hover, .cat:hover img, .icard:hover, .icard:hover img, .dt:hover img,
   .hero__btn--light:hover, .hq__item:hover .hq__arrow { transform: none !important; }
 }
+
+/* ===================== Hero: moti ===================== */
+.wx { display: inline-flex; justify-self: start; width: fit-content; align-items: center; gap: 9px; margin: 0 0 22px; padding: 7px 14px 7px 9px; border-radius: 999px;
+  color: #fff; text-decoration: none; font: 500 13.5px/1.2 var(--sans); max-width: 100%;
+  background: rgba(14,18,26,.34); border: 1px solid rgba(255,255,255,.35);
+  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); transition: background .25s, border-color .25s; }
+.wx[hidden] { display: none; }
+.wx:hover { background: rgba(14,18,26,.5); border-color: rgba(255,255,255,.6); color: #fff; }
+.wx:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+.wx__ic { display: grid; place-items: center; width: 26px; height: 26px; flex: none; }
+.wx__t { font-weight: 700; font-size: 15px; }
+.wx__d { color: rgba(255,255,255,.85); }
+.wx__tip { padding-left: 10px; border-left: 1px solid rgba(255,255,255,.35); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.wx__go { flex: none; opacity: .85; }
+@media (max-width: 720px) {
+  .wx { margin-bottom: 16px; font-size: 12.5px; padding: 6px 12px 6px 7px; gap: 7px; }
+  .wx__d { display: none; }
+  .wx__tip { padding-left: 8px; white-space: normal; line-height: 1.25; }
+  .wx { border-radius: 18px; }
+}

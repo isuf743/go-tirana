@@ -174,6 +174,60 @@
     document.readyState === "complete" ? start() : window.addEventListener("load", start);
   })();
 
+  // ---- Moti në hero (Open-Meteo, pa çelës). Ruhet 20 min që të mos e kërkojmë në çdo faqe ----
+  (function () {
+    const el = document.getElementById("wx");
+    if (!el || !window.fetch) return;
+    const M = JSON.parse(el.dataset.msg);
+    const URL_MOTI = "https://api.open-meteo.com/v1/forecast?latitude=41.3275&longitude=19.8187" +
+      "&current=temperature_2m,weather_code,is_day&daily=precipitation_probability_max&timezone=Europe%2FTirane&forecast_days=1";
+    const S = 'stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"';
+    const RE = '<path d="M7 17.5a4 4 0 0 1-.6-8 5.5 5.5 0 0 1 10.6 1.5 3.3 3.3 0 0 1 .3 6.5z" ' + S + '/>';
+    const IK = {
+      sun: '<circle cx="12" cy="12" r="4.2" ' + S + '/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" ' + S + '/>',
+      moon: '<path d="M19.5 14.5A8 8 0 0 1 9.5 4.5a8 8 0 1 0 10 10z" ' + S + '/>',
+      part: '<circle cx="8.5" cy="8" r="3.2" ' + S + '/><path d="M8.5 2v1.3M3.2 8H2M4.7 4.2l.9.9M12.3 4.2l-.9.9" ' + S + '/><path d="M9 19.5a3.5 3.5 0 0 1-.4-7 4.8 4.8 0 0 1 9.2 1.3 2.9 2.9 0 0 1 .3 5.7z" ' + S + '/>',
+      cloud: RE,
+      rain: '<path d="M7 14.5a4 4 0 0 1-.6-8 5.5 5.5 0 0 1 10.6 1.5 3.3 3.3 0 0 1 .3 6.5z" ' + S + '/><path d="M8.5 17.5l-1 2.5M12.5 17.5l-1 2.5M16.5 17.5l-1 2.5" ' + S + '/>',
+      snow: '<path d="M7 14.5a4 4 0 0 1-.6-8 5.5 5.5 0 0 1 10.6 1.5 3.3 3.3 0 0 1 .3 6.5z" ' + S + '/><path d="M8.5 18.5h.01M12 20h.01M15.5 18.5h.01" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>',
+      storm: '<path d="M7 14.5a4 4 0 0 1-.6-8 5.5 5.5 0 0 1 10.6 1.5 3.3 3.3 0 0 1 .3 6.5z" ' + S + '/><path d="M12.5 15l-2 3.5h3l-2 3.5" ' + S + '/>',
+      fog: '<path d="M4 9h16M3 13h18M5 17h14" ' + S + '/>',
+    };
+    function shfaq(d) {
+      const c = d.current, kodi = c.weather_code, dite = c.is_day === 1, t = Math.round(c.temperature_2m);
+      const shi = (d.daily && d.daily.precipitation_probability_max && d.daily.precipitation_probability_max[0]) || 0;
+      let lloji, ik;
+      if (kodi === 0) { lloji = dite ? "clear" : "night"; ik = dite ? "sun" : "moon"; }
+      else if (kodi <= 2) { lloji = dite ? "mostly" : "night"; ik = dite ? "part" : "moon"; }
+      else if (kodi === 3) { lloji = "cloudy"; ik = "cloud"; }
+      else if (kodi <= 48) { lloji = "fog"; ik = "fog"; }
+      else if (kodi <= 57) { lloji = "drizzle"; ik = "rain"; }
+      else if (kodi <= 67) { lloji = "rain"; ik = "rain"; }
+      else if (kodi <= 77 || kodi === 85 || kodi === 86) { lloji = "snow"; ik = "snow"; }
+      else if (kodi <= 82) { lloji = "showers"; ik = "rain"; }
+      else { lloji = "storm"; ik = "storm"; }
+      const lageshti = ["drizzle", "rain", "showers", "storm"].includes(lloji) || (dite && shi >= 70);
+      const k = lageshti ? "rain" : lloji === "snow" || t < 8 ? "cold" : !dite ? "night" : t >= 31 ? "hot"
+              : ["clear", "mostly"].includes(lloji) ? "nice" : "grey";
+      el.querySelector(".wx__ic").innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24">' + IK[ik] + "</svg>";
+      el.querySelector(".wx__t").textContent = t + "°";
+      el.querySelector(".wx__d").textContent = M.d[lloji];
+      el.querySelector(".wx__tip").textContent = M.tip[k];
+      el.href = M.links[k];
+      el.title = M.src;
+      el.setAttribute("aria-label", `${M.label}: ${t}°, ${M.d[lloji]}. ${M.tip[k]}`);
+      el.hidden = false;
+    }
+    let ruajtur = null;
+    try { ruajtur = JSON.parse(sessionStorage.getItem("gt-wx") || "null"); } catch (e) {}
+    if (ruajtur && Date.now() - ruajtur.koha < 20 * 60 * 1000) return shfaq(ruajtur.d);
+    fetch(URL_MOTI).then(r => r.ok ? r.json() : Promise.reject()).then(d => {
+      if (!d.current) return;
+      shfaq(d);
+      try { sessionStorage.setItem("gt-wx", JSON.stringify({ koha: Date.now(), d })); } catch (e) {}
+    }).catch(() => {});
+  })();
+
   // ---- Faqja pa internet: service worker (vetëm në HTTPS ose localhost, siç kërkojnë shfletuesit) ----
   if ("serviceWorker" in navigator && (location.protocol === "https:" || ["localhost", "127.0.0.1"].includes(location.hostname))) {
     window.addEventListener("load", () => navigator.serviceWorker.register(document.body.dataset.root + "sw.js").catch(() => {}));

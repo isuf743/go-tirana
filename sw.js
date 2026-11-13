@@ -6,10 +6,10 @@
    - CSS, JS, shkronjat, fotot dhe të dhënat e autobusëve: kopja e ruajtur menjëherë, rifreskohet në sfond.
    - Pllakat e hartës dhe statistikat nuk ruhen (janë shumë të mëdha / s'kanë kuptim offline). */
 "use strict";
-const VERSIONI = "30";
+const VERSIONI = "31";
 const PARA = "gt-para-" + VERSIONI;        // ruhen gjatë instalimit
 const GJATE = "gt-gjate-" + VERSIONI;      // ruhen gjatë përdorimit
-const LISTA = ["offline.html", "site.webmanifest", "favicon.svg", "icon-192.png", "assets/fonts/manrope-var.woff2", "assets/css/site.css?v=30", "assets/js/site.js?v=30", "assets/js/placesmap.js?v=30", "en/", "en/info/", "en/explore/", "it/", "it/info/", "it/explore/", "sq/", "sq/info/", "sq/explore/"];
+const LISTA = ["offline.html", "site.webmanifest", "favicon.svg", "icon-192.png", "assets/fonts/manrope-var.woff2", "assets/css/site.css?v=31", "assets/js/site.js?v=31", "assets/js/placesmap.js?v=31", "en/", "en/info/", "en/explore/", "it/", "it/info/", "it/explore/", "sq/", "sq/info/", "sq/explore/"];
 const FOTOT_E_JASHTME = ["upload.wikimedia.org"];
 
 self.addEventListener("install", e => {

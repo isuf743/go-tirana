@@ -6,7 +6,7 @@ Asnjë fakt këtu nuk është i shpikur: oraret, çmimet dhe adresat që s'i dim
 
 SHTESA = {
     "en": {
-        "footer_data_short": "Maps © Google. Bus data © OpenStreetMap contributors.", "photo_credits": "Photo credits",
+        "footer_data_short": "Maps © Google. Bus data © OpenStreetMap contributors. Weather: Open-Meteo.com.", "photo_credits": "Photo credits",
         "bus_card_title": "Plan a trip", "explore_city": "Explore the city",
         "site_title_home": "Go Tirana | Discover Tirana, Albania",
         "site_desc": "Discover the best places in Tirana, Albania. Explore cultural landmarks, local food, beautiful views and find your way around with our city bus planner.",
@@ -97,7 +97,7 @@ SHTESA = {
         "location": "Location",
     },
     "it": {
-        "footer_data_short": "Mappe © Google. Dati delle linee © contributori di OpenStreetMap.", "photo_credits": "Crediti fotografici",
+        "footer_data_short": "Mappe © Google. Dati delle linee © contributori di OpenStreetMap. Meteo: Open-Meteo.com.", "photo_credits": "Crediti fotografici",
         "bus_card_title": "Pianifica un viaggio", "explore_city": "Esplora la città",
         "site_title_home": "Go Tirana | Scopri Tirana, Albania",
         "site_desc": "Scopri i luoghi migliori di Tirana, in Albania: monumenti, cucina locale, panorami e un pianificatore di autobus per muoverti in città.",
@@ -188,7 +188,7 @@ SHTESA = {
         "location": "Zona",
     },
     "sq": {
-        "footer_data_short": "Hartat © Google. Të dhënat e linjave © kontribuuesit e OpenStreetMap.", "photo_credits": "Autorët e fotove",
+        "footer_data_short": "Hartat © Google. Të dhënat e linjave © kontribuuesit e OpenStreetMap. Moti: Open-Meteo.com.", "photo_credits": "Autorët e fotove",
         "bus_card_title": "Planifiko një udhëtim", "explore_city": "Eksploro qytetin",
         "site_title_home": "Go Tirana | Zbulo Tiranën",
         "site_desc": "Zbulo vendet më të mira të Tiranës: monumente, ushqim vendas, pamje të bukura dhe një planifikues autobusësh për të lëvizur në qytet.",

@@ -50,7 +50,7 @@ import tekstet_udhetime as UDH
 import tekstet_hero as HERO
 from tekstet import GJUHET, EMRAT_E_GJUHEVE, LOCALE, KATEGORITE, KATEGORITE_PERSHKRIM, T, PRIVATESIA, KUSHTET
 
-VERSIONI = "30"   # rrit këtë numër kur ndryshon CSS/JS, që shfletuesit të marrin versionin e ri
+VERSIONI = "31"   # rrit këtë numër kur ndryshon CSS/JS, që shfletuesit të marrin versionin e ri
 
 
 def lexo_json(emri):
@@ -266,6 +266,7 @@ def main():
            places=vendet, places_json=te_dhenat_harte(vendet), places_by_cat=sipas_kat,
            story_imgs=[sipas_slug[s] for s in FOTO_HISTORIA], credit_list=vendet, itins=itineraret[1], it_ui=IT_UI[lang],
            hero_slides=slidet_hero(lang), hero_ui=HERO.UI[lang],
+           wx_msgs=json.dumps({**HERO.MOTI[lang], "links": {k: "../" + lang + "/" + v for k, v in HERO.LIDHJET_MOTI.items()}}, ensure_ascii=False),
            bus_msgs=json_attr({k: t[k] for k in ("locating", "loc_denied", "loc_outside", "loc_unavailable",
                                                  "form_err_to", "form_err_same", "my_location")}),
            nl_msgs=json_attr({k: t[k] for k in ("nl_ok", "nl_sending", "nl_err_email", "nl_err_consent",
