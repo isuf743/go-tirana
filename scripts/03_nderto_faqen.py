@@ -311,7 +311,7 @@ def main():
 
         def render(shabllon, rruga, faqja, thellesia, **kw):
             root = "../" * thellesia
-            faqja.setdefault("og_image", f"{site}/assets/img/og-default.png")
+            faqja.setdefault("og_image", f"{site}/assets/img/og-cover.jpg")
             faqja["path"] = rruga
             faqja["url"] = url(lang, rruga)
             faqja["alternates"] = {l: url(l, rruga) for l in GJUHET}
@@ -511,7 +511,7 @@ def main():
         lang="en", t=t, cfg=cfg, root=cfg["base_path"], langs=GJUHET, lang_names=EMRAT_E_GJUHEVE, locale=LOCALE["en"],
         cat_list=kat_en, brand_mark=logo, v=VERSIONI, year=date.today().year,
         page={"title": f"{t['nf_title']} | {cfg['site_name']}", "desc": t["nf_text"], "path": "", "url": site + "/404.html",
-              "alternates": {l: f"{site}/{l}/" for l in GJUHET}, "og_image": f"{site}/assets/img/og-default.png"})
+              "alternates": {l: f"{site}/{l}/" for l in GJUHET}, "og_image": f"{site}/assets/img/og-cover.jpg"})
     html = html.replace("<head>", '<head>\n<meta name="robots" content="noindex">', 1)
     shkruaj("404.html", html)
 
@@ -520,7 +520,7 @@ def main():
         lang="en", t=t, T=T, cfg=cfg, root=cfg["base_path"], langs=GJUHET, lang_names=EMRAT_E_GJUHEVE, locale=LOCALE["en"],
         cat_list=kat_en, brand_mark=logo, v=VERSIONI, year=date.today().year,
         page={"title": f"{t['off_title']} | {cfg['site_name']}", "desc": t["off_text"], "path": "", "url": site + "/offline.html",
-              "alternates": {l: f"{site}/{l}/" for l in GJUHET}, "og_image": f"{site}/assets/img/og-default.png"})
+              "alternates": {l: f"{site}/{l}/" for l in GJUHET}, "og_image": f"{site}/assets/img/og-cover.jpg"})
     shkruaj("offline.html", html.replace("<head>", '<head>\n<meta name="robots" content="noindex">', 1))
 
     # ---- sw.js: faqja punon edhe pa internet (ruan faqet kryesore dhe ato që hap vizitori) ----
